@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'Investissement pour les Jeunes - Construire son Avenir Financier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>💰 Investir Jeune, Réussir Demain</h1>
+            <p class="hero-subtitle">Ton guide complet pour construire ton patrimoine dès maintenant</p>
+            <div class="alert-box">
+                <strong>⚠️ Urgent 2025 :</strong> Avec l'inflation à 2% et le Livret A à 1,7%, tu perds 0,3% de pouvoir d'achat chaque année !
+            </div>
+            <button id="startBtn" class="cta-button">🚀 Commencer maintenant</button>
+        </div>
+    </header>
+
+    <nav class="navigation">
+        <div class="container">
+            <ul>
+                <li><a href="#pourquoi" data-section="pourquoi">Pourquoi investir ?</a></li>
+                <li><a href="#calculateur" data-section="calculateur">Calculateur</a></li>
+                <li><a href="#commencer" data-section="commencer">Comment commencer</a></li>
+                <li><a href="#eviter" data-section="eviter">Éviter les pièges</a></li>
+                <li><a href="#ressources" data-section="ressources">Ressources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section Pourquoi Investir -->
+        <section id="pourquoi" class="section">
+            <div class="container">
+                <h2>🌍 Pourquoi investir MAINTENANT en 2025 ?</h2>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>⚡ Tensions géopolitiques</h3>
+                        <p>Guerre commerciale USA-Chine, conflit Ukraine-Russie, instabilité énergétique : l'économie mondiale est sous tension.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📈 Inflation persistante</h3>
+                        <p>Ton argent sur le Livret A perd 0,3% de valeur réelle chaque année. Sur 20 ans = -6% de pouvoir d'achat !</p>
+                    </div>
+                    <div class="card">
+                        <h3>🚀 Pouvoir des intérêts composés</h3>
+                        <p>Commencer à 20 ans vs 30 ans = 500 000€ de différence à la retraite avec seulement 100€/mois !</p>
+                    </div>
+                </div>
+
+                <div class="comparison-box">
+                    <h3>📊 Comparaison sur 20 ans avec 10 000€ initial</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-item losing">
+                            <h4>Livret A (1,7%)</h4>
+                            <div class="amount">14 081€</div>
+                        </div>
+                        <div class="comparison-item winning">
+                            <h4>ETF MSCI World (8,5%)</h4>
+                            <div class="amount">51 150€</div>
+                        </div>
+                    </div>
+                    <p class="comparison-result">Différence : <strong>+37 069€</strong> soit +263% !</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Calculateur -->
+        <section id="calculateur" class="section">
+            <div class="container">
+                <h2>🧮 Calculateur d'Investissement Interactif</h2>
+
+                <div class="calculator-container">
+                    <div class="calculator-inputs">
+                        <div class="input-group">
+                            <label for="age">Ton âge actuel</label>
+                            <input type="range" id="age" min="18" max="25" value="20">
+                            <span id="ageValue">20 ans</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="monthly">Montant mensuel</label>
+                            <input type="range" id="monthly" min="50" max="500" step="25" value="100">
+                            <span id="monthlyValue">100€/mois</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="years">Durée d'investissement</label>
+                            <input type="range" id="years" min="5" max="40" value="20">
+                            <span id="yearsValue">20 ans</span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="return">Rendement annuel estimé</label>
+                            <select id="return">
+                                <option value="1.7">Livret A (1,7%)</option>
+                                <option value="6" selected>Portefeuille équilibré (6%)</option>
+                                <option value="8">ETF actions monde (8%)</option>
+                                <option value="10">Portefeuille dynamique (10%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calculator-results">
+                        <div class="result-card">
+                            <h3>Résultats de ton investissement</h3>
+                            <div class="result-item">
+                                <span>Total versé :</span>
+                                <span id="totalInvested">24 000€</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Capital final :</span>
+                                <span id="finalAmount" class="highlight">39 292€</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Plus-value :</span>
+                                <span id="profit" class="profit">+15 292€</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Avec Livret A (1,7%) :</span>
+                                <span id="livretA" class="comparison">26 847€</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Gain vs Livret A :</span>
+                                <span id="gainVsLivret" class="gain">+12 445€</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Comment Commencer -->
+        <section id="commencer" class="section">
+            <div class="container">
+                <h2>🎯 Par où commencer ? (Guide étape par étape)</h2>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Épargne de précaution</h3>
+                            <p>Constitue 3-4 mois de charges sur Livret A/LDDS</p>
+                            <div class="step-detail">💰 Exemple : 3000-5000€ selon ton budget</div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Ouvrir les bonnes enveloppes</h3>
+                            <p>PEA Jeune (18-25 ans) + Assurance-vie en ligne</p>
+                            <div class="step-detail">⏱️ Délai : 1 semaine maximum</div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Premier investissement</h3>
+                            <p>ETF MSCI World via PEA, versements mensuels automatiques</p>
+                            <div class="step-detail">📈 50-200€/mois selon tes revenus</div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Diversification progressive</h3>
+                            <p>Ajouter ETF émergents, sectoriels selon profil</p>
+                            <div class="step-detail">📅 Après 6 mois d'expérience</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommended-products">
+                    <h3>🏆 Produits recommandés pour débuter</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <h4>PEA Jeune + ETF MSCI World</h4>
+                            <ul>
+                                <li>✅ Exonération fiscale après 5 ans</li>
+                                <li>✅ Diversification mondiale</li>
+                                <li>✅ Frais faibles (0,38%/an)</li>
+                            </ul>
+                            <div class="product-min">Minimum : 25€/mois</div>
+                        </div>
+
+                        <div class="product-card">
+                            <h4>Assurance-vie en ligne + UC</h4>
+                            <ul>
+                                <li>✅ Flexibilité totale</li>
+                                <li>✅ Avantages fiscaux après 8 ans</li>
+                                <li>✅ Diversification fonds euros + UC</li>
+                            </ul>
+                            <div class="product-min">Recommandé : 50€/mois</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Éviter les Pièges -->
+        <section id="eviter" class="section">
+            <div class="container">
+                <h2>⚠️ Éviter les Erreurs Courantes</h2>
+
+                <div class="errors-grid">
+                    <div class="error-card">
+                        <h3>🎰 FOMO (Fear of Missing Out)</h3>
+                        <p>Se précipiter sur les tendances crypto/actions à la mode</p>
+                        <div class="solution">✅ Solution : Stratégie définie à l'avance</div>
+                    </div>
+
+                    <div class="error-card">
+                        <h3>😱 Panique lors des baisses</h3>
+                        <p>Vendre au plus bas par émotion</p>
+                        <div class="solution">✅ Solution : Vision long terme, volatilité = normalité</div>
+                    </div>
+
+                    <div class="error-card">
+                        <h3>🎯 Sous-diversification</h3>
+                        <p>Tout miser sur une seule action/crypto/secteur</p>
+                        <div class="solution">✅ Solution : ETF diversifiés dès le départ</div>
+                    </div>
+
+                    <div class="error-card">
+                        <h3>💸 Négliger les frais</h3>
+                        <p>2,5% de frais = -12% de performance sur 10 ans</p>
+                        <div class="solution">✅ Solution : ETF et courtiers en ligne</div>
+                    </div>
+
+                    <div class="error-card">
+                        <h3>🧠 Overconfidence</h3>
+                        <p>Surestimer ses capacités après quelques gains</p>
+                        <div class="solution">✅ Solution : Rester humble, continuer à apprendre</div>
+                    </div>
+
+                    <div class="error-card">
+                        <h3>📱 Conseils réseaux sociaux</h3>
+                        <p>Suivre les "gourous" Instagram/TikTok</p>
+                        <div class="solution">✅ Solution : Sources officielles (AMF, Banque de France)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Ressources -->
+        <section id="ressources" class="section">
+            <div class="container">
+                <h2>📚 Ressources et Outils</h2>
+
+                <div class="resources-grid">
+                    <div class="resource-category">
+                        <h3>🏛️ Sites officiels</h3>
+                        <ul>
+                            <li>📋 AMF (Autorité des Marchés Financiers)</li>
+                            <li>🏦 Mes questions d'argent (Banque de France)</li>
+                            <li>📖 La Finance Pour Tous</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>📱 Applications recommandées</h3>
+                        <ul>
+                            <li>💼 Boursorama, Fortuneo (PEA)</li>
+                            <li>🤖 Nalo, Yomoni (Assurance-vie)</li>
+                            <li>📊 JustETF (Comparaison ETF)</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-category">
+                        <h3>📚 Formation continue</h3>
+                        <ul>
+                            <li>📗 "L'investisseur intelligent" (Benjamin Graham)</li>
+                            <li>🎧 Podcasts : "Parlons Patrimoine"</li>
+                            <li>📺 Chaînes YouTube éducatives françaises</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>💬 Des questions ?</h3>
+                    <p>L'investissement peut sembler complexe au début, mais chaque expert a commencé par le premier pas. La différence entre ceux qui réussissent et les autres ? Ils ont commencé.</p>
+                    <button class="secondary-button">📧 Poser une question</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Guide d'investissement pour les jeunes - 2025 | Sources : AMF, Banque de France, données historiques</p>
+            <p><strong>Avertissement :</strong> Les performances passées ne préjugent pas des performances futures. Tout investissement comporte des risques.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
