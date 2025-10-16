@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur FIRE - Indépendance Financière</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .inputs-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .results-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            appearance: none;
+            margin: 15px 0;
+        }
+
+        .input-group input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #667eea;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input[type="number"]:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .value-display {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .fire-results {
+            text-align: center;
+        }
+
+        .fire-number {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .fire-number h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .fire-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .fire-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .timeline-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-years {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .progress-section {
+            margin-top: 30px;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #00b894, #00cec9);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .scenario-card {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-optimistic {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+        }
+
+        .scenario-realistic {
+            background: linear-gradient(135deg, #0984e3, #74b9ff);
+            color: white;
+        }
+
+        .scenario-conservative {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+            color: white;
+        }
+
+        .scenario-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .scenario-years {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .tips-section {
+            background: #f1f3f4;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+
+        .tips-section h4 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .tip-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .warning-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .fire-amount {
+                font-size: 2.2rem;
+            }
+
+            .scenarios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Calculateur FIRE</h1>
+            <p>Découvre quand tu pourras vivre de tes investissements</p>
+        </div>
+
+        <div class="main-content">
+            <div class="inputs-section">
+                <h3 style="margin-bottom: 30px; color: #2c3e50;">📊 Tes Paramètres</h3>
+
+                <div class="input-group">
+                    <label for="currentAge">Ton âge actuel</label>
+                    <input type="range" id="currentAge" min="18" max="50" value="25">
+                    <div class="value-display" id="currentAgeValue">25 ans</div>
+                </div>
+
+                <div class="input-group">
+                    <label for="currentSavings">Épargne actuelle</label>
+                    <input type="number" id="currentSavings" value="10000" step="1000" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="monthlyIncome">Revenus mensuels nets</label>
+                    <input type="number" id="monthlyIncome" value="2500" step="100" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="monthlyExpenses">Dépenses mensuelles</label>
+                    <input type="number" id="monthlyExpenses" value="1800" step="100" min="0">
+                </div>
+
+                <div class="input-group">
+                    <label for="returnRate">Rendement annuel espéré</label>
+                    <input type="range" id="returnRate" min="3" max="12" value="7" step="0.5">
+                    <div class="value-display" id="returnRateValue">7%</div>
+                </div>
+
+                <div class="input-group">
+                    <label for="withdrawalRate">Taux de retrait FIRE</label>
+                    <input type="range" id="withdrawalRate" min="3" max="6" value="4" step="0.1">
+                    <div class="value-display" id="withdrawalRateValue">4%</div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="fire-results">
+                    <div class="fire-number">
+                        <h3>Ton Nombre FIRE</h3>
+                        <div class="fire-amount" id="fireNumber">540,000€</div>
+                        <div class="fire-subtitle">Capital nécessaire pour l'indépendance</div>
+                    </div>
+
+                    <div class="timeline-card">
+                        <h4>🎯 Tu atteindras le FIRE à :</h4>
+                        <div class="timeline-years" id="fireAge">45 ans</div>
+                    </div>
+
+                    <div class="progress-section">
+                        <h4 style="color: #2c3e50; margin-bottom: 15px;">Progression actuelle</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 15%"></div>
+                        </div>
+                        <p id="progressText">Tu as déjà 15% de ton objectif FIRE !</p>
+                    </div>
+
+                    <div class="scenarios-grid">
+                        <div class="scenario-card scenario-optimistic">
+                            <div class="scenario-title">🚀 Optimiste (+2%)</div>
+                            <div class="scenario-years" id="optimisticAge">42 ans</div>
+                        </div>
+                        <div class="scenario-card scenario-realistic">
+                            <div class="scenario-title">🎯 Réaliste</div>
+                            <div class="scenario-years" id="realisticAge">45 ans</div>
+                        </div>
+                        <div class="scenario-card scenario-conservative">
+                            <div class="scenario-title">🛡️ Prudent (-2%)</div>
+                            <div class="scenario-years" id="conservativeAge">49 ans</div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Important</strong>
+                        Ces calculs sont des estimations. Les performances passées ne garantissent pas les performances futures.
+                    </div>
+                </div>
+
+                <div class="tips-section">
+                    <h4>💡 Conseils pour accélérer ton FIRE</h4>
+                    <div class="tip-item">
+                        <strong>Augmente ton taux d'épargne :</strong> Passer de 20% à 30% peut réduire ton délai de 3-5 ans
+                    </div>
+                    <div class="tip-item">
+                        <strong>Optimise tes investissements :</strong> ETF diversifiés avec frais &lt; 0.5%
+                    </div>
+                    <div class="tip-item">
+                        <strong>Génère des revenus passifs :</strong> Dividendes, SCPI, immobilier locatif
+                    </div>
+                    <div class="tip-item">
+                        <strong>Développe tes compétences :</strong> Augmentation de salaire = FIRE plus rapide
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('fr-FR', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function calculateFIRE() {
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthlyIncome = parseFloat(document.getElementById('monthlyIncome').value) || 0;
+            const monthlyExpenses = parseFloat(document.getElementById('monthlyExpenses').value) || 0;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+
+            // Calcul du nombre FIRE
+            const annualExpenses = monthlyExpenses * 12;
+            const fireNumber = annualExpenses / withdrawalRate;
+
+            // Épargne mensuelle
+            const monthlySavings = monthlyIncome - monthlyExpenses;
+            const annualSavings = monthlySavings * 12;
+
+            // Calcul du temps pour atteindre FIRE
+            let yearsToFire = 0;
+            let currentAmount = currentSavings;
+
+            if (annualSavings > 0 && returnRate > 0) {
+                // Formule des annuités avec capital initial
+                const monthlyRate = returnRate / 12;
+                const targetAmount = fireNumber - currentSavings;
+
+                if (targetAmount > 0) {
+                    yearsToFire = Math.log(1 + (targetAmount * monthlyRate) / monthlySavings) / (12 * Math.log(1 + monthlyRate));
+                }
+            }
+
+            const fireAge = currentAge + Math.ceil(yearsToFire);
+
+            // Calcul des scénarios
+            const optimisticAge = currentAge + Math.ceil(yearsToFire * 0.85); // +2% rendement
+            const conservativeAge = currentAge + Math.ceil(yearsToFire * 1.25); // -2% rendement
+
+            // Progression actuelle
+            const progressPercent = Math.min((currentSavings / fireNumber) * 100, 100);
+
+            // Mise à jour de l'affichage
+            document.getElementById('fireNumber').textContent = formatCurrency(fireNumber);
+            document.getElementById('fireAge').textContent = fireAge + ' ans';
+            document.getElementById('optimisticAge').textContent = optimisticAge + ' ans';
+            document.getElementById('realisticAge').textContent = fireAge + ' ans';
+            document.getElementById('conservativeAge').textContent = conservativeAge + ' ans';
+
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            document.getElementById('progressText').textContent = 
+                `Tu as déjà ${Math.round(progressPercent)}% de ton objectif FIRE !`;
+
+            // Mise à jour des valeurs affichées
+            document.getElementById('currentAgeValue').textContent = currentAge + ' ans';
+            document.getElementById('returnRateValue').textContent = (returnRate * 100).toFixed(1) + '%';
+            document.getElementById('withdrawalRateValue').textContent = (withdrawalRate * 100).toFixed(1) + '%';
+        }
+
+        // Event listeners
+        document.getElementById('currentAge').addEventListener('input', calculateFIRE);
+        document.getElementById('currentSavings').addEventListener('input', calculateFIRE);
+        document.getElementById('monthlyIncome').addEventListener('input', calculateFIRE);
+        document.getElementById('monthlyExpenses').addEventListener('input', calculateFIRE);
+        document.getElementById('returnRate').addEventListener('input', calculateFIRE);
+        document.getElementById('withdrawalRate').addEventListener('input', calculateFIRE);
+
+        // Calcul initial
+        calculateFIRE();
+    </script>
+</body>
+</html>
