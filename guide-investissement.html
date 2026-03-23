@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide d'investissement — FinCulture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0f1e; --bg2: #0f1629; --bg3: #151d35; --bg4: #1a2240;
+  --accent: #3b82f6; --accent2: #60a5fa; --accent3: #93c5fd;
+  --gold: #f59e0b; --gold2: #fbbf24; --gold3: #fcd34d;
+  --green: #10b981; --green2: #34d399; --green3: #6ee7b7;
+  --red: #ef4444; --red2: #f87171;
+  --purple: #8b5cf6; --purple2: #a78bfa;
+  --text: #f1f5f9; --text2: #94a3b8; --text3: #64748b;
+  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+  --card: rgba(255,255,255,0.04); --card-hover: rgba(255,255,255,0.07);
+  --radius: 16px; --radius-sm: 10px;
+  --ff: 'Sora', sans-serif; --ff-serif: 'Lora', serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0.9rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,15,30,0.88); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+.nav-logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent), var(--gold)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.nav-logo-text { font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; }
+.nav-logo-text span { color: var(--accent2); }
+.nav-back { display: flex; align-items: center; gap: 6px; color: var(--text2); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.4rem 0.85rem; border-radius: 8px; border: 1px solid var(--border2); transition: all 0.2s; }
+.nav-back:hover { color: var(--text); background: var(--card-hover); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-toc-btn { display: none; background: var(--card); border: 1px solid var(--border2); color: var(--text2); padding: 0.4rem 0.85rem; border-radius: 8px; font-size: 0.82rem; cursor: pointer; font-family: var(--ff); transition: all 0.2s; }
+
+.disclaimer-bar {
+  background: rgba(245,158,11,0.08); border-bottom: 1px solid rgba(245,158,11,0.15);
+  padding: 0.55rem 2rem; text-align: center; font-size: 0.76rem; color: #fbbf24;
+  margin-top: 57px;
+}
+
+/* LAYOUT */
+.page-layout { display: flex; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; gap: 2.5rem; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; flex-shrink: 0;
+  position: sticky; top: 90px;
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+  padding: 2rem 0 2rem;
+  scrollbar-width: thin; scrollbar-color: var(--border2) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+.toc-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); margin-bottom: 0.75rem; padding-left: 0.75rem; }
+.toc { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.toc a { display: block; padding: 0.45rem 0.75rem; color: var(--text2); text-decoration: none; font-size: 0.82rem; border-radius: 8px; border-left: 2px solid transparent; transition: all 0.2s; line-height: 1.4; }
+.toc a:hover { color: var(--text); background: var(--card-hover); border-left-color: var(--border2); }
+.toc a.active { color: var(--accent2); background: rgba(59,130,246,0.08); border-left-color: var(--accent); }
+.toc-sub a { padding-left: 1.5rem; font-size: 0.78rem; }
+.toc-divider { height: 1px; background: var(--border); margin: 0.5rem 0.75rem; }
+
+.toc-progress { margin-bottom: 1.25rem; padding: 0 0.75rem; }
+.toc-progress-label { font-size: 0.72rem; color: var(--text3); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.toc-progress-bar { height: 3px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+.toc-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 4px; width: 0%; transition: width 0.3s ease; }
+
+/* MAIN CONTENT */
+.main-content { flex: 1; min-width: 0; padding: 2rem 0 4rem; }
+
+/* HERO ARTICLE */
+.article-hero {
+  padding: 2.5rem; margin-bottom: 2rem;
+  background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(245,158,11,0.04) 100%);
+  border: 1px solid rgba(59,130,246,0.15); border-radius: var(--radius);
+  position: relative; overflow: hidden;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 100% 100% at 80% 50%, transparent 30%, black 100%);
+}
+.article-breadcrumb { font-size: 0.75rem; color: var(--text3); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 6px; }
+.article-breadcrumb a { color: var(--text3); text-decoration: none; }
+.article-breadcrumb a:hover { color: var(--text2); }
+.article-hero h1 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 0.75rem; position: relative; }
+.article-hero h1 em { font-style: normal; background: linear-gradient(135deg, var(--accent2), var(--gold2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.article-hero-desc { color: var(--text2); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin-bottom: 1.5rem; position: relative; }
+.article-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; position: relative; }
+.article-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text3); }
+.article-meta-item span { color: var(--text2); }
+
+/* SECTIONS */
+.article-section { margin-bottom: 2.5rem; scroll-margin-top: 90px; }
+.section-anchor { scroll-margin-top: 90px; }
+
+.section-header-line {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 1.5rem; padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-num { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), rgba(59,130,246,0.4)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; }
+.section-header-line h2 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; }
+
+.article-section h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.6rem; color: var(--text); letter-spacing: -0.01em; }
+.article-section p { font-size: 0.9rem; color: var(--text2); line-height: 1.75; margin-bottom: 0.9rem; }
+.article-section strong { color: var(--text); font-weight: 600; }
+
+/* CALLOUTS */
+.callout { border-radius: 10px; padding: 1rem 1.25rem; margin: 1.25rem 0; font-size: 0.87rem; line-height: 1.65; }
+.callout-info { background: rgba(59,130,246,0.07); border: 1px solid rgba(59,130,246,0.18); border-left: 3px solid var(--accent); color: var(--text2); }
+.callout-warning { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.18); border-left: 3px solid var(--gold); color: var(--text2); }
+.callout-success { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.18); border-left: 3px solid var(--green); color: var(--text2); }
+.callout-danger { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.18); border-left: 3px solid var(--red); color: var(--text2); }
+.callout strong { color: var(--text); }
+.callout-title { font-weight: 600; color: var(--text); margin-bottom: 0.3rem; font-size: 0.88rem; }
+
+/* TABLES */
+.table-wrap { overflow-x: auto; margin: 1.25rem 0; border-radius: 12px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+thead tr { background: rgba(255,255,255,0.04); }
+th { text-align: left; padding: 0.7rem 1rem; color: var(--text3); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: var(--card); }
+.t-green { color: var(--green2); font-weight: 500; }
+.t-amber { color: var(--gold2); font-weight: 500; }
+.t-red { color: var(--red2); font-weight: 500; }
+.t-blue { color: var(--accent2); font-weight: 500; }
+.t-bold { color: var(--text); font-weight: 600; }
+
+/* CARDS GRID */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.info-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem; }
+.info-card-icon { font-size: 20px; margin-bottom: 0.6rem; }
+.info-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+.info-card p { font-size: 0.82rem; color: var(--text2); line-height: 1.55; }
+.info-card.accent { border-color: rgba(59,130,246,0.25); background: rgba(59,130,246,0.06); }
+.info-card.gold { border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.05); }
+.info-card.green { border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.05); }
+.info-card.red { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.05); }
+
+/* STEPS */
+.steps { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+.step { display: flex; gap: 1rem; align-items: flex-start; }
+.step-num { width: 32px; height: 32px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.step-body h4 { font-size: 0.92rem; font-weight: 600; margin-bottom: 0.3rem; }
+.step-body p { font-size: 0.84rem; color: var(--text2); line-height: 1.6; margin: 0; }
+.steps-connector { width: 1px; height: 20px; background: var(--border2); margin-left: 16px; }
+
+/* PILL BADGES */
+.badge { display: inline-flex; align-items: center; padding: 0.2rem 0.65rem; border-radius: 50px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.02em; }
+.badge-blue { background: rgba(59,130,246,0.12); color: var(--accent3); }
+.badge-green { background: rgba(16,185,129,0.12); color: var(--green2); }
+.badge-amber { background: rgba(245,158,11,0.12); color: var(--gold2); }
+.badge-red { background: rgba(239,68,68,0.1); color: var(--red2); }
+.badge-purple { background: rgba(139,92,246,0.12); color: var(--purple2); }
+
+/* COMPARISON BLOCK */
+.compare-block { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.25rem 0; }
+.compare-col { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem; }
+.compare-col.left { border-top: 2px solid var(--red); }
+.compare-col.right { border-top: 2px solid var(--green); }
+.compare-col h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.85rem; }
+.compare-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.compare-col li { font-size: 0.82rem; color: var(--text2); display: flex; gap: 8px; line-height: 1.45; }
+.compare-col li::before { flex-shrink: 0; margin-top: 2px; }
+.compare-col.left li::before { content: '✕'; color: var(--red2); font-size: 0.7rem; }
+.compare-col.right li::before { content: '✓'; color: var(--green2); font-size: 0.75rem; }
+
+/* SIMULATOR */
+.simulator { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; margin: 1.5rem 0; }
+.simulator h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.simulator .sim-desc { font-size: 0.82rem; color: var(--text2); margin-bottom: 1.5rem; }
+.sim-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.sim-field label { display: block; font-size: 0.75rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.sim-field .val-display { font-size: 0.88rem; color: var(--accent2); font-weight: 500; margin-left: 6px; }
+input[type=range] { width: 100%; -webkit-appearance: none; height: 4px; background: var(--bg3); border-radius: 4px; outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--bg); transition: transform 0.15s; }
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+select { width: 100%; background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 0.55rem 0.75rem; color: var(--text); font-size: 0.85rem; font-family: var(--ff); outline: none; cursor: pointer; }
+select:focus { border-color: var(--accent); }
+
+.sim-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; }
+.sim-result-card { background: var(--bg3); border-radius: 10px; padding: 0.9rem 1rem; }
+.sim-result-label { font-size: 0.72rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.sim-result-val { font-size: 1.2rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.sim-result-val.accent { color: var(--accent2); }
+.sim-result-val.green { color: var(--green2); }
+.sim-result-val.gold { color: var(--gold2); }
+
+.sim-chart { height: 180px; position: relative; }
+.sim-chart canvas { width: 100% !important; height: 100% !important; }
+
+.sim-disclaimer { font-size: 0.75rem; color: var(--text3); margin-top: 1rem; font-style: italic; line-height: 1.55; }
+
+/* ENVELOPPES */
+.enveloppe-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.env-tab { padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid var(--border2); background: transparent; color: var(--text2); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: var(--ff); }
+.env-tab:hover, .env-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+.env-panel { display: none; }
+.env-panel.active { display: block; }
+.env-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
+.env-stat { background: var(--bg3); border-radius: 9px; padding: 0.85rem 1rem; }
+.env-stat-label { font-size: 0.72rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+.env-stat-val { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+.env-stat-val.good { color: var(--green2); }
+.env-stat-val.warn { color: var(--gold2); }
+.env-stat-val.bad { color: var(--red2); }
+
+/* ERRORS GRID */
+.errors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.error-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.25rem; }
+.error-card-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.6rem; }
+.error-icon { width: 34px; height: 34px; border-radius: 8px; background: rgba(239,68,68,0.1); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.error-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--text); line-height: 1.3; }
+.error-card p { font-size: 0.81rem; color: var(--text2); line-height: 1.6; margin-bottom: 0.65rem; }
+.error-solution { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.15); border-radius: 7px; padding: 0.55rem 0.75rem; font-size: 0.8rem; color: var(--green2); }
+.error-solution::before { content: '✓ '; font-weight: 700; }
+
+/* RESOURCES */
+.resources-list { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.25rem 0; }
+.resource-item { display: flex; gap: 1rem; align-items: flex-start; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem 1.25rem; text-decoration: none; color: var(--text); transition: all 0.2s; }
+.resource-item:hover { background: var(--card-hover); border-color: var(--border2); transform: translateX(3px); }
+.resource-item-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.resource-item h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.25rem; }
+.resource-item p { font-size: 0.79rem; color: var(--text2); line-height: 1.5; }
+.resource-item .source { font-size: 0.7rem; color: var(--text3); margin-top: 3px; }
+
+/* RISK GAUGE */
+.risk-scale { display: flex; gap: 3px; height: 8px; border-radius: 6px; overflow: hidden; margin: 0.6rem 0; }
+.risk-scale-block { flex: 1; }
+.risk-filled { opacity: 1 !important; }
+.risk-empty { opacity: 0.18; }
+
+/* NAV BOTTOM */
+.article-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.article-nav-btn { display: flex; align-items: center; gap: 8px; padding: 0.85rem 1.25rem; background: var(--card); border: 1px solid var(--border2); border-radius: 12px; text-decoration: none; color: var(--text2); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; max-width: 48%; }
+.article-nav-btn:hover { background: var(--card-hover); color: var(--text); }
+.article-nav-btn.next { margin-left: auto; text-align: right; flex-direction: row-reverse; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .page-layout { padding: 0 1rem; }
+  .nav-toc-btn { display: block; }
+  .compare-block { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  nav { padding: 0.8rem 1rem; }
+  .article-hero { padding: 1.5rem; }
+  .simulator { padding: 1.25rem; }
+  .sim-inputs { grid-template-columns: 1fr; }
+}
+
+/* SCROLL ANIMATIONS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.anim { animation: fadeInUp 0.5s ease forwards; opacity: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-logo-icon">📊</div>
+    <span class="nav-logo-text">Fin<span>Culture</span></span>
+  </a>
+  <div class="nav-right">
+    <button class="nav-toc-btn" onclick="toggleMobileToc()">☰ Sommaire</button>
+    <a href="../index.html" class="nav-back">← Accueil</a>
+  </div>
+</nav>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer-bar">
+  ⚖️ <strong>Information pédagogique uniquement</strong> — Pas de conseil en investissement. Les simulations sont illustratives. Consultez un professionnel agréé avant toute décision.
+</div>
+
+<!-- LAYOUT -->
+<div class="page-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar" id="sidebar">
+    <div class="toc-progress">
+      <div class="toc-progress-label">
+        <span>Progression</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="toc-progress-bar"><div class="toc-progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="toc-label">Sommaire</div>
+    <ul class="toc">
+      <li><a href="#intro" class="toc-link">Introduction</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#pourquoi" class="toc-link">1 · Pourquoi investir ?</a></li>
+      <li class="toc-sub"><a href="#inflation" class="toc-link">L'inflation expliquée</a></li>
+      <li class="toc-sub"><a href="#interets" class="toc-link">Intérêts composés</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#bases" class="toc-link">2 · Les bases essentielles</a></li>
+      <li class="toc-sub"><a href="#actifs" class="toc-link">Classes d'actifs</a></li>
+      <li class="toc-sub"><a href="#risque-rendement" class="toc-link">Risque & rendement</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#enveloppes" class="toc-link">3 · Enveloppes fiscales</a></li>
+      <li class="toc-sub"><a href="#pea" class="toc-link">Le PEA</a></li>
+      <li class="toc-sub"><a href="#av" class="toc-link">L'assurance-vie</a></li>
+      <li class="toc-sub"><a href="#cto" class="toc-link">CTO & PER</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#simulateur" class="toc-link">4 · Simulateur</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#commencer" class="toc-link">5 · Par où commencer ?</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#erreurs" class="toc-link">6 · Erreurs courantes</a></li>
+      <li class="toc-divider"></li>
+      <li><a href="#ressources" class="toc-link">7 · Ressources</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- HERO -->
+    <header class="article-hero" id="intro">
+      <div class="article-breadcrumb">
+        <a href="../index.html">FinCulture</a> <span>›</span> <span>Guide d'investissement</span>
+      </div>
+      <h1>Guide d'investissement<br><em>complet pour débutants</em></h1>
+      <p class="article-hero-desc">
+        Comprendre pourquoi et comment l'argent peut travailler pour toi — sans jargon inutile, sans promesse de gain, et avec toutes les nuances que le sujet mérite.
+      </p>
+      <div class="article-meta">
+        <div class="article-meta-item">📚 <span>Lecture ~35 min</span></div>
+        <div class="article-meta-item">🎯 <span>Tous niveaux</span></div>
+        <div class="article-meta-item">🔄 <span>Mis à jour 2025</span></div>
+        <div class="article-meta-item">⚖️ <span>Éducatif uniquement</span></div>
+      </div>
+    </header>
+
+    <!-- ===== SECTION 1 : POURQUOI ===== -->
+    <section class="article-section" id="pourquoi">
+      <div class="section-header-line">
+        <div class="section-num">1</div>
+        <h2>Pourquoi investir ?</h2>
+      </div>
+
+      <p>Mettre de l'argent de côté est déjà une bonne habitude. Mais laisser cet argent dormir sur un compte courant ou sur un livret très peu rémunéré, c'est accepter silencieusement un appauvrissement progressif. Pour comprendre pourquoi, il faut d'abord comprendre deux concepts fondamentaux : <strong>l'inflation</strong> et les <strong>intérêts composés</strong>.</p>
+
+      <div id="inflation" class="section-anchor">
+        <h3>L'inflation : l'ennemi silencieux de l'épargne</h3>
+        <p>L'inflation mesure la hausse générale des prix dans le temps. Si les prix augmentent de 3 % par an, 100 € aujourd'hui n'ont que le pouvoir d'achat de 97 € l'an prochain. Sur 10 ans à 3 % d'inflation, 100 € ne valent plus que <strong>74 € en termes réels</strong>.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Placement</th><th>Taux nominal</th><th>Inflation (moy.)</th><th>Rendement réel</th><th>Verdict</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Compte courant</td><td>0 %</td><td>2,5 %</td><td class="t-red">−2,5 % / an</td><td><span class="badge badge-red">Perte réelle</span></td></tr>
+              <tr><td>Livret A (2025)</td><td>1,7 %</td><td>2,5 %</td><td class="t-red">−0,8 % / an</td><td><span class="badge badge-amber">Perte légère</span></td></tr>
+              <tr><td>LDDS</td><td>1,7 %</td><td>2,5 %</td><td class="t-red">−0,8 % / an</td><td><span class="badge badge-amber">Perte légère</span></td></tr>
+              <tr><td>Livret d'épargne (1 %)</td><td>1 %</td><td>2,5 %</td><td class="t-red">−1,5 % / an</td><td><span class="badge badge-red">Perte réelle</span></td></tr>
+              <tr><td>Fonds euros (AV)</td><td>~2,5–3 %</td><td>2,5 %</td><td class="t-amber">≈ 0 %</td><td><span class="badge badge-amber">Neutre</span></td></tr>
+              <tr><td>Actions (long terme hist.)</td><td>~8–10 %</td><td>2,5 %</td><td class="t-green">+5,5–7,5 %</td><td><span class="badge badge-green">Gain réel</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">⚠️ Ce tableau est illustratif</div>
+          Les rendements passés des actions ne garantissent pas les rendements futurs. Les chiffres historiques correspondent à des moyennes sur de très longues périodes (30–50 ans) incluant des krachs importants. Sur une période courte, les résultats peuvent être très différents.
+        </div>
+      </div>
+
+      <div id="interets" class="section-anchor">
+        <h3>Les intérêts composés : l'effet boule de neige</h3>
+        <p>Les intérêts composés, c'est le fait de gagner des intérêts sur ses intérêts. Ce principe mathématique produit une croissance <em>exponentielle</em> dans le temps — et c'est pourquoi commencer tôt a une valeur considérable, même avec de petites sommes.</p>
+
+        <p>La formule de base est : <strong>Capital final = Capital initial × (1 + taux)<sup>n</sup></strong> (où n = nombre d'années)</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Capital initial</th><th>Taux annuel</th><th>10 ans</th><th>20 ans</th><th>30 ans</th><th>40 ans</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1 000 €</td><td>2 %</td><td>1 219 €</td><td>1 486 €</td><td>1 811 €</td><td>2 208 €</td></tr>
+              <tr><td>1 000 €</td><td>5 %</td><td>1 629 €</td><td>2 653 €</td><td>4 322 €</td><td class="t-green">7 040 €</td></tr>
+              <tr><td>1 000 €</td><td>7 %</td><td>1 967 €</td><td>3 870 €</td><td>7 612 €</td><td class="t-green">14 974 €</td></tr>
+              <tr><td>1 000 €</td><td>10 %</td><td>2 594 €</td><td>6 727 €</td><td>17 449 €</td><td class="t-green">45 259 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <div class="callout-title">📐 La règle des 72</div>
+          Divise 72 par le taux annuel pour estimer en combien d'années ton capital <strong>double</strong>. À 6 % → 72 ÷ 6 = 12 ans. À 9 % → 72 ÷ 9 = 8 ans. C'est une approximation pratique, pas un engagement de rendement.
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">⚠️ Le revers de la médaille</div>
+          Les intérêts composés fonctionnent exactement de la même façon sur une <strong>dette</strong>. Un crédit revolving à 20 % double en 3,6 ans. Rembourser ses dettes coûteuses avant d'investir est donc une priorité absolue.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2 : BASES ===== -->
+    <section class="article-section" id="bases">
+      <div class="section-header-line">
+        <div class="section-num">2</div>
+        <h2>Les bases essentielles</h2>
+      </div>
+
+      <div id="actifs" class="section-anchor">
+        <h3>Les grandes classes d'actifs</h3>
+        <p>Un "actif" est quelque chose que tu possèdes et qui peut générer de la valeur ou des revenus. En finance, on regroupe les actifs en grandes catégories appelées "classes d'actifs", chacune avec ses propres caractéristiques de risque et de rendement.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Classe d'actif</th><th>Description simplifiée</th><th>Risque</th><th>Liquidité</th><th>Horizon recommandé</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-bold">Actions</td>
+                <td>Part de propriété d'une entreprise</td>
+                <td><span class="badge badge-red">Élevé</span></td>
+                <td class="t-green">Très haute</td>
+                <td>5–10 ans +</td>
+              </tr>
+              <tr>
+                <td class="t-bold">Obligations</td>
+                <td>Prêt à une entreprise ou un État</td>
+                <td><span class="badge badge-green">Faible–modéré</span></td>
+                <td class="t-green">Haute</td>
+                <td>3–7 ans</td>
+              </tr>
+              <tr>
+                <td class="t-bold">Immobilier</td>
+                <td>Biens physiques ou SCPI</td>
+                <td><span class="badge badge-amber">Modéré</span></td>
+                <td class="t-red">Faible (physique)</td>
+                <td>10–20 ans</td>
+              </tr>
+              <tr>
+                <td class="t-bold">Matières premières</td>
+                <td>Or, argent, pétrole, blé…</td>
+                <td><span class="badge badge-amber">Modéré–élevé</span></td>
+                <td class="t-green">Haute (ETF)</td>
+                <td>Variable</td>
+              </tr>
+              <tr>
+                <td class="t-bold">Cash / Livrets</td>
+                <td>Épargne liquide réglementée</td>
+                <td><span class="badge badge-green">Quasi-nul</span></td>
+                <td class="t-green">Maximale</td>
+                <td>Court terme</td>
+              </tr>
+              <tr>
+                <td class="t-bold">Cryptomonnaies</td>
+                <td>Actifs numériques décentralisés</td>
+                <td><span class="badge badge-red">Très élevé</span></td>
+                <td class="t-green">Haute (24/7)</td>
+                <td>Spéculatif</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Les ETF (fonds indiciels cotés)</h3>
+        <p>Un ETF (Exchange-Traded Fund) est un fonds qui réplique automatiquement la performance d'un indice boursier (ex. : S&P 500, MSCI World, CAC 40). Il est coté en bourse et peut être acheté comme une action ordinaire. C'est l'un des outils les plus utilisés pour les investisseurs individuels souhaitant diversifier facilement.</p>
+
+        <div class="cards-grid">
+          <div class="info-card green">
+            <div class="info-card-icon">💰</div>
+            <h4>Frais très bas</h4>
+            <p>TER souvent entre 0,05 % et 0,5 % par an, contre 1–3 % pour un fonds actif géré.</p>
+          </div>
+          <div class="info-card accent">
+            <div class="info-card-icon">🌍</div>
+            <h4>Diversification immédiate</h4>
+            <p>Un ETF MSCI World donne accès à ~1 500 entreprises dans 23 pays développés en un seul ordre.</p>
+          </div>
+          <div class="info-card gold">
+            <div class="info-card-icon">📖</div>
+            <h4>Transparence totale</h4>
+            <p>La composition est publiée quotidiennement. Tu sais exactement ce que tu détiens.</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">⚡</div>
+            <h4>Liquide comme une action</h4>
+            <p>Achat/vente pendant les heures de marché, en quelques secondes, sans minimum d'investissement élevé.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-info">
+          <div class="callout-title">Capitalisant vs Distribuant</div>
+          Un ETF <strong>capitalisant</strong> (ACC) réinvestit automatiquement les dividendes dans le fonds — idéal pour profiter des intérêts composés. Un ETF <strong>distribuant</strong> (DIST ou DR) verse les dividendes en cash sur ton compte. Dans un PEA, les dividendes sont obligatoirement réinvestis donc le type importe moins.
+        </div>
+      </div>
+
+      <div id="risque-rendement" class="section-anchor">
+        <h3>La relation risque / rendement</h3>
+        <p>En finance, il n'existe pas de rendement élevé sans risque élevé — c'est un principe fondamental. Si quelqu'un te promet un rendement exceptionnel avec peu ou pas de risque, c'est presque toujours un signal d'alarme.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Actif</th><th>Risque perçu</th><th>Rendement historique moyen*</th><th>Volatilité annuelle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Livret A</td><td>Quasi-nul</td><td class="t-amber">1,5–3 %</td><td>~0 %</td></tr>
+              <tr><td>Obligations État (France)</td><td>Très faible</td><td class="t-amber">2–4 %</td><td>3–5 %</td></tr>
+              <tr><td>Fonds euros (AV)</td><td>Faible</td><td class="t-amber">2–3 %</td><td>~0 %</td></tr>
+              <tr><td>SCPI</td><td>Modéré</td><td class="t-green">4–6 %</td><td>Faible</td></tr>
+              <tr><td>ETF MSCI World</td><td>Modéré–élevé</td><td class="t-green">7–10 %</td><td>15–18 %</td></tr>
+              <tr><td>ETF marchés émergents</td><td>Élevé</td><td class="t-green">7–12 %</td><td>20–25 %</td></tr>
+              <tr><td>Bitcoin</td><td>Très élevé</td><td class="t-blue">Variable</td><td>50–80 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text3); margin-top: -0.5rem;">* Données historiques sur longues périodes, à titre illustratif. Les performances passées ne préjugent pas du futur.</p>
+
+        <p>La <strong>volatilité</strong> mesure l'amplitude des fluctuations d'un actif. Un actif avec 18 % de volatilité peut techniquement perdre ou gagner 18 % en moyenne dans une année. Ces chiffres peuvent sembler abstraits — en pratique, une baisse de 40–50 % (comme en 2008 ou 2020) est tout à fait possible sur les marchés actions, avant une reprise éventuelle.</p>
+
+        <div class="callout callout-warning">
+          <div class="callout-title">⚠️ L'horizon de temps est crucial</div>
+          Sur 1 an, les marchés actions peuvent perdre 40 %. Sur 20 ans, les périodes de baisse historiques ont toujours été suivies de reprises — mais rien ne le garantit pour l'avenir. C'est pourquoi on entend souvent "n'investissez que l'argent dont vous n'aurez pas besoin à court terme".
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3 : ENVELOPPES ===== -->
+    <section class="article-section" id="enveloppes">
+      <div class="section-header-line">
+        <div class="section-num">3</div>
+        <h2>Les enveloppes fiscales françaises</h2>
+      </div>
+
+      <p>En France, tu n'investis pas directement sur les marchés — tu passes par une <strong>enveloppe fiscale</strong> qui détermine comment tes gains seront imposés. Bien choisir son enveloppe est aussi important que de bien choisir ses investissements.</p>
+
+      <div class="enveloppe-tabs">
+        <button class="env-tab active" onclick="showEnv('pea', this)">PEA</button>
+        <button class="env-tab" onclick="showEnv('av', this)">Assurance-vie</button>
+        <button class="env-tab" onclick="showEnv('per', this)">PER</button>
+        <button class="env-tab" onclick="showEnv('cto', this)">CTO</button>
+        <button class="env-tab" onclick="showEnv('livrets', this)">Livrets réglementés</button>
+      </div>
+
+      <!-- PEA -->
+      <div class="env-panel active" id="env-pea">
+        <div id="pea" class="section-anchor"></div>
+        <p>Le <strong>Plan d'Épargne en Actions (PEA)</strong> est l'enveloppe fiscale la plus avantageuse pour investir en actions européennes sur le long terme. Il est ouvert à toute personne physique fiscalement domiciliée en France.</p>
+        <div class="env-grid">
+          <div class="env-stat"><div class="env-stat-label">Plafond</div><div class="env-stat-val">150 000 €</div></div>
+          <div class="env-stat"><div class="env-stat-label">Titres éligibles</div><div class="env-stat-val">Actions UE + ETF éligibles</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité avant 5 ans</div><div class="env-stat-val bad">30 % (flat tax)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité après 5 ans</div><div class="env-stat-val good">17,2 % (PS seulement)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Retrait partiel</div><div class="env-stat-val">Possible après 5 ans</div></div>
+          <div class="env-stat"><div class="env-stat-label">PEA Jeune (18–25 ans)</div><div class="env-stat-val good">Plafond 20 000 €</div></div>
+        </div>
+        <div class="callout callout-info" style="margin-top: 1rem;">
+          <strong>Astuce importante :</strong> Le délai des 5 ans court dès la <em>date d'ouverture</em>, pas des premiers versements. Ouvrir un PEA avec un petit montant dès que possible "fait tourner le compteur".
+        </div>
+        <div class="callout callout-warning">
+          <strong>Attention :</strong> Tout retrait avant 5 ans entraîne obligatoirement la <strong>clôture du PEA</strong> et la perte de l'antériorité fiscale, sauf exceptions (licenciement, invalidité, création d'entreprise).
+        </div>
+        <h3>ETF éligibles PEA</h3>
+        <p>Certains ETF répliquant des indices mondiaux (dont américains) sont éligibles au PEA grâce à la <strong>réplication synthétique</strong> : le fonds est domicilié en Europe et utilise des swaps pour reproduire la performance d'un indice non-européen (ex. : S&P 500, MSCI World). Cette structure est encadrée par la réglementation UCITS, qui limite le risque de contrepartie à 10 % des actifs.</p>
+      </div>
+
+      <!-- AV -->
+      <div class="env-panel" id="env-av">
+        <div id="av" class="section-anchor"></div>
+        <p>L'<strong>assurance-vie</strong> est l'enveloppe la plus populaire en France. Contrairement à son nom, ce n'est pas une assurance décès — c'est un contrat d'épargne avec un cadre fiscal très favorable, surtout pour la transmission de patrimoine.</p>
+        <div class="env-grid">
+          <div class="env-stat"><div class="env-stat-label">Plafond</div><div class="env-stat-val good">Aucun</div></div>
+          <div class="env-stat"><div class="env-stat-label">Supports disponibles</div><div class="env-stat-val">Fonds euros + Unités de Compte (UC)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité avant 8 ans</div><div class="env-stat-val bad">30 % (flat tax)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité après 8 ans</div><div class="env-stat-val warn">Abattement 4 600 € (9 200 € couple) puis 7,5 % + PS</div></div>
+          <div class="env-stat"><div class="env-stat-label">Avantage succession</div><div class="env-stat-val good">152 500 € exonérés / bénéficiaire</div></div>
+          <div class="env-stat"><div class="env-stat-label">Liquidité</div><div class="env-stat-val">Retraits partiels possibles à tout moment</div></div>
+        </div>
+        <div class="callout callout-info" style="margin-top: 1rem;">
+          <strong>Fonds euros vs Unités de Compte :</strong> Le <em>fonds euros</em> est un support à capital garanti, à faible rendement (~2–3 %). Les <em>unités de compte</em> (UC) sont des supports non garantis (ETF, OPCVM, SCPI) avec un potentiel de rendement plus élevé mais avec risque de perte en capital.
+        </div>
+      </div>
+
+      <!-- PER -->
+      <div class="env-panel" id="env-per">
+        <p>Le <strong>Plan d'Épargne Retraite (PER)</strong> est une enveloppe dédiée à la préparation de la retraite, créée en 2019 pour remplacer les anciens PERP et Madelin. Son principal avantage est la déductibilité des versements du revenu imposable.</p>
+        <div class="env-grid">
+          <div class="env-stat"><div class="env-stat-label">Déductibilité</div><div class="env-stat-val good">Oui (dans la limite de ~10 % revenus)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Blocage</div><div class="env-stat-val warn">Jusqu'à la retraite (sauf cas exceptionnels)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Déblocage anticipé</div><div class="env-stat-val">Achat résidence principale + accidents de la vie</div></div>
+          <div class="env-stat"><div class="env-stat-label">Sortie retraite</div><div class="env-stat-val">Capital ou rente (au choix)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité sortie</div><div class="env-stat-val bad">Imposition à l'IR (car déduction à l'entrée)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Supports</div><div class="env-stat-val">ETF, fonds euros, UC (selon assureur)</div></div>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 1rem;">
+          <strong>Pour qui ?</strong> Le PER est principalement intéressant pour les personnes fortement imposées (tranche 30 % ou plus), qui bénéficient d'une déduction fiscale significative à l'entrée. Pour les faibles revenus, l'avantage est limité car la déduction est moindre.
+        </div>
+      </div>
+
+      <!-- CTO -->
+      <div class="env-panel" id="env-cto">
+        <div id="cto" class="section-anchor"></div>
+        <p>Le <strong>Compte-Titres Ordinaire (CTO)</strong> est l'enveloppe la plus flexible : sans plafond, sans restriction de titres éligibles (actions mondiales, ETF, obligations, options, etc.). En contrepartie, <strong>aucun avantage fiscal</strong> — tous les gains sont soumis à la flat tax de 30 % chaque année fiscale.</p>
+        <div class="env-grid">
+          <div class="env-stat"><div class="env-stat-label">Plafond</div><div class="env-stat-val good">Aucun</div></div>
+          <div class="env-stat"><div class="env-stat-label">Titres éligibles</div><div class="env-stat-val good">Tous (monde entier)</div></div>
+          <div class="env-stat"><div class="env-stat-label">Fiscalité</div><div class="env-stat-val bad">30 % flat tax sur tous les gains</div></div>
+          <div class="env-stat"><div class="env-stat-label">Liquidité</div><div class="env-stat-val good">Maximale, aucun délai</div></div>
+        </div>
+        <div class="callout callout-info" style="margin-top: 1rem;">
+          <strong>Quand utiliser un CTO ?</strong> Quand le PEA et l'AV sont déjà bien remplis, pour accéder à des actifs non éligibles (ETF non-UCITS, actions hors Europe, etc.), ou pour des investissements sans horizon long terme défini.
+        </div>
+      </div>
+
+      <!-- LIVRETS -->
+      <div class="env-panel" id="env-livrets">
+        <p>Les <strong>livrets réglementés</strong> sont des produits d'épargne dont le taux est fixé par l'État. Ils sont liquides, sans risque, et exonérés d'impôts — mais leurs rendements sont généralement inférieurs à l'inflation sur le long terme.</p>
+        <div class="table-wrap" style="margin-top: 1rem;">
+          <table>
+            <thead><tr><th>Livret</th><th>Taux 2025</th><th>Plafond</th><th>Fiscalité</th><th>Accessible</th></tr></thead>
+            <tbody>
+              <tr><td class="t-bold">Livret A</td><td class="t-amber">1,7 %</td><td>22 950 €</td><td class="t-green">Exonéré</td><td>Tout le monde</td></tr>
+              <tr><td class="t-bold">LDDS</td><td class="t-amber">1,7 %</td><td>12 000 €</td><td class="t-green">Exonéré</td><td>Tout le monde</td></tr>
+              <tr><td class="t-bold">LEP</td><td class="t-green">3,5 %</td><td>10 000 €</td><td class="t-green">Exonéré</td><td>Sous conditions de revenus</td></tr>
+              <tr><td class="t-bold">Livret Jeune</td><td class="t-amber">≥ 1,7 %</td><td>1 600 €</td><td class="t-green">Exonéré</td><td>12–25 ans</td></tr>
+              <tr><td class="t-bold">CEL</td><td class="t-amber">~2 %</td><td>15 300 €</td><td class="t-red">Imposable</td><td>Tout le monde</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-success" style="margin-top: 1rem;">
+          <strong>Utilité des livrets réglementés :</strong> Ils constituent une <em>épargne de précaution</em> — un matelas financier de 3 à 6 mois de charges, disponible immédiatement en cas d'imprévu. Avant tout investissement, constituer cette réserve est souvent considéré comme une priorité.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== SECTION 4 : SIMULATEUR ===== -->
+    <section class="article-section" id="simulateur">
+      <div class="section-header-line">
+        <div class="section-num">4</div>
+        <h2>Simulateur d'investissement</h2>
+      </div>
+
+      <p>Cet outil illustre l'effet des intérêts composés sur une période donnée. Les taux utilisés sont des exemples historiques et <strong>ne constituent en aucun cas une prévision de rendement futur</strong>. Les marchés peuvent baisser durablement.</p>
+
+      <div class="simulator">
+        <h3>Simulateur pédagogique</h3>
+        <p class="sim-desc">Ajuste les paramètres pour visualiser différents scénarios illustratifs.</p>
+
+        <div class="sim-inputs">
+          <div class="sim-field">
+            <label>Capital initial <span class="val-display" id="v-capital">1 000 €</span></label>
+            <input type="range" min="0" max="50000" step="500" value="1000" id="r-capital" oninput="updateSim()">
+          </div>
+          <div class="sim-field">
+            <label>Versement mensuel <span class="val-display" id="v-mensuel">100 €</span></label>
+            <input type="range" min="0" max="1000" step="25" value="100" id="r-mensuel" oninput="updateSim()">
+          </div>
+          <div class="sim-field">
+            <label>Durée <span class="val-display" id="v-duree">20 ans</span></label>
+            <input type="range" min="1" max="40" step="1" value="20" id="r-duree" oninput="updateSim()">
+          </div>
+          <div class="sim-field">
+            <label>Scénario de taux (illustratif)</label>
+            <select id="s-taux" onchange="updateSim()">
+              <option value="1.7">Livret A — 1,7 % / an</option>
+              <option value="3">Fonds euros — 3 % / an</option>
+              <option value="5">Hypothèse prudente — 5 % / an</option>
+              <option value="7" selected>Hypothèse modérée — 7 % / an</option>
+              <option value="10">Hypothèse optimiste — 10 % / an</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="sim-results">
+          <div class="sim-result-card">
+            <div class="sim-result-label">Total versé</div>
+            <div class="sim-result-val accent" id="r-verse">25 000 €</div>
+          </div>
+          <div class="sim-result-card">
+            <div class="sim-result-label">Capital final</div>
+            <div class="sim-result-val green" id="r-final">—</div>
+          </div>
+          <div class="sim-result-card">
+            <div class="sim-result-label">Plus-value théorique</div>
+            <div class="sim-result-val gold" id="r-plusvalue">—</div>
+          </div>
+          <div class="sim-result-card">
+            <div class="sim-result-label">Comparaison Livret A</div>
+            <div class="sim-result-val" id="r-compare">—</div>
+          </div>
+        </div>
+
+        <div class="sim-chart">
+          <canvas id="simCanvas"></canvas>
+        </div>
+
+        <div class="sim-disclaimer">
+          ⚠️ Ces projections sont purement illustratives. Elles supposent un taux constant, ce qui ne reflète pas la réalité des marchés financiers. Les performances passées ne préjugent pas des performances futures. Tout investissement comporte un risque de perte en capital.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5 : COMMENCER ===== -->
+    <section class="article-section" id="commencer">
+      <div class="section-header-line">
+        <div class="section-num">5</div>
+        <h2>Par où commencer ?</h2>
+      </div>
+
+      <p>Il n'existe pas de chemin universel — la situation de chacun est différente. Voici cependant les étapes logiques souvent citées dans la littérature financière pour structurer son approche, à adapter selon ta situation personnelle.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Établir un budget et connaître ton taux d'épargne réel</h4>
+            <p>Avant tout investissement, il est utile de savoir combien tu dépenses, combien tu gagnes, et combien tu peux réellement mettre de côté chaque mois. Un budget précis évite les mauvaises surprises et les retraits forcés.</p>
+          </div>
+        </div>
+        <div class="steps-connector"></div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Rembourser les dettes à taux élevé</h4>
+            <p>Un crédit revolving à 20 % représente un rendement garanti de 20 % en le remboursant — aucun investissement ne peut rivaliser avec ce niveau de certitude. Rembourser les dettes coûteuses est généralement prioritaire avant d'investir.</p>
+          </div>
+        </div>
+        <div class="steps-connector"></div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Constituer une épargne de précaution</h4>
+            <p>Une réserve de 3 à 6 mois de charges sur un livret liquide (Livret A, LDDS) permet de faire face aux imprévus sans avoir à vendre ses investissements au mauvais moment. C'est un filet de sécurité, pas un investissement.</p>
+          </div>
+        </div>
+        <div class="steps-connector"></div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Se former sur les concepts de base</h4>
+            <p>Comprendre ce qu'on fait avant de le faire — c'est le principe de cet guide. Lire, écouter des podcasts sérieux, consulter les ressources de l'AMF et de la Banque de France. L'éducation financière prend du temps mais réduit les erreurs coûteuses.</p>
+          </div>
+        </div>
+        <div class="steps-connector"></div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Ouvrir les enveloppes adaptées à son projet</h4>
+            <p>PEA pour l'investissement en actions sur le long terme, assurance-vie pour la flexibilité et la transmission, PER pour la retraite (si pertinent selon ton imposition). L'ouverture d'un PEA tôt "fait tourner le compteur" des 5 ans, même avec un faible montant initial.</p>
+          </div>
+        </div>
+        <div class="steps-connector"></div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h4>Investir progressivement et régulièrement (DCA)</h4>
+            <p>Investir une somme fixe régulièrement (ex. : 100 €/mois) plutôt que d'essayer de "timer" le marché. Cette approche lisse le prix d'achat moyen et réduit l'impact psychologique des fluctuations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">⚠️ Ce n'est pas un conseil personnalisé</div>
+        L'ordre de ces étapes est général et peut ne pas s'appliquer à ta situation. Un professionnel agréé (Conseiller en Investissements Financiers - CIF, banquier, notaire) peut t'aider à structurer un plan adapté à ta situation, tes revenus, tes objectifs et ton profil de risque.
+      </div>
+
+      <h3>Comparer les courtiers : les critères à regarder</h3>
+      <p>Le choix d'un courtier en ligne (pour ouvrir un PEA, CTO ou AV) est important. Il ne s'agit pas ici de recommander une plateforme, mais de lister les critères importants à comparer.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Critère</th><th>Ce qu'il faut regarder</th></tr></thead>
+          <tbody>
+            <tr><td class="t-bold">Frais de courtage</td><td>Commission par ordre (fixe ou variable). Peut fortement impacter la rentabilité sur de petits montants.</td></tr>
+            <tr><td class="t-bold">Frais de tenue de compte</td><td>Certains courtiers facturent des frais annuels. D'autres sont gratuits.</td></tr>
+            <tr><td class="t-bold">Catalogue d'ETF</td><td>Vérifier la disponibilité des ETF qui t'intéressent et leurs conditions de trading.</td></tr>
+            <tr><td class="t-bold">Solidité financière</td><td>Vérifier la couverture par le Fonds de Garantie des Dépôts et de Résolution (FGDR) ou l'ACPR.</td></tr>
+            <tr><td class="t-bold">Ergonomie</td><td>Interface claire, application mobile, qualité du service client.</td></tr>
+            <tr><td class="t-bold">Offres promotionnelles</td><td>Attention aux offres d'entrée attractives qui masquent des frais récurrents élevés.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6 : ERREURS ===== -->
+    <section class="article-section" id="erreurs">
+      <div class="section-header-line">
+        <div class="section-num">6</div>
+        <h2>Les erreurs courantes à comprendre</h2>
+      </div>
+
+      <p>Ces comportements sont documentés par la recherche en finance comportementale. Les comprendre permet de mieux les anticiper — sans garantie de les éviter.</p>
+
+      <div class="errors-grid">
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">😱</div>
+            <h4>Vendre lors des baisses (panique)</h4>
+          </div>
+          <p>Vendre ses investissements en pleine chute de marché cristallise les pertes. La plupart des krachs historiques ont été suivis d'une reprise, mais vendre au creux empêche de participer à la remontée.</p>
+          <div class="error-solution">Définir son horizon et son profil de risque avant d'investir, pour ne pas être surpris par la volatilité normale.</div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">🚀</div>
+            <h4>FOMO — acheter après une forte hausse</h4>
+          </div>
+          <p>Investir massivement sur un actif après une forte hausse parce qu'on a "peur de rater" est l'une des sources les plus fréquentes de pertes. Ce qui a fortement monté peut tout autant fortement redescendre.</p>
+          <div class="error-solution">Se fixer une stratégie à l'avance et s'y tenir, indépendamment de l'actualité à court terme.</div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">🎯</div>
+            <h4>Sur-concentration (sous-diversification)</h4>
+          </div>
+          <p>Mettre tout son capital sur une seule action, un seul secteur ou une seule devise expose à un risque spécifique élevé que la diversification pourrait éliminer.</p>
+          <div class="error-solution">Diversifier géographiquement, sectorellement et par classes d'actifs selon son profil.</div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">💸</div>
+            <h4>Ignorer l'impact des frais</h4>
+          </div>
+          <p>2,5 % de frais annuels sur un fonds semblent anodins, mais sur 20 ans à 7 % brut, ils réduisent le capital final de ~30 % comparé à un équivalent à 0,3 %. Les frais se composent aussi.</p>
+          <div class="error-solution">Toujours vérifier le TER (Total Expense Ratio) avant d'investir dans un fonds.</div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">📱</div>
+            <h4>Suivre des "gourous" des réseaux sociaux</h4>
+          </div>
+          <p>Les influenceurs financiers ne sont pas réglementés et peuvent promouvoir des produits contre rémunération. Leur contenu est souvent sélectionné pour montrer leurs succès, pas leurs erreurs.</p>
+          <div class="error-solution">Privilégier les sources officielles (AMF, Banque de France) et vérifier les accréditations des personnes qui donnent des conseils.</div>
+        </div>
+
+        <div class="error-card">
+          <div class="error-card-head">
+            <div class="error-icon">⏰</div>
+            <h4>Essayer de "timer" le marché</h4>
+          </div>
+          <p>Essayer d'acheter au plus bas et de vendre au plus haut est une stratégie que même les professionnels n'arrivent pas à appliquer de manière consistante sur le long terme.</p>
+          <div class="error-solution">Des études montrent que "time in the market" surperforme souvent "timing the market" sur le long terme.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-danger">
+        <div class="callout-title">🚨 Reconnaître les arnaques</div>
+        L'AMF publie une <strong>liste noire</strong> des plateformes et produits non autorisés à proposer des investissements en France. Avant de confier de l'argent à une plateforme, vérifier : l'enregistrement auprès de l'ORIAS (intermédiaires), l'autorisation AMF, l'absence de la liste noire AMF. Les arnaques courantes incluent les promesses de "rendement garanti", les cryptos exotiques, le trading de forex avec "coaches", et les CFD proposés par des acteurs non réglementés.
+      </div>
+    </section>
+
+    <!-- ===== SECTION 7 : RESSOURCES ===== -->
+    <section class="article-section" id="ressources">
+      <div class="section-header-line">
+        <div class="section-num">7</div>
+        <h2>Ressources de référence</h2>
+      </div>
+
+      <p>Pour aller plus loin, voici des sources fiables et officielles — sans affiliation commerciale.</p>
+
+      <h3>Sources officielles françaises</h3>
+      <div class="resources-list">
+        <a href="https://www.amf-france.org/fr/espace-epargnants" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(59,130,246,0.12);">🏛️</div>
+          <div>
+            <h4>AMF — Espace épargnants</h4>
+            <p>Guides pédagogiques, liste noire des plateformes, quiz éducatifs. Le régulateur officiel des marchés financiers en France.</p>
+            <div class="source">amf-france.org</div>
+          </div>
+        </a>
+        <a href="https://www.mesquestionsdargent.fr" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(16,185,129,0.12);">🏦</div>
+          <div>
+            <h4>Mes Questions d'Argent (Banque de France)</h4>
+            <p>Site d'éducation financière de la Banque de France. Budget, crédit, épargne, investissement. Neutre et officiel.</p>
+            <div class="source">mesquestionsdargent.fr</div>
+          </div>
+        </a>
+        <a href="https://www.lafinancepourtous.com" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(245,158,11,0.12);">📖</div>
+          <div>
+            <h4>La Finance Pour Tous (IEFP)</h4>
+            <p>Institut pour l'Éducation Financière du Public. Encyclopédie grand public complète, partenaire de l'État.</p>
+            <div class="source">lafinancepourtous.com</div>
+          </div>
+        </a>
+        <a href="https://www.service-public.fr/particuliers/vosdroits/N20373" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(139,92,246,0.12);">🇫🇷</div>
+          <div>
+            <h4>Service-Public.fr — Épargne & placements</h4>
+            <p>Informations officielles sur la fiscalité des placements, les enveloppes fiscales, les livrets réglementés.</p>
+            <div class="source">service-public.fr</div>
+          </div>
+        </a>
+      </div>
+
+      <h3>Outils de recherche</h3>
+      <div class="resources-list">
+        <a href="https://www.justetf.com/fr/" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(6,182,212,0.12);">📊</div>
+          <div>
+            <h4>JustETF</h4>
+            <p>Moteur de recherche et comparaison d'ETF. TER, encours, réplication, performance, éligibilité PEA. Référence européenne.</p>
+            <div class="source">justetf.com</div>
+          </div>
+        </a>
+        <a href="https://www.orias.fr/welcome" target="_blank" rel="noopener" class="resource-item">
+          <div class="resource-item-icon" style="background: rgba(239,68,68,0.1);">🔍</div>
+          <div>
+            <h4>ORIAS — Vérification des intermédiaires</h4>
+            <p>Vérifie si un conseiller, courtier ou intermédiaire financier est bien enregistré et autorisé à exercer en France.</p>
+            <div class="source">orias.fr</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="callout callout-success" style="margin-top: 2rem;">
+        <div class="callout-title">✅ Pour aller encore plus loin</div>
+        Explore les autres modules de FinCulture : <a href="../index.html#modules" style="color: var(--accent2);">comparateur ETF</a>, <a href="../index.html#modules" style="color: var(--accent2);">guide fiscalité</a>, <a href="../index.html#modules" style="color: var(--accent2);">calculateur FIRE</a>. Chaque outil est pédagogique et sans conseil personnalisé.
+      </div>
+    </section>
+
+    <!-- NAV ARTICLES -->
+    <nav class="article-nav">
+      <a href="../index.html" class="article-nav-btn">← Retour à l'accueil</a>
+      <a href="../guide-fiscalite/guide_fiscalite.html" class="article-nav-btn next">Guide Fiscalité →</a>
+    </nav>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script>
+// ===== ENV TABS =====
+function showEnv(id, btn) {
+  document.querySelectorAll('.env-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.env-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('env-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== SIMULATOR =====
+let simChart = null;
+
+function fmt(n) {
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+}
+
+function updateSim() {
+  const capital = parseInt(document.getElementById('r-capital').value);
+  const mensuel = parseInt(document.getElementById('r-mensuel').value);
+  const duree = parseInt(document.getElementById('r-duree').value);
+  const taux = parseFloat(document.getElementById('s-taux').value) / 100;
+  const tauxLA = 0.017;
+
+  document.getElementById('v-capital').textContent = fmt(capital);
+  document.getElementById('v-mensuel').textContent = fmt(mensuel);
+  document.getElementById('v-duree').textContent = duree + ' ans';
+
+  const totalVerse = capital + mensuel * 12 * duree;
+  const tauxMensuel = taux / 12;
+  const n = duree * 12;
+
+  let final = capital * Math.pow(1 + tauxMensuel, n);
+  if (mensuel > 0 && tauxMensuel > 0) {
+    final += mensuel * (Math.pow(1 + tauxMensuel, n) - 1) / tauxMensuel;
+  } else {
+    final += mensuel * n;
+  }
+
+  const tauxMLA = tauxLA / 12;
+  let finalLA = capital * Math.pow(1 + tauxMLA, n);
+  if (mensuel > 0 && tauxMLA > 0) {
+    finalLA += mensuel * (Math.pow(1 + tauxMLA, n) - 1) / tauxMLA;
+  } else {
+    finalLA += mensuel * n;
+  }
+
+  const plusvalue = final - totalVerse;
+  const diffLA = final - finalLA;
+
+  document.getElementById('r-verse').textContent = fmt(totalVerse);
+  document.getElementById('r-final').textContent = fmt(Math.round(final));
+  document.getElementById('r-plusvalue').textContent = (plusvalue >= 0 ? '+' : '') + fmt(Math.round(plusvalue));
+  const compareEl = document.getElementById('r-compare');
+  if (taux > tauxLA) {
+    compareEl.textContent = '+' + fmt(Math.round(diffLA));
+    compareEl.className = 'sim-result-val green';
+  } else {
+    compareEl.textContent = fmt(Math.round(diffLA));
+    compareEl.className = 'sim-result-val';
+  }
+
+  // Chart
+  const labels = [], dataFinal = [], dataVerse = [], dataLA = [];
+  for (let y = 0; y <= duree; y++) {
+    labels.push(y === 0 ? 'Début' : 'An ' + y);
+    const ny = y * 12;
+    const tmy = taux / 12;
+    let val = capital * Math.pow(1 + tmy, ny);
+    if (mensuel > 0 && tmy > 0) val += mensuel * (Math.pow(1 + tmy, ny) - 1) / tmy;
+    else val += mensuel * ny;
+
+    let valLA = capital * Math.pow(1 + tauxMLA, ny);
+    if (mensuel > 0 && tauxMLA > 0) valLA += mensuel * (Math.pow(1 + tauxMLA, ny) - 1) / tauxMLA;
+    else valLA += mensuel * ny;
+
+    dataFinal.push(Math.round(val));
+    dataLA.push(Math.round(valLA));
+    dataVerse.push(Math.round(capital + mensuel * 12 * y));
+  }
+
+  const canvas = document.getElementById('simCanvas');
+  if (simChart) simChart.destroy();
+  simChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Scénario sélectionné',
+          data: dataFinal,
+          borderColor: '#60a5fa',
+          backgroundColor: 'rgba(59,130,246,0.08)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          pointRadius: 0
+        },
+        {
+          label: 'Livret A (1,7 %)',
+          data: dataLA,
+          borderColor: '#f59e0b',
+          backgroundColor: 'transparent',
+          borderWidth: 1.5,
+          borderDash: [5, 4],
+          tension: 0.4,
+          pointRadius: 0
+        },
+        {
+          label: 'Somme versée',
+          data: dataVerse,
+          borderColor: 'rgba(255,255,255,0.2)',
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderDash: [3, 3],
+          tension: 0,
+          pointRadius: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          labels: { color: '#94a3b8', font: { family: 'Sora', size: 11 }, boxWidth: 12, padding: 16 }
+        },
+        tooltip: {
+          backgroundColor: '#0f1629',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#f1f5f9',
+          bodyColor: '#94a3b8',
+          callbacks: {
+            label: ctx => ' ' + ctx.dataset.label + ' : ' + new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(ctx.raw)
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', font: { size: 10, family: 'Sora' }, maxTicksLimit: 8 }, grid: { color: 'rgba(255,255,255,0.04)' }, border: { color: 'rgba(255,255,255,0.07)' } },
+        y: { ticks: { color: '#64748b', font: { size: 10, family: 'Sora' }, callback: v => new Intl.NumberFormat('fr-FR', { notation: 'compact', maximumFractionDigits: 0 }).format(v) + ' €' }, grid: { color: 'rgba(255,255,255,0.04)' }, border: { color: 'rgba(255,255,255,0.07)' } }
+      }
+    }
+  });
+}
+
+// Init
+updateSim();
+
+// ===== TOC SCROLL SPY =====
+const tocLinks = document.querySelectorAll('.toc-link');
+const sections = [];
+tocLinks.forEach(link => {
+  const id = link.getAttribute('href').replace('#', '');
+  const el = document.getElementById(id);
+  if (el) sections.push({ id, el, link });
+});
+
+function updateToc() {
+  const scrollY = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? Math.round((scrollY / docH) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  let current = sections[0];
+  sections.forEach(s => {
+    if (s.el.getBoundingClientRect().top < 120) current = s;
+  });
+
+  tocLinks.forEach(l => l.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+}
+
+window.addEventListener('scroll', updateToc, { passive: true });
+updateToc();
+
+// ===== MOBILE TOC =====
+function toggleMobileToc() {
+  const sb = document.getElementById('sidebar');
+  if (sb.style.display === 'block') {
+    sb.style.display = '';
+  } else {
+    sb.style.cssText = 'display:block;position:fixed;top:57px;left:0;right:0;bottom:0;z-index:90;background:var(--bg2);width:100%;height:100vh;padding:1.5rem;overflow-y:auto;border:none;';
+  }
+}
+
+// ===== SCROLL ANIMATIONS =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('anim');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.info-card, .error-card, .resource-item, .step').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
