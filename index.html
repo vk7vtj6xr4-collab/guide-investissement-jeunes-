@@ -3,186 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FinCulture — Plateforme d'éducation financière. Apprenez l'investissement, ETF, FIRE, fiscalité. Contenu pédagogique, clair, sans conseil personnalisé.">
-  <meta property="og:title" content="FinCulture — Éducation financière premium">
-  <meta property="og:description" content="Apprendre à investir, pas à spéculer. Guide complet, outils interactifs, contenu éducatif transparent.">
-  <title>FinCulture — Éducation financière premium</title>
+  <meta name="description" content="Blog & Articles FinCulture — Approfondissez votre compréhension de l'investissement avec des guides détaillés, des explications de concepts et des stratégies.">
+  <meta property="og:title" content="Blog — FinCulture">
+  <meta property="og:description" content="Articles éducatifs sur l'investissement, ETF, fiscalité, FIRE et stratégie financière.">
+  <title>Blog — FinCulture</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="../design-system.css">
   
   <style>
-    /* ── HOME SPECIFIC STYLES ── */
-    
-    /* Hero section */
-    .hero {
-      padding: var(--space-20) var(--container-gap) var(--space-24);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        ellipse 800px 600px at 50% 0%,
-        color-mix(in srgb, var(--c-primary) 8%, transparent),
-        transparent 70%
-      );
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: 700px;
-      margin: 0 auto;
+    .blog-hero {
+      padding: var(--space-16) var(--container-gap);
       text-align: center;
     }
 
-    .hero-subtitle {
-      font-size: var(--type-sm);
-      font-weight: var(--type-weight-medium);
-      color: var(--c-primary);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: var(--space-4);
+    .blog-hero h1 {
+      margin-bottom: var(--space-6);
     }
 
-    .hero-title {
-      font-size: var(--type-h1);
-      color: var(--text);
-      margin-bottom: var(--space-8);
-      line-height: 1.2;
-    }
-
-    .hero-description {
-      font-size: var(--type-base);
-      color: var(--text-secondary);
-      margin-bottom: var(--space-12);
-      line-height: 1.8;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: var(--space-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Disclaimer hero */
-    .disclaimer-hero {
-      background: color-mix(in srgb, var(--c-warning) 6%, var(--surface));
-      border: 1px solid color-mix(in srgb, var(--c-warning) 15%, var(--border));
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-      margin: var(--space-16) auto;
-      max-width: 700px;
-      text-align: center;
-      font-size: var(--type-sm);
-      line-height: 1.8;
-    }
-
-    .disclaimer-hero strong {
-      color: var(--c-warning);
-    }
-
-    /* Tools grid */
-    .tools-grid {
+    .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: var(--space-8);
       margin: var(--space-12) 0;
     }
 
-    .tool-card {
+    .blog-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: var(--space-8);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      text-decoration: none;
+      color: inherit;
       display: flex;
       flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-      transition: all var(--transition-base);
-      position: relative;
-      overflow: hidden;
     }
 
-    .tool-card:hover {
+    .blog-card:hover {
       border-color: var(--c-primary);
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px color-mix(in srgb, var(--c-primary) 15%, transparent);
     }
 
-    .tool-icon {
-      font-size: 2rem;
-      margin-bottom: var(--space-4);
-    }
-
-    .tool-title {
-      font-size: var(--type-h4);
-      margin-bottom: var(--space-2);
-      font-family: var(--font-family-serif);
-      font-weight: var(--type-weight-semibold);
-    }
-
-    .tool-description {
-      font-size: var(--type-sm);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      flex-grow: 1;
-    }
-
-    .tool-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      margin-top: var(--space-6);
-      color: var(--c-primary);
-      font-weight: var(--type-weight-medium);
-      font-size: var(--type-sm);
-    }
-
-    /* Educational modules */
-    .modules {
-      background: var(--surface);
-    }
-
-    .modules-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-8);
-    }
-
-    @media (max-width: 768px) {
-      .modules-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .module-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+    .blog-card-header {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--c-primary) 8%, var(--surface)), var(--surface));
       padding: var(--space-8);
-      text-decoration: none;
-      color: inherit;
-      transition: all var(--transition-base);
+      border-bottom: 1px solid var(--border);
     }
 
-    .module-item:hover {
-      border-color: var(--c-primary);
-      transform: translateY(-2px);
-    }
-
-    .module-number {
+    .blog-category {
       font-size: var(--type-xs);
       font-weight: var(--type-weight-bold);
       color: var(--c-primary);
@@ -191,141 +63,61 @@
       margin-bottom: var(--space-2);
     }
 
-    .module-title {
+    .blog-card-title {
       font-size: var(--type-h4);
       font-family: var(--font-family-serif);
-      margin-bottom: var(--space-3);
+      margin-bottom: var(--space-2);
     }
 
-    .module-description {
+    .blog-card-excerpt {
       font-size: var(--type-sm);
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
-    /* Features */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: var(--space-8);
-      margin: var(--space-12) 0;
-    }
-
-    .feature {
+    .blog-card-meta {
+      padding: var(--space-6) var(--space-8);
+      border-top: 1px solid var(--border);
+      font-size: var(--type-xs);
+      color: var(--text-tertiary);
       display: flex;
-      flex-direction: column;
-    }
-
-    .feature-icon {
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: color-mix(in srgb, var(--c-primary) 10%, var(--surface));
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-4);
-      font-size: 1.5rem;
     }
 
-    .feature-title {
-      font-size: var(--type-base);
-      font-weight: var(--type-weight-semibold);
-      margin-bottom: var(--space-2);
-    }
-
-    .feature-description {
-      font-size: var(--type-sm);
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--space-6);
-      margin: var(--space-12) 0;
-    }
-
-    .stat {
-      text-align: center;
-      padding: var(--space-8);
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-    }
-
-    .stat-value {
-      font-size: clamp(1.875rem, 1.75rem + 1vw, 2.5rem);
-      font-family: var(--font-family-serif);
-      font-weight: var(--type-weight-bold);
+    .blog-card-read {
       color: var(--c-primary);
-      margin-bottom: var(--space-2);
+      font-weight: var(--type-weight-medium);
     }
 
-    .stat-label {
-      font-size: var(--type-sm);
-      color: var(--text-secondary);
-    }
-
-    /* CTA section */
-    .cta-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-12);
+    .coming-soon {
+      padding: var(--space-8);
+      background: color-mix(in srgb, var(--c-primary) 5%, var(--surface));
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
       text-align: center;
-      margin: var(--space-16) 0;
-    }
-
-    .cta-title {
-      font-size: var(--type-h3);
-      margin-bottom: var(--space-4);
-    }
-
-    .cta-description {
-      font-size: var(--type-base);
       color: var(--text-secondary);
-      margin-bottom: var(--space-8);
-      max-width: 60ch;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Navbar mobile specific */
-    @media (max-width: 768px) {
-      .hero {
-        padding: var(--space-16) var(--container-gap) var(--space-20);
-      }
-
-      .hero-title {
-        font-size: var(--type-h2);
-      }
-
-      .hero-description {
-        font-size: var(--type-sm);
-      }
+      font-size: var(--type-sm);
     }
   </style>
 </head>
-<body data-page="home">
+<body data-page="blog">
   <a href="#main" class="skip-to-content">Aller au contenu principal</a>
 
   <!-- Header -->
   <header class="header">
     <div class="container">
       <div class="header-inner">
-        <a href="/index.html" class="logo">
+        <a href="/" class="logo">
           <span class="logo-text">FinCulture</span>
           <span class="logo-dot"></span>
         </a>
         
         <nav class="nav">
           <ul class="nav-links">
-            <li><a href="#outils" class="nav-link">Outils</a></li>
-            <li><a href="#apprentissage" class="nav-link">Apprentissage</a></li>
-            <li><a href="#ressources" class="nav-link">Ressources</a></li>
+            <li><a href="/#outils" class="nav-link">Outils</a></li>
+            <li><a href="/#apprentissage" class="nav-link">Apprentissage</a></li>
+            <li><a href="/blog/" class="nav-link active">Blog</a></li>
           </ul>
           
           <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème">
@@ -347,197 +139,92 @@
 
   <!-- Mobile Nav -->
   <nav class="mobile-nav" id="mobile-nav">
-    <a href="#outils">Outils</a>
-    <a href="#apprentissage">Apprentissage</a>
-    <a href="#ressources">Ressources</a>
+    <a href="/#outils">Outils</a>
+    <a href="/#apprentissage">Apprentissage</a>
+    <a href="/blog/">Blog</a>
     <hr style="border: none; border-top: 1px solid var(--border); margin: var(--space-4) 0;">
-    <a href="guide-investissement.html" class="btn btn-primary">Guide d'investissement</a>
+    <a href="/" class="btn btn-secondary" style="justify-content: center;">Retour à l'accueil</a>
   </nav>
 
   <main id="main">
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content fade-in">
-        <span class="hero-subtitle">Éducation financière indépendante</span>
-        <h1 class="hero-title">Apprendre à investir,<br>pas à spéculer</h1>
-        <p class="hero-description">
-          Une plateforme pédagogique gratuite pour comprendre l'investissement. Guides complets, outils interactifs, aucun conseil financier personnalisé — juste la clarté.
-        </p>
-        <div class="hero-cta">
-          <a href="#outils" class="btn btn-primary">Découvrir les outils →</a>
-          <a href="guide-investissement.html" class="btn btn-secondary">Lire le guide</a>
-        </div>
-      </div>
-
-      <!-- Disclaimer prominent -->
-      <div class="disclaimer-hero fade-in">
-        <strong>⚠ Contenu éducatif uniquement.</strong> Aucune recommandation d'investissement personnalisée. Ce site explique les mécanismes généraux de l'investissement à titre pédagogique et ne constitue pas un conseil financier.
-      </div>
-    </section>
-
-    <!-- Tools Section -->
-    <section id="outils" class="section">
+    <!-- Hero -->
+    <section class="blog-hero">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Outils interactifs</h2>
-          <p class="section-subtitle">Des calculateurs et trackers conçus pour comprendre les principes fondamentaux de l'investissement.</p>
-        </div>
-
-        <div class="tools-grid fade-in-stagger">
-          
-          <!-- FIRE Calculator -->
-          <a href="calculateur_fire.html" class="tool-card">
-            <span class="tool-icon">🔥</span>
-            <h3 class="tool-title">Calculateur FIRE</h3>
-            <p class="tool-description">
-              Simule ton chemin vers l'indépendance financière. Visualise comment l'épargne régulière et le rendement des investissements te rapprochent de tes objectifs.
-            </p>
-            <span class="tool-cta">Explorer →</span>
-          </a>
-
-          <!-- ETF Comparator -->
-          <a href="comparateur_etf.html" class="tool-card">
-            <span class="tool-icon">📊</span>
-            <h3 class="tool-title">Comparateur ETF</h3>
-            <p class="tool-description">
-              Apprenez comment fonctionnent les ETF et comparez les meilleurs trackers pédagogiquement pertinents pour débutants.
-            </p>
-            <span class="tool-cta">Comparer →</span>
-          </a>
-
-          <!-- Budget Tracker -->
-          <a href="budget_tracker.html" class="tool-card">
-            <span class="tool-icon">💰</span>
-            <h3 class="tool-title">Budget Tracker</h3>
-            <p class="tool-description">
-              Suivez vos revenus et dépenses. Visualisez votre taux d'épargne et appliquez la règle 50/30/20. Données stockées localement.
-            </p>
-            <span class="tool-cta">Tracker →</span>
-          </a>
-
-        </div>
+        <h1>Blog & Articles</h1>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-8);">Approfondissez votre compréhension de l'investissement avec des articles détaillés, des guides stratégiques et des explications de concepts.</p>
       </div>
     </section>
 
-    <!-- Educational Modules -->
-    <section id="apprentissage" class="section modules">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Modules pédagogiques</h2>
-          <p class="section-subtitle">Découvrez nos guides complets couvrant les fondamentaux de l'investissement.</p>
-        </div>
-
-        <div class="modules-grid fade-in-stagger">
-          
-          <!-- Guide Investissement -->
-          <a href="guide-investissement.html" class="module-item">
-            <span class="module-number">01 — Fondamentaux</span>
-            <h3 class="module-title">Guide d'investissement</h3>
-            <p class="module-description">
-              De A à Z : actions, ETF, obligations, enveloppes fiscales (PEA, assurance-vie), risque, diversification, stratégie. Tout ce qu'il faut comprendre pour débuter.
-            </p>
-          </a>
-
-          <!-- Guide Fiscalité -->
-          <a href="guide_fiscalite.html" class="module-item">
-            <span class="module-number">02 — Fiscalité</span>
-            <h3 class="module-title">Guide Fiscalité</h3>
-            <p class="module-description">
-              Comprendre les enveloppes fiscales (PEA, assurance-vie, PER, CTO), la flat-tax 30%, les implications fiscales de chaque type d'investissement.
-            </p>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
+    <!-- Content -->
     <section class="section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Pourquoi FinCulture</h2>
-          <p class="section-subtitle">Une approche totalement différente de la finance.</p>
+        
+        <div class="blog-grid">
+          
+          <!-- Article 1 -->
+          <a href="pourquoi-investir.html" class="blog-card">
+            <div class="blog-card-header">
+              <div class="blog-category">Fondamentaux</div>
+              <h3 class="blog-card-title">Pourquoi investir ?</h3>
+              <p class="blog-card-excerpt">
+                Comprendre le pourquoi avant le comment. L'investissement, l'intérêt composé et la création de richesse.
+              </p>
+            </div>
+            <div class="blog-card-meta">
+              <span>12 avril 2026</span>
+              <span class="blog-card-read">Lire →</span>
+            </div>
+          </a>
+
+          <!-- Article 2 -->
+          <a href="etf-guide-complet.html" class="blog-card">
+            <div class="blog-card-header">
+              <div class="blog-category">Instruments</div>
+              <h3 class="blog-card-title">ETF : Guide complet pour débutants</h3>
+              <p class="blog-card-excerpt">
+                Qu'est-ce qu'un ETF ? Comment fonctionnent-ils ? Pourquoi sont-ils idéals pour démarrer ?
+              </p>
+            </div>
+            <div class="blog-card-meta">
+              <span>10 avril 2026</span>
+              <span class="blog-card-read">Lire →</span>
+            </div>
+          </a>
+
+          <!-- Article 3 -->
+          <a href="diversification.html" class="blog-card">
+            <div class="blog-card-header">
+              <div class="blog-category">Stratégie</div>
+              <h3 class="blog-card-title">La diversification expliquée simplement</h3>
+              <p class="blog-card-excerpt">
+                Pourquoi ne pas mettre tous ses œufs dans le même panier ? Les principes clés de la diversification.
+              </p>
+            </div>
+            <div class="blog-card-meta">
+              <span>8 avril 2026</span>
+              <span class="blog-card-read">Lire →</span>
+            </div>
+          </a>
+
+          <!-- Article 4 - Coming soon -->
+          <div class="coming-soon">
+            <div style="font-size: 1.5rem; margin-bottom: var(--space-2);">🚀</div>
+            <strong>Articles à venir</strong>
+            <p style="margin-top: var(--space-2); font-size: var(--type-xs);">Fiscalité avancée, stratégies FIRE, gestion de portefeuille...</p>
+          </div>
+
         </div>
 
-        <div class="features fade-in-stagger">
-          <div class="feature">
-            <div class="feature-icon">📚</div>
-            <h3 class="feature-title">100% Pédagogique</h3>
-            <p class="feature-description">Aucun produit à vendre, aucun conseil personnalisé. Juste l'éducation et la clarté.</p>
-          </div>
-
-          <div class="feature">
-            <div class="feature-icon">🎯</div>
-            <h3 class="feature-title">Pour les débutants</h3>
-            <p class="feature-description">Conçu pour être accessible, clair et non intimidant, même si tu ne connais rien à la finance.</p>
-          </div>
-
-          <div class="feature">
-            <div class="feature-icon">🔓</div>
-            <h3 class="feature-title">Gratuit et indépendant</h3>
-            <p class="feature-description">Aucune publicité, aucun partenariat financier, aucune agenda cachée.</p>
-          </div>
-
-          <div class="feature">
-            <div class="feature-icon">⚙️</div>
-            <h3 class="feature-title">Outils interactifs</h3>
-            <p class="feature-description">Calculez, simulez, suivez — apprenez en faisant, avec vos propres données.</p>
-          </div>
-
-          <div class="feature">
-            <div class="feature-icon">🌍</div>
-            <h3 class="feature-title">Contexte français</h3>
-            <p class="feature-description">Optimisé pour la France : PEA, assurance-vie, fiscalité française, termes francophones.</p>
-          </div>
-
-          <div class="feature">
-            <div class="feature-icon">🔒</div>
-            <h3 class="feature-title">Vos données vous appartiennent</h3>
-            <p class="feature-description">Budget, progression, données stockées localement sur votre appareil. Zéro suivi.</p>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Resources Section -->
-    <section id="ressources" class="section alt">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Ressources officielles</h2>
-          <p class="section-subtitle">Pour aller plus loin avec des sources d'information fiables.</p>
-        </div>
-
-        <div class="stats fade-in-stagger">
-          <div class="stat">
-            <div class="stat-value">∞</div>
-            <div class="stat-label">Aucune limite de temps</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">0€</div>
-            <div class="stat-label">Totalement gratuit</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">📖</div>
-            <div class="stat-label">Contenu éducatif</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">🔄</div>
-            <div class="stat-label">Régulièrement mis à jour</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="section">
-      <div class="container">
-        <div class="cta-section fade-in">
-          <h2 class="cta-title">Prêt à apprendre ?</h2>
-          <p class="cta-description">Commence par les bases avec notre guide d'investissement ou explorez directement les outils interactifs.</p>
-          <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-            <a href="guide-investissement.html" class="btn btn-primary">Commencer le guide</a>
-            <a href="#outils" class="btn btn-secondary">Explorer les outils</a>
-          </div>
+    <!-- CTA Back -->
+    <section class="section alt">
+      <div class="container" style="text-align: center;">
+        <h2 style="margin-bottom: var(--space-4);">Découvrez aussi nos guides complets</h2>
+        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; margin-bottom: var(--space-8);">
+          <a href="../guide-investissement.html" class="btn btn-primary">Guide d'investissement</a>
+          <a href="../calculateur_fire.html" class="btn btn-secondary">Calculateur FIRE</a>
         </div>
       </div>
     </section>
@@ -548,22 +235,19 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
-        
         <div class="footer-section">
           <h3>Navigation</h3>
           <div class="footer-links">
-            <a href="guide-investissement.html">Guide d'investissement</a>
-            <a href="comparateur_etf.html">Comparateur ETF</a>
-            <a href="calculateur_fire.html">Calculateur FIRE</a>
-            <a href="budget_tracker.html">Budget Tracker</a>
-            <a href="guide_fiscalite.html">Guide Fiscalité</a>
+            <a href="/../guide-investissement.html">Guide d'investissement</a>
+            <a href="/../calculateur_fire.html">Calculateur FIRE</a>
+            <a href="/../budget_tracker.html">Budget Tracker</a>
+            <a href="/blog/">Blog</a>
           </div>
         </div>
 
         <div class="footer-section">
           <h3>Ressources</h3>
           <div class="footer-links">
-            <a href="blog/index.html">Blog & Articles</a>
             <a href="#">Glossaire</a>
             <a href="#">FAQ</a>
             <a href="#">Contact</a>
@@ -578,7 +262,6 @@
             <a href="#">Politique de confidentialité</a>
           </div>
         </div>
-
       </div>
 
       <div class="footer-bottom">
@@ -625,46 +308,10 @@
       mobileMenuBtn.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
     });
 
-    // Close mobile menu on link click
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileNav.classList.remove('open');
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#main') {
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      });
-    });
-
-    // Mark active nav link
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section[id]');
-      let current = '';
-
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
       });
     });
   </script>
