@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Guide d'investissement complet — FinCulture</title>
+  <meta name="description" content="Comprendre l'investissement de A à Z : actions, ETF, obligations, enveloppes fiscales PEA, assurance-vie, risque et stratégie. Guide éducatif 2026.">
+  <meta property="og:title" content="Guide d'investissement complet — FinCulture">
+  <meta property="og:description" content="Comprendre l'investissement de A à Z : actions, ETF, obligations, enveloppes fiscales PEA, assurance-vie, risque et stratégie. Guide éducatif 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --fd:'Instrument Serif',Georgia,serif;
+      --fb:'Inter','Helvetica Neue',sans-serif;
+      --xs:clamp(.75rem,.7rem + .25vw,.875rem);
+      --sm:clamp(.875rem,.8rem + .35vw,1rem);
+      --base:clamp(1rem,.95rem + .25vw,1.125rem);
+      --lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+      --xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --3xl:clamp(2.5rem,1rem + 4vw,5rem);
+      --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
+      --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;--s20:5rem;--s24:6rem;
+      --r1:.375rem;--r2:.5rem;--r3:.75rem;--r4:1rem;--r5:1.5rem;--rf:9999px;
+      --ease:180ms cubic-bezier(.16,1,.3,1);
+      --cw:1200px;--cd:960px;--cn:640px;
+    }
+    :root,[data-theme="dark"]{
+      --bg:#0c0c0f;--s:#131318;--s2:#1a1a22;--so:#20202c;--sd:#28283a;
+      --dv:#22222e;--bd:#2e2e40;
+      --t:#eeeef2;--tm:#8080a0;--tf:#44445a;--ti:#0c0c0f;
+      --p:#3b6fff;--ph:#5c85ff;--pa:#2050e0;--phl:rgba(59,111,255,.1);
+      --gd:#d4a843;--ok:#3ecf8e;--er:#ff5555;
+      --e1:0 1px 3px rgba(0,0,0,.5);--e2:0 4px 16px rgba(0,0,0,.6);--e3:0 16px 40px rgba(0,0,0,.7);
+    }
+    [data-theme="light"]{
+      --bg:#f6f6f9;--s:#fff;--s2:#f0f0f5;--so:#e8e8f0;--sd:#dcdce8;
+      --dv:#e2e2ec;--bd:#d0d0de;
+      --t:#0d0d18;--tm:#5a5a78;--tf:#aaaabc;--ti:#fff;
+      --p:#2450d8;--ph:#3b6fff;--pa:#1838b0;--phl:rgba(36,80,216,.08);
+      --gd:#a07810;--ok:#1a9e5e;--er:#cc2222;
+      --e1:0 1px 3px rgba(0,0,0,.07);--e2:0 4px 16px rgba(0,0,0,.09);--e3:0 16px 40px rgba(0,0,0,.13);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:4rem;text-rendering:optimizeLegibility}
+    body{min-height:100dvh;font-family:var(--fb);font-size:var(--base);color:var(--t);background:var(--bg);line-height:1.65;overflow-x:hidden}
+    img,svg{display:block;max-width:100%;height:auto}
+    h1,h2,h3,h4{text-wrap:balance;line-height:1.12;font-family:var(--fd)}
+    p,li{text-wrap:pretty}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+    input,select,textarea,range{font:inherit;color:inherit}
+    ::selection{background:rgba(59,111,255,.22)}
+    :focus-visible{outline:2px solid var(--p);outline-offset:3px;border-radius:var(--r1)}
+    a,button,[role=button]{transition:color var(--ease),background var(--ease),border-color var(--ease),box-shadow var(--ease),opacity var(--ease),transform var(--ease)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+    .skip{position:absolute;top:-100%;left:1rem;background:var(--p);color:#fff;padding:.5rem 1rem;border-radius:var(--r2);z-index:9999;font-size:var(--sm)}
+    .skip:focus{top:.5rem}
+    /* NAV */
+    .hdr{position:sticky;top:0;z-index:200;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--dv)}
+    .hdr-in{max-width:var(--cw);margin:0 auto;padding:0 clamp(1rem,4vw,3rem);height:3.75rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .logo{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+    .logo-t{font-family:var(--fd);font-size:var(--lg);color:var(--t);letter-spacing:-.01em}
+    .logo-d{width:5px;height:5px;border-radius:50%;background:var(--p)}
+    .nav-l{display:flex;align-items:center;gap:1.75rem}
+    .nav-l a{font-size:var(--sm);color:var(--tm);font-weight:450}
+    .nav-l a:hover,.nav-l a.act{color:var(--t)}
+    .nav-l a.act{color:var(--p)}
+    .nav-r{display:flex;align-items:center;gap:.75rem}
+    .i-btn{width:34px;height:34px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;color:var(--tm);border:1px solid var(--bd)}
+    .i-btn:hover{color:var(--t);border-color:var(--tm)}
+    .btn-p{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);font-weight:500;padding:.45rem 1rem;background:var(--p);color:#fff;border-radius:var(--r2)}
+    .btn-p:hover{background:var(--ph);transform:translateY(-1px);box-shadow:0 6px 20px rgba(59,111,255,.35)}
+    .btn-g{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);font-weight:500;padding:.45rem 1rem;color:var(--tm);border:1px solid var(--bd);border-radius:var(--r2)}
+    .btn-g:hover{color:var(--t);border-color:var(--tm)}
+    .hmb{display:none;width:34px;height:34px;align-items:center;justify-content:center;border-radius:var(--r2);border:1px solid var(--bd);color:var(--tm);flex-direction:column;gap:4px}
+    @media(max-width:768px){.nav-l{display:none}.nav-r .btn-p{display:none}.hmb{display:flex}}
+    .mnav{display:none;position:fixed;inset:0;z-index:190;background:var(--bg);padding:4.5rem 1.5rem 2rem;flex-direction:column;gap:.25rem;overflow-y:auto}
+    .mnav.open{display:flex}
+    .mnav a{font-size:var(--lg);color:var(--tm);padding:.75rem 1rem;border-radius:var(--r3)}
+    .mnav a:hover{color:var(--t);background:var(--so)}
+    .mnav hr{border:none;border-top:1px solid var(--dv);margin:.75rem 0}
+    /* FOOTER */
+    .ftr{background:var(--s);border-top:1px solid var(--dv);padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,3rem) 2rem}
+    .ftr-in{max-width:var(--cw);margin:0 auto}
+    .ftr-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
+    @media(max-width:768px){.ftr-g{grid-template-columns:1fr 1fr;gap:1.5rem}}
+    @media(max-width:480px){.ftr-g{grid-template-columns:1fr}}
+    .ftr-d{font-size:var(--sm);color:var(--tm);line-height:1.7;margin-top:.75rem;max-width:30ch}
+    .ftr-h{font-size:var(--xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--tf);margin-bottom:1rem;font-family:var(--fb)}
+    .ftr-ul{list-style:none;display:flex;flex-direction:column;gap:.625rem}
+    .ftr-ul a{font-size:var(--sm);color:var(--tm)}
+    .ftr-ul a:hover{color:var(--t)}
+    .ftr-b{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--dv);font-size:var(--xs);color:var(--tf)}
+    /* PAGE HERO */
+    .ph{padding:clamp(3rem,7vw,6rem) clamp(1rem,4vw,3rem) clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--dv);position:relative;overflow:hidden}
+    .ph::after{content:'';position:absolute;top:-30%;right:-8%;width:45%;height:130%;background:radial-gradient(ellipse,rgba(59,111,255,.06) 0%,transparent 65%);pointer-events:none}
+    .ph-in{max-width:var(--cw);margin:0 auto;position:relative;z-index:1}
+    .back{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);color:var(--tm);margin-bottom:1.5rem}
+    .back:hover{color:var(--t)}
+    .ey{font-size:var(--xs);font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--p);margin-bottom:1rem;display:block;font-family:var(--fb)}
+    .ph-t{font-size:var(--3xl);color:var(--t);letter-spacing:-.025em;line-height:1.04;margin-bottom:1.25rem}
+    .ph-t em{color:var(--p);font-style:italic}
+    .ph-s{font-size:var(--lg);color:var(--tm);max-width:54ch;line-height:1.65;margin-bottom:1.5rem}
+    .ph-m{display:flex;flex-wrap:wrap;gap:.75rem}
+    .mbg{display:inline-flex;align-items:center;font-size:var(--xs);padding:.2rem .7rem;border-radius:var(--rf);border:1px solid var(--bd);color:var(--tm);background:var(--s);font-family:var(--fb)}
+    /* DISC */
+    .disc{background:color-mix(in srgb,var(--gd) 8%,var(--s));border:1px solid color-mix(in srgb,var(--gd) 28%,var(--bd));border-radius:var(--r4);padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;margin-bottom:2rem}
+    .disc svg{flex-shrink:0;color:var(--gd);width:15px;height:15px;margin-top:2px}
+    .disc p{font-size:var(--xs);color:var(--tm);line-height:1.65;max-width:none}
+    /* SECTIONS */
+    .sec{padding:clamp(3rem,7vw,6rem) clamp(1rem,4vw,3rem)}
+    .sec-s{background:var(--s);border-top:1px solid var(--dv)}
+    .cw{max-width:var(--cw);margin:0 auto}
+    .cd{max-width:var(--cd);margin:0 auto}
+    .cn{max-width:var(--cn);margin:0 auto}
+    .lbl{font-size:var(--xs);font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--p);margin-bottom:.75rem;display:block;font-family:var(--fb)}
+    .sttl{font-size:var(--2xl);color:var(--t);letter-spacing:-.022em;margin-bottom:1rem;line-height:1.08}
+    .sttl em{color:var(--p);font-style:italic}
+    .ssub{font-size:var(--base);color:var(--tm);max-width:58ch;line-height:1.72;margin-bottom:2rem}
+    /* CARDS */
+    .card{background:var(--s);border:1px solid var(--bd);border-radius:var(--r4);padding:1.5rem;transition:all var(--ease)}
+    .card:hover{box-shadow:var(--e2);border-color:color-mix(in srgb,var(--p) 35%,var(--bd));transform:translateY(-2px)}
+    /* TABLE */
+    .tbl{width:100%;border-collapse:collapse;font-size:var(--sm);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bd)}
+    .tbl th{background:var(--so);text-align:left;font-size:var(--xs);text-transform:uppercase;letter-spacing:.08em;color:var(--tf);padding:.75rem 1rem;font-weight:500;border-bottom:1px solid var(--bd);font-family:var(--fb)}
+    .tbl td{padding:.75rem 1rem;color:var(--tm);border-bottom:1px solid var(--dv)}
+    .tbl tr:last-child td{border-bottom:none}
+    .tbl .t1{color:var(--t);font-weight:500}
+    .tbl tbody tr:hover td{background:var(--so)}
+    /* CALLOUT */
+    .cll{background:var(--phl);border:1px solid rgba(59,111,255,.2);border-radius:var(--r3);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .cll-w{background:color-mix(in srgb,var(--gd) 8%,transparent);border-color:color-mix(in srgb,var(--gd) 30%,transparent)}
+    .cll-t{font-size:var(--sm);font-weight:600;color:var(--p);margin-bottom:.4rem;font-family:var(--fb)}
+    .cll-w .cll-t{color:var(--gd)}
+    .cll p{font-size:var(--sm);color:var(--tm);max-width:none;line-height:1.65}
+    /* TAGS */
+    .tag{display:inline-flex;align-items:center;font-size:var(--xs);font-weight:500;padding:2px .6rem;border-radius:var(--rf);font-family:var(--fb)}
+    .t-b{background:var(--phl);color:var(--p)}
+    .t-i{background:rgba(212,168,67,.12);color:var(--gd)}
+    .t-a{background:rgba(62,207,142,.1);color:var(--ok)}
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+    .rv.in{opacity:1;transform:translateY(0)}
+
+  /* TOC sidebar */
+  .guide-wrap{max-width:var(--cw);margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:3rem;padding:0 clamp(1rem,4vw,3rem) clamp(3rem,6vw,5rem)}
+  @media(max-width:900px){.guide-wrap{grid-template-columns:1fr}}
+  .toc{position:sticky;top:4.5rem;height:fit-content;max-height:calc(100vh - 5rem);overflow-y:auto;padding:1.5rem;background:var(--s);border:1px solid var(--bd);border-radius:var(--r4)}
+  @media(max-width:900px){.toc{display:none}}
+  .toc-h{font-size:var(--xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--tf);margin-bottom:1rem;font-family:var(--fb)}
+  .toc-ul{list-style:none;display:flex;flex-direction:column;gap:.1rem}
+  .toc-ul a{font-size:var(--xs);color:var(--tm);padding:.3rem .6rem;border-radius:var(--r1);display:block;line-height:1.4}
+  .toc-ul a:hover,.toc-ul a.on{color:var(--p);background:var(--phl)}
+  .toc-ul .sub{padding-left:1.25rem}
+  /* CONTENT */
+  .prose{max-width:72ch}
+  .art-sec{margin-bottom:clamp(2.5rem,6vw,5rem);scroll-margin-top:5rem}
+  .art-sec h2{font-size:var(--xl);color:var(--t);letter-spacing:-.018em;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--dv)}
+  .art-sec h3{font-size:var(--lg);color:var(--t);letter-spacing:-.012em;margin:1.75rem 0 .75rem}
+  .art-sec p{font-size:var(--base);color:var(--tm);line-height:1.75;margin-bottom:1rem;max-width:72ch}
+  .art-sec ul,.art-sec ol{margin:1rem 0 1.25rem 1.25rem;display:flex;flex-direction:column;gap:.5rem}
+  .art-sec li{font-size:var(--base);color:var(--tm);line-height:1.65;max-width:68ch}
+  .art-sec strong{color:var(--t);font-weight:600}
+  /* CARD GRID inside article */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+  @media(max-width:600px){.g2{grid-template-columns:1fr}}
+  .g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:1rem;margin:1.5rem 0}
+  /* PROGRESS BAR */
+  .prog-bar{height:3px;background:var(--dv);border-radius:var(--rf);margin:2rem 0}
+  .prog-fill{height:100%;background:var(--p);border-radius:var(--rf);width:0%;transition:width .3s ease}
+  /* STAT BOXES */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:1rem;margin:1.5rem 0}
+  .stat-box{background:var(--so);border:1px solid var(--bd);border-radius:var(--r3);padding:1.25rem;text-align:center}
+  .stat-v{font-family:var(--fd);font-size:var(--xl);color:var(--t);display:block;letter-spacing:-.02em}
+  .stat-l{font-size:var(--xs);color:var(--tm);margin-top:.3rem;font-family:var(--fb)}
+  /* CHECKLIST */
+  .chk{list-style:none;margin-left:0!important;margin:1rem 0 1.25rem}
+  .chk li{display:flex;align-items:flex-start;gap:.6rem;font-size:var(--base);color:var(--tm);line-height:1.6;max-width:68ch;padding:.3rem 0}
+  .chk li::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--phl);border:1.5px solid var(--p);flex-shrink:0;margin-top:.15rem}
+  /* COMPARE TABLE */
+  .cmp-tbl{margin:1.5rem 0}
+  /* MOBILE TOC */
+  .mob-toc{display:none;background:var(--s);border:1px solid var(--bd);border-radius:var(--r4);padding:1rem;margin:1.5rem 0}
+  @media(max-width:900px){.mob-toc{display:block}}
+  .mob-toc summary{cursor:pointer;font-size:var(--sm);font-weight:600;color:var(--t);list-style:none;display:flex;justify-content:space-between;align-items:center;user-select:none}
+  .mob-toc ul{margin:1rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.25rem}
+  .mob-toc ul a{font-size:var(--sm);color:var(--tm);padding:.3rem .5rem;display:block;border-radius:var(--r1)}
+  .mob-toc ul a:hover{color:var(--t);background:var(--phl)}
+</style>
+</head>
+<body data-page="guide">
+<a href="#main" class="skip">Aller au contenu</a>
+<header class="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="logo"><svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="var(--p)"/><path d="M6 20L11 10L16.5 17L20 12.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="12.5" r="2" fill="#fff"/></svg><span class="logo-t">FinCulture</span><span class="logo-d" aria-hidden="true"></span></a>
+    <nav class="nav-l"><a href="guide-investissement.html" data-p="guide"class=act>Guide</a><a href="comparateur_etf.html" data-p="etf">ETF</a><a href="calculateur_fire.html" data-p="fire">FIRE</a><a href="budget_tracker.html" data-p="budget">Budget</a><a href="guide_fiscalite.html" data-p="fisc">Fiscalité</a></nav>
+    <div class="nav-r">
+      <button class="i-btn" data-tt aria-label="Thème"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+      <a href="index.html" class="btn-p">← Accueil</a>
+      <button class="hmb" id="hmb" aria-label="Menu" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="mnav" id="mnav">
+  <a href="index.html">← Accueil</a><a href="guide-investissement.html">Guide</a><a href="comparateur_etf.html">ETF</a><a href="calculateur_fire.html">FIRE</a><a href="budget_tracker.html">Budget</a><a href="guide_fiscalite.html">Fiscalité</a>
+  <hr>
+  <a href="index.html" class="btn-p" style="justify-content:center">Retour à l'accueil</a>
+</nav>
+
+<main id="main">
+  <div class="ph">
+    <div class="ph-in">
+      <a href="index.html" class="back rv"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Accueil</a>
+      <span class="ey rv">Guide complet</span>
+      <h1 class="ph-t rv">Investir, ça s'<em>apprend</em></h1>
+      <p class="ph-s rv">De la première mise de côté jusqu'à la construction d'un portefeuille diversifié — les mécanismes expliqués clairement, sans jargon, sans conflits d'intérêts.</p>
+      <div class="ph-m rv">
+        <span class="mbg">📖 Guide complet</span>
+        <span class="mbg">⏱️ ~30 min de lecture</span>
+        <span class="mbg">🎓 Débutant → Avancé</span>
+        <span class="mbg">🔄 Mis à jour 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:2rem clamp(1rem,4vw,3rem) 0;max-width:var(--cw);margin:0 auto">
+    <div class="disc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+<p><strong>Contenu éducatif uniquement.</strong> Ce guide explique des mécanismes généraux d'investissement à titre pédagogique. Il ne constitue pas un conseil en investissement personnalisé et ne prend pas en compte ta situation individuelle. Tout investissement comporte un risque de perte en capital.</p></div>
+  </div>
+
+  <div class="guide-wrap">
+    <!-- STICKY TOC -->
+    <aside class="toc">
+      <p class="toc-h">Sommaire</p>
+      <ul class="toc-ul" id="toc-ul">
+        <li><a href="#bases">1. Les fondamentaux</a></li>
+        <li><a href="#marches" class="sub">→ Les marchés financiers</a></li>
+        <li><a href="#actifs">2. Classes d'actifs</a></li>
+        <li><a href="#actions" class="sub">→ Actions</a></li>
+        <li><a href="#obligations" class="sub">→ Obligations</a></li>
+        <li><a href="#etf" class="sub">→ ETF & fonds indiciels</a></li>
+        <li><a href="#immo" class="sub">→ Immobilier & SCPI</a></li>
+        <li><a href="#crypto" class="sub">→ Crypto-monnaies</a></li>
+        <li><a href="#enveloppes">3. Enveloppes fiscales</a></li>
+        <li><a href="#pea" class="sub">→ PEA</a></li>
+        <li><a href="#av" class="sub">→ Assurance-vie</a></li>
+        <li><a href="#per" class="sub">→ PER</a></li>
+        <li><a href="#cto" class="sub">→ CTO</a></li>
+        <li><a href="#risque">4. Risque & diversification</a></li>
+        <li><a href="#strategie">5. Construire sa stratégie</a></li>
+        <li><a href="#erreurs">6. Erreurs à éviter</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <article>
+      <!-- Mobile TOC -->
+      <details class="mob-toc rv">
+        <summary>📖 Sommaire du guide <span>▾</span></summary>
+        <ul>
+          <li><a href="#bases">1. Les fondamentaux</a></li>
+          <li><a href="#actifs">2. Classes d'actifs</a></li>
+          <li><a href="#enveloppes">3. Enveloppes fiscales</a></li>
+          <li><a href="#risque">4. Risque & diversification</a></li>
+          <li><a href="#strategie">5. Construire sa stratégie</a></li>
+          <li><a href="#erreurs">6. Erreurs à éviter</a></li>
+        </ul>
+      </details>
+
+      <!-- ① FONDAMENTAUX -->
+      <section class="art-sec rv" id="bases">
+        <h2>1. Les fondamentaux de l'investissement</h2>
+        <p>Avant d'investir le moindre euro en bourse, il faut maîtriser quelques principes de base. Ce n'est pas une question de timing ou de chance — c'est une question de fondations solides.</p>
+
+        <h3>Pourquoi investir ?</h3>
+        <p>L'argent qui dort perd de sa valeur à cause de l'<strong>inflation</strong>. Si tu laisses 10 000 € sur un compte courant pendant 10 ans à 0 % de taux, et que l'inflation tourne autour de 2,5 %/an, tu auras perdu environ 22 % de pouvoir d'achat sans t'en rendre compte.</p>
+        <p>Investir, c'est faire travailler ton argent pour qu'il croisse au-delà de l'inflation. Ce n'est pas de la spéculation — c'est de la gestion patrimoniale raisonnée sur le long terme.</p>
+
+        <div class="stat-row">
+          <div class="stat-box"><span class="stat-v">2,5 %</span><p class="stat-l">Inflation annuelle moyenne France</p></div>
+          <div class="stat-box"><span class="stat-v">3,0 %</span><p class="stat-l">Livret A (2026)</p></div>
+          <div class="stat-box"><span class="stat-v">7–9 %</span><p class="stat-l">Rendement historique MSCI World</p></div>
+          <div class="stat-box"><span class="stat-v">30 %</span><p class="stat-l">Flat tax sur gains (CTO)</p></div>
+        </div>
+
+        <h3>Les 3 règles d'or avant d'investir</h3>
+        <ul class="chk">
+          <li>Constituer un <strong>fonds d'urgence</strong> de 3 à 6 mois de charges courantes sur un Livret A ou LDDS (argent disponible immédiatement)</li>
+          <li>Rembourser d'abord les dettes à taux élevé (crédit consommation > 5 %) — leur coût dépasse souvent le rendement d'un investissement boursier</li>
+          <li>Ne jamais investir de l'argent dont tu pourrais avoir besoin à court terme (moins de 5 ans)</li>
+        </ul>
+
+        <div class="cll">
+          <p class="cll-t">💡 La règle 50/30/20</p>
+          <p>Un cadre budgétaire simple : 50 % des revenus nets aux besoins essentiels (logement, courses, transport), 30 % aux envies, 20 % à l'épargne et l'investissement. C'est un point de départ, pas une loi.</p>
+        </div>
+
+        <h3 id="marches">Les marchés financiers — comment ça marche ?</h3>
+        <p>Un marché financier est un lieu (physique ou virtuel) où s'échangent des instruments financiers : actions, obligations, ETF, devises, matières premières. En France, le principal marché actions est <strong>Euronext Paris</strong>.</p>
+        <p>Lorsqu'une entreprise veut lever des fonds, elle peut entrer en bourse (IPO) et émettre des actions. Les investisseurs achètent ces actions, devenant propriétaires d'une fraction de l'entreprise. Si l'entreprise génère des bénéfices, la valeur de l'action augmente et des dividendes peuvent être versés.</p>
+
+        <div class="cll cll-w">
+          <p class="cll-t">⚠️ Un marché n'est pas un casino</p>
+          <p>À court terme, les prix fluctuent de manière imprévisible. À long terme (10-20+ ans), les marchés d'actions ont historiquement toujours progressé. La durée est ton meilleur allié.</p>
+        </div>
+      </section>
+
+      <!-- ② CLASSES D'ACTIFS -->
+      <section class="art-sec rv" id="actifs">
+        <h2>2. Les classes d'actifs</h2>
+        <p>Une classe d'actifs est un groupe d'instruments financiers partageant des caractéristiques similaires en termes de risque, rendement et comportement de marché. Diversifier entre classes d'actifs réduit le risque global d'un portefeuille.</p>
+
+        <div style="overflow-x:auto;margin:1.5rem 0">
+        <table class="tbl">
+          <thead><tr><th>Classe d'actif</th><th>Rendement espéré</th><th>Volatilité</th><th>Horizon recommandé</th><th>Liquidité</th></tr></thead>
+          <tbody>
+            <tr><td class="t1">Actions</td><td>7–10 % /an</td><td>Élevée</td><td>8–10 ans+</td><td>Haute</td></tr>
+            <tr><td class="t1">Obligations d'État</td><td>3–5 % /an</td><td>Faible</td><td>2–5 ans</td><td>Haute</td></tr>
+            <tr><td class="t1">ETF World</td><td>6–9 % /an</td><td>Modérée</td><td>8–10 ans+</td><td>Haute</td></tr>
+            <tr><td class="t1">SCPI</td><td>4–6 % /an</td><td>Faible</td><td>8–12 ans+</td><td>Faible</td></tr>
+            <tr><td class="t1">Or</td><td>2–4 % /an</td><td>Modérée</td><td>5–10 ans+</td><td>Modérée</td></tr>
+            <tr><td class="t1">Crypto (BTC)</td><td>Variable</td><td>Très élevée</td><td>Spéculatif</td><td>Haute</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <h3 id="actions">Les actions</h3>
+        <p>Acheter une action, c'est acheter une fraction de la propriété d'une entreprise. En tant qu'actionnaire, tu participes à la croissance de l'entreprise (plus-value potentielle) et à la distribution de ses bénéfices (dividendes).</p>
+        <p>Le risque : si l'entreprise fait faillite, tu peux perdre l'intégralité de ta mise. C'est pourquoi investir dans des actions individuelles sans diversification est très risqué pour un débutant.</p>
+        <ul>
+          <li><strong>Actions en croissance (growth)</strong> : entreprises réinvestissant tous leurs bénéfices (ex: tech). Potentiel élevé, volatilité élevée.</li>
+          <li><strong>Actions à dividendes (value)</strong> : entreprises matures versant des dividendes réguliers. Plus stables, moins de croissance potentielle.</li>
+          <li><strong>Small caps / Large caps</strong> : les petites capitalisations sont plus risquées mais potentiellement plus rentables.</li>
+        </ul>
+
+        <h3 id="obligations">Les obligations</h3>
+        <p>Une obligation est un titre de dette. Quand tu achètes une obligation d'État français (OAT) ou d'une entreprise, tu lui prêtes de l'argent en échange d'un intérêt périodique (coupon) et du remboursement du capital à maturité.</p>
+        <p>En 2026, les obligations redeviennent intéressantes après des années de taux quasi-nuls. Une OAT 10 ans offre environ 3,2 % brut. Elles servent de <strong>amortisseur</strong> dans un portefeuille diversifié.</p>
+
+        <h3 id="etf">ETF & fonds indiciels</h3>
+        <p>Un ETF (Exchange Traded Fund) est un fonds qui réplique automatiquement un indice boursier (CAC 40, MSCI World, S&P 500…). Tu achètes une seule part et tu es exposé à des centaines ou milliers d'entreprises simultanément.</p>
+        <ul class="chk">
+          <li><strong>Frais ultra-réduits</strong> : 0,05 % à 0,5 %/an contre 1 à 3 % pour un fonds actif</li>
+          <li><strong>Diversification instantanée</strong> : un ETF MSCI World = ~1500 entreprises dans 23 pays</li>
+          <li><strong>Transparence totale</strong> : la composition est publiée quotidiennement</li>
+          <li><strong>Liquidité</strong> : cotés en bourse, s'achètent et se vendent comme une action</li>
+        </ul>
+        <p>La plupart des gérants actifs font moins bien que l'indice sur 10 ans+. C'est pourquoi les ETF passifs sont au cœur de la stratégie de nombreux investisseurs de long terme.</p>
+        <p>👉 Pour comparer les principaux ETF, <a href="comparateur_etf.html" style="color:var(--p);font-weight:500">consulte notre comparateur pédagogique →</a></p>
+
+        <h3 id="immo">Immobilier & SCPI</h3>
+        <p>L'immobilier reste la classe d'actifs préférée des Français. Deux approches : l'immobilier <strong>direct</strong> (acquisition d'un bien) et l'immobilier <strong>indirect</strong> via des SCPI (Sociétés Civiles de Placement Immobilier).</p>
+        <p>Les SCPI permettent d'investir dans l'immobilier avec quelques centaines d'euros, sans gestion locative, en percevant des loyers trimestriels. Attention aux frais d'entrée (7–12 %) et à la liquidité faible.</p>
+
+        <h3 id="crypto">Crypto-monnaies</h3>
+        <p>Bitcoin, Ethereum et les autres crypto-actifs sont des actifs numériques basés sur la technologie blockchain. Leur volatilité est extrême (−70 % à +300 % en un an), et leur nature spéculative est incompatible avec une stratégie de long terme classique.</p>
+        <div class="cll cll-w">
+          <p class="cll-t">⚠️ Position éducative sur les cryptos</p>
+          <p>Les crypto-actifs sont légaux en France et déclarables à l'impôt. Mais leur usage à des fins d'investissement comporte des risques considérables : manque de régulation, arnaques, volatilité extrême. Ne jamais investir plus que ce qu'on est prêt à perdre entièrement.</p>
+        </div>
+      </section>
+
+      <!-- ③ ENVELOPPES FISCALES -->
+      <section class="art-sec rv" id="enveloppes">
+        <h2>3. Les enveloppes fiscales</h2>
+        <p>En France, où tu loges tes investissements est presque aussi important que ce dans quoi tu investis. Les enveloppes fiscales permettent de réduire considérablement l'imposition de tes gains.</p>
+
+        <h3 id="pea">Le Plan d'Épargne en Actions (PEA)</h3>
+        <p>Le PEA est l'enveloppe fiscale de référence pour investir en actions et ETF européens. Son avantage principal : après 5 ans de détention, seuls les <strong>17,2 % de prélèvements sociaux</strong> s'appliquent sur les plus-values (contre 30 % en flat tax sur un CTO).</p>
+        <div style="overflow-x:auto;margin:1.5rem 0">
+        <table class="tbl">
+          <thead><tr><th>Critère</th><th>Détail</th></tr></thead>
+          <tbody>
+            <tr><td class="t1">Plafond de versements</td><td>150 000 € (hors plus-values)</td></tr>
+            <tr><td class="t1">Titres éligibles</td><td>Actions EU, ETF à prépondérance EU (>75 %), SICAVs</td></tr>
+            <tr><td class="t1">Fiscalité avant 5 ans</td><td>30 % (flat tax) + clôture du PEA obligatoire</td></tr>
+            <tr><td class="t1">Fiscalité après 5 ans</td><td>17,2 % de prélèvements sociaux seulement</td></tr>
+            <tr><td class="t1">Retraits après 5 ans</td><td>Libres, sans clôture automatique</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <h3 id="av">Assurance-vie</h3>
+        <p>L'assurance-vie est l'enveloppe la plus polyvalente. Elle permet d'investir sur des fonds en euros (capital garanti, ~2-3 %/an) et des unités de compte (UC) comme des ETF. Sa fiscalité est dégressive dans le temps.</p>
+        <ul>
+          <li>Avant 8 ans : 30 % sur les gains (flat tax)</li>
+          <li>Après 8 ans : abattement annuel de <strong>4 600 € (seul)</strong> ou <strong>9 200 € (couple)</strong> sur les gains, puis 24,7 % sur le reste</li>
+          <li>Avantage successoral : transmission hors droits de succession jusqu'à 152 500 € par bénéficiaire</li>
+        </ul>
+
+        <h3 id="per">Plan d'Épargne Retraite (PER)</h3>
+        <p>Le PER permet de déduire les versements de son revenu imposable (dans certaines limites), ce qui en fait un outil puissant pour les contribuables fortement imposés. Les sommes sont bloquées jusqu'à la retraite (sauf cas exceptionnels).</p>
+        <p>La déduction fiscale varie selon ta tranche d'imposition : si tu es à 30 % d'IR, verser 1 000 € sur un PER te coûte réellement 700 € après déduction.</p>
+
+        <h3 id="cto">Compte-Titres Ordinaire (CTO)</h3>
+        <p>Le CTO n'a aucune contrainte : aucun plafond, tous les actifs mondiaux accessibles (ETF US, actions américaines, obligations, ETF matières premières…). En contrepartie, les plus-values sont soumises à la flat tax de 30 % chaque année.</p>
+        <p>Il est complémentaire au PEA : tu l'utilises quand ton PEA est plein, ou pour des actifs non éligibles au PEA (ETF américains purs, actions hors Europe).</p>
+
+        <div style="overflow-x:auto;margin:1.5rem 0">
+        <table class="tbl">
+          <thead><tr><th>Enveloppe</th><th>Plafond</th><th>Fiscalité gain</th><th>Disponibilité</th><th>Actifs</th></tr></thead>
+          <tbody>
+            <tr><td class="t1">PEA</td><td>150 000 €</td><td>17,2 % (après 5 ans)</td><td>Après 5 ans libre</td><td>Actions EU + ETF EU</td></tr>
+            <tr><td class="t1">Assurance-vie</td><td>Illimité</td><td>17,2–24,7 % (après 8 ans)</td><td>Toujours</td><td>Fonds €, ETF, SCPI</td></tr>
+            <tr><td class="t1">PER</td><td>10 % revenu</td><td>IR à sortie</td><td>Retraite</td><td>ETF, SCPI, fonds</td></tr>
+            <tr><td class="t1">CTO</td><td>Aucun</td><td>30 % (flat tax)</td><td>Toujours</td><td>Tout</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p>👉 Détails complets et simulation : <a href="guide_fiscalite.html" style="color:var(--p);font-weight:500">Guide de la fiscalité de l'investissement →</a></p>
+      </section>
+
+      <!-- ④ RISQUE -->
+      <section class="art-sec rv" id="risque">
+        <h2>4. Risque & diversification</h2>
+        <p>En finance, le risque désigne la <strong>variabilité des rendements</strong>. Un actif risqué peut générer +50 % ou −50 % selon les années. Un actif peu risqué génère des rendements stables mais faibles. Il n'y a pas de rendement élevé sans risque élevé — comprendre ce compromis est fondamental.</p>
+
+        <h3>Les types de risque</h3>
+        <div class="g2">
+          <div class="card"><h4 style="font-size:var(--sm);font-family:var(--fd);margin-bottom:.5rem;color:var(--t)">Risque de marché</h4><p style="font-size:var(--sm);color:var(--tm);max-width:none">Fluctuation générale des marchés. Non diversifiable. Mesurable via la volatilité historique.</p></div>
+          <div class="card"><h4 style="font-size:var(--sm);font-family:var(--fd);margin-bottom:.5rem;color:var(--t)">Risque spécifique</h4><p style="font-size:var(--sm);color:var(--tm);max-width:none">Lié à une entreprise ou un secteur. Éliminable avec une bonne diversification.</p></div>
+          <div class="card"><h4 style="font-size:var(--sm);font-family:var(--fd);margin-bottom:.5rem;color:var(--t)">Risque de liquidité</h4><p style="font-size:var(--sm);color:var(--tm);max-width:none">Impossibilité de vendre rapidement sans perte. SCPI, Private Equity, immobilier direct.</p></div>
+          <div class="card"><h4 style="font-size:var(--sm);font-family:var(--fd);margin-bottom:.5rem;color:var(--t)">Risque de change</h4><p style="font-size:var(--sm);color:var(--tm);max-width:none">Exposition à d'autres devises (USD, GBP). Peut amplifier ou atténuer les rendements.</p></div>
+        </div>
+
+        <h3>La diversification — l'unique "repas gratuit" en finance</h3>
+        <p>Harry Markowitz, Prix Nobel d'économie, a démontré qu'en combinant des actifs décorrélés dans un portefeuille, on peut <strong>réduire le risque global sans sacrifier le rendement espéré</strong>. C'est la seule vraie "astuce" gratuite en finance.</p>
+        <p>Concrètement : ne jamais concentrer plus de 5 % d'un portefeuille dans une seule entreprise, et diversifier géographiquement (Europe, États-Unis, Pays émergents) et par classes d'actifs.</p>
+
+        <div class="cll">
+          <p class="cll-t">📐 La règle des 100 moins l'âge</p>
+          <p>Un heuristique simple pour la répartition actions/obligations : 100 − ton âge = % en actions. À 25 ans : 75 % actions, 25 % obligations. À 60 ans : 40 % actions, 60 % obligations. C'est une simplification — ta tolérance au risque personnelle reste le facteur déterminant.</p>
+        </div>
+      </section>
+
+      <!-- ⑤ STRATÉGIE -->
+      <section class="art-sec rv" id="strategie">
+        <h2>5. Construire sa stratégie d'investissement</h2>
+        <p>Il n'existe pas de stratégie universelle. Mais il existe des principes éprouvés qui permettent à la plupart des investisseurs particuliers d'obtenir de bons résultats sur le long terme.</p>
+
+        <h3>Le portefeuille passif — la stratégie de référence</h3>
+        <p>Investir régulièrement (DCA) dans un ou deux ETF couvrant le marché mondial, en utilisant une enveloppe fiscale adaptée (PEA ou assurance-vie), et en ne touchant à rien pendant 10-20 ans. Simple, prouvé, accessible à tous.</p>
+
+        <div class="g2">
+          <div class="card"><p style="font-size:var(--xs);color:var(--p);font-family:var(--fb);font-weight:500;margin-bottom:.5rem">EXEMPLE DÉBUTANT</p><p style="font-family:var(--fd);font-size:var(--base);color:var(--t);margin-bottom:.5rem">Portefeuille simple</p><p style="font-size:var(--sm);color:var(--tm);max-width:none">90 % ETF MSCI World (PEA) + 10 % fonds en euros (AV). DCA mensuel de 100-300 €.</p></div>
+          <div class="card"><p style="font-size:var(--xs);color:var(--p);font-family:var(--fb);font-weight:500;margin-bottom:.5rem">EXEMPLE INTERMÉDIAIRE</p><p style="font-family:var(--fd);font-size:var(--base);color:var(--t);margin-bottom:.5rem">Portefeuille diversifié</p><p style="font-size:var(--sm);color:var(--tm);max-width:none">70 % MSCI World + 15 % Obligations + 10 % Émergents + 5 % Or. Sur PEA + AV + CTO.</p></div>
+        </div>
+
+        <h3>Le DCA — l'investissement régulier</h3>
+        <p>Le Dollar Cost Averaging (DCA) consiste à investir une somme fixe à intervalles réguliers (chaque mois, par exemple), quelle que soit la conjoncture. Cette approche élimine le risque de "mal timer" le marché, et crée une discipline d'épargne automatique.</p>
+        <p>Exemple : investir 200 €/mois pendant 20 ans à 7 %/an de rendement moyen = environ <strong>103 000 €</strong> de capital final pour 48 000 € versés.</p>
+      </section>
+
+      <!-- ⑥ ERREURS -->
+      <section class="art-sec rv" id="erreurs">
+        <h2>6. Les erreurs classiques à éviter</h2>
+        <ul>
+          <li><strong>Investir sans fonds d'urgence</strong> — Si tu as besoin de liquidités en urgence, tu seras forcé de vendre à perte.</li>
+          <li><strong>Essayer de "timer" le marché</strong> — Personne ne sait si le marché va monter ou baisser demain. Le DCA est plus efficace que d'attendre "le bon moment".</li>
+          <li><strong>Paniquer lors des baisses</strong> — Les corrections sont normales. Vendre dans la panique cristallise une perte et fait manquer le rebond.</li>
+          <li><strong>Suivre les "tips" et conseils de réseaux sociaux</strong> — L'investissement n'est pas un jeu de casino. Les influenceurs financiers ne sont pas des conseillers agréés.</li>
+          <li><strong>Frais trop élevés</strong> — 1 % de frais annuels en plus sur 30 ans peut amputer 25 % de la valeur finale de ton portefeuille. Comparer les frais est essentiel.</li>
+          <li><strong>Manque de diversification</strong> — Concentrer tout sur une seule action, un seul secteur ou un seul pays est une prise de risque disproportionnée.</li>
+          <li><strong>Oublier la fiscalité</strong> — Choisir la mauvaise enveloppe peut coûter des milliers d'euros sur 20 ans. Cf. <a href="guide_fiscalite.html" style="color:var(--p);font-weight:500">guide fiscalité →</a></li>
+        </ul>
+
+        <div class="cll" style="margin-top:2rem">
+          <p class="cll-t">🚀 Prochaine étape</p>
+          <p>Tu as les bases. Explore nos outils : <a href="calculateur_fire.html" style="color:var(--p)">Calculateur FIRE</a> pour visualiser ton indépendance financière, le <a href="comparateur_etf.html" style="color:var(--p)">Comparateur ETF</a> pour choisir tes premiers fonds, et le <a href="budget_tracker.html" style="color:var(--p)">Budget Tracker</a> pour optimiser ton taux d'épargne.</p>
+        </div>
+      </section>
+    </article>
+  </div>
+</main>
+
+<footer class="ftr"><div class="ftr-in">
+  <div class="ftr-g">
+    <div><a href="index.html" class="logo" style="margin-bottom:.75rem"><svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="var(--p)"/><path d="M6 20L11 10L16.5 17L20 12.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="12.5" r="2" fill="#fff"/></svg><span class="logo-t">FinCulture</span></a>
+    <p class="ftr-d">Plateforme d'éducation financière indépendante. Apprendre à investir, pas à spéculer.</p></div>
+    <div><p class="ftr-h">Outils</p><ul class="ftr-ul">
+      <li><a href="guide-investissement.html">Guide d'investissement</a></li>
+      <li><a href="comparateur_etf.html">Comparateur ETF</a></li>
+      <li><a href="calculateur_fire.html">Calculateur FIRE</a></li>
+      <li><a href="budget_tracker.html">Budget Tracker</a></li>
+      <li><a href="guide_fiscalite.html">Guide Fiscalité</a></li>
+    </ul></div>
+    <div><p class="ftr-h">Apprendre</p><ul class="ftr-ul">
+      <li><a href="guide-investissement.html#bases">Bases de l'investissement</a></li>
+      <li><a href="guide-investissement.html#enveloppes">Enveloppes fiscales</a></li>
+      <li><a href="guide-investissement.html#strategie">Stratégie long terme</a></li>
+    </ul></div>
+    <div><p class="ftr-h">Légal</p><ul class="ftr-ul">
+      <li><a href="index.html#disclaimer">Disclaimer</a></li>
+      <li><a href="index.html#ressources">Sources officielles</a></li>
+    </ul></div>
+  </div>
+  <div class="ftr-b"><p>© 2026 FinCulture — Éducatif uniquement, aucun conseil en investissement.</p><p>Fait avec soin 🇫🇷</p></div>
+</div></footer>
+<script>
+(function(){
+  var r=document.documentElement,d=r.getAttribute('data-theme')||'dark',t=document.querySelector('[data-tt]');
+  function set(v){r.setAttribute('data-theme',v);if(t)t.innerHTML=v==='dark'?'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';}
+  set(d);if(t)t.addEventListener('click',function(){d=d==='dark'?'light':'dark';set(d);});
+  var h=document.getElementById('hmb'),m=document.getElementById('mnav');
+  if(h)h.addEventListener('click',function(){var o=m.classList.toggle('open');h.setAttribute('aria-expanded',o);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in');},i*60);io.unobserve(e.target);}});},{threshold:.06});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var pg=document.body.getAttribute('data-page');
+  if(pg){var lk=document.querySelector('.nav-l a[data-p="'+pg+'"]');if(lk)lk.classList.add('act');}
+})();
+</script><script>
+// Active TOC highlighting
+var secs=document.querySelectorAll('.art-sec');
+var links=document.querySelectorAll('.toc-ul a');
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      links.forEach(function(l){l.classList.remove('on');});
+      var id=e.target.id;
+      var a=document.querySelector('.toc-ul a[href="#'+id+'"]');
+      if(a)a.classList.add('on');
+    }
+  });
+},{rootMargin:'-10% 0px -80% 0px'});
+secs.forEach(function(s){obs.observe(s);});
+</script>
+</body>
+</html>

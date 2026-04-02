@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Comparateur ETF pédagogique — FinCulture</title>
+  <meta name="description" content="Comprendre et comparer les principaux ETF indiciels : MSCI World, Nasdaq, obligations, émergents. Critères de sélection expliqués pour débutants. Éducatif uniquement.">
+  <meta property="og:title" content="Comparateur ETF pédagogique — FinCulture">
+  <meta property="og:description" content="Comprendre et comparer les principaux ETF indiciels : MSCI World, Nasdaq, obligations, émergents. Critères de sélection expliqués pour débutants. Éducatif uniquement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --fd:'Instrument Serif',Georgia,serif;
+      --fb:'Inter','Helvetica Neue',sans-serif;
+      --xs:clamp(.75rem,.7rem + .25vw,.875rem);
+      --sm:clamp(.875rem,.8rem + .35vw,1rem);
+      --base:clamp(1rem,.95rem + .25vw,1.125rem);
+      --lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+      --xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --3xl:clamp(2.5rem,1rem + 4vw,5rem);
+      --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.25rem;--s6:1.5rem;
+      --s8:2rem;--s10:2.5rem;--s12:3rem;--s16:4rem;--s20:5rem;--s24:6rem;
+      --r1:.375rem;--r2:.5rem;--r3:.75rem;--r4:1rem;--r5:1.5rem;--rf:9999px;
+      --ease:180ms cubic-bezier(.16,1,.3,1);
+      --cw:1200px;--cd:960px;--cn:640px;
+    }
+    :root,[data-theme="dark"]{
+      --bg:#0c0c0f;--s:#131318;--s2:#1a1a22;--so:#20202c;--sd:#28283a;
+      --dv:#22222e;--bd:#2e2e40;
+      --t:#eeeef2;--tm:#8080a0;--tf:#44445a;--ti:#0c0c0f;
+      --p:#3b6fff;--ph:#5c85ff;--pa:#2050e0;--phl:rgba(59,111,255,.1);
+      --gd:#d4a843;--ok:#3ecf8e;--er:#ff5555;
+      --e1:0 1px 3px rgba(0,0,0,.5);--e2:0 4px 16px rgba(0,0,0,.6);--e3:0 16px 40px rgba(0,0,0,.7);
+    }
+    [data-theme="light"]{
+      --bg:#f6f6f9;--s:#fff;--s2:#f0f0f5;--so:#e8e8f0;--sd:#dcdce8;
+      --dv:#e2e2ec;--bd:#d0d0de;
+      --t:#0d0d18;--tm:#5a5a78;--tf:#aaaabc;--ti:#fff;
+      --p:#2450d8;--ph:#3b6fff;--pa:#1838b0;--phl:rgba(36,80,216,.08);
+      --gd:#a07810;--ok:#1a9e5e;--er:#cc2222;
+      --e1:0 1px 3px rgba(0,0,0,.07);--e2:0 4px 16px rgba(0,0,0,.09);--e3:0 16px 40px rgba(0,0,0,.13);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:4rem;text-rendering:optimizeLegibility}
+    body{min-height:100dvh;font-family:var(--fb);font-size:var(--base);color:var(--t);background:var(--bg);line-height:1.65;overflow-x:hidden}
+    img,svg{display:block;max-width:100%;height:auto}
+    h1,h2,h3,h4{text-wrap:balance;line-height:1.12;font-family:var(--fd)}
+    p,li{text-wrap:pretty}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+    input,select,textarea,range{font:inherit;color:inherit}
+    ::selection{background:rgba(59,111,255,.22)}
+    :focus-visible{outline:2px solid var(--p);outline-offset:3px;border-radius:var(--r1)}
+    a,button,[role=button]{transition:color var(--ease),background var(--ease),border-color var(--ease),box-shadow var(--ease),opacity var(--ease),transform var(--ease)}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+    .skip{position:absolute;top:-100%;left:1rem;background:var(--p);color:#fff;padding:.5rem 1rem;border-radius:var(--r2);z-index:9999;font-size:var(--sm)}
+    .skip:focus{top:.5rem}
+    /* NAV */
+    .hdr{position:sticky;top:0;z-index:200;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--dv)}
+    .hdr-in{max-width:var(--cw);margin:0 auto;padding:0 clamp(1rem,4vw,3rem);height:3.75rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .logo{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+    .logo-t{font-family:var(--fd);font-size:var(--lg);color:var(--t);letter-spacing:-.01em}
+    .logo-d{width:5px;height:5px;border-radius:50%;background:var(--p)}
+    .nav-l{display:flex;align-items:center;gap:1.75rem}
+    .nav-l a{font-size:var(--sm);color:var(--tm);font-weight:450}
+    .nav-l a:hover,.nav-l a.act{color:var(--t)}
+    .nav-l a.act{color:var(--p)}
+    .nav-r{display:flex;align-items:center;gap:.75rem}
+    .i-btn{width:34px;height:34px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;color:var(--tm);border:1px solid var(--bd)}
+    .i-btn:hover{color:var(--t);border-color:var(--tm)}
+    .btn-p{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);font-weight:500;padding:.45rem 1rem;background:var(--p);color:#fff;border-radius:var(--r2)}
+    .btn-p:hover{background:var(--ph);transform:translateY(-1px);box-shadow:0 6px 20px rgba(59,111,255,.35)}
+    .btn-g{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);font-weight:500;padding:.45rem 1rem;color:var(--tm);border:1px solid var(--bd);border-radius:var(--r2)}
+    .btn-g:hover{color:var(--t);border-color:var(--tm)}
+    .hmb{display:none;width:34px;height:34px;align-items:center;justify-content:center;border-radius:var(--r2);border:1px solid var(--bd);color:var(--tm);flex-direction:column;gap:4px}
+    @media(max-width:768px){.nav-l{display:none}.nav-r .btn-p{display:none}.hmb{display:flex}}
+    .mnav{display:none;position:fixed;inset:0;z-index:190;background:var(--bg);padding:4.5rem 1.5rem 2rem;flex-direction:column;gap:.25rem;overflow-y:auto}
+    .mnav.open{display:flex}
+    .mnav a{font-size:var(--lg);color:var(--tm);padding:.75rem 1rem;border-radius:var(--r3)}
+    .mnav a:hover{color:var(--t);background:var(--so)}
+    .mnav hr{border:none;border-top:1px solid var(--dv);margin:.75rem 0}
+    /* FOOTER */
+    .ftr{background:var(--s);border-top:1px solid var(--dv);padding:clamp(3rem,6vw,5rem) clamp(1rem,4vw,3rem) 2rem}
+    .ftr-in{max-width:var(--cw);margin:0 auto}
+    .ftr-g{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:2rem;margin-bottom:3rem}
+    @media(max-width:768px){.ftr-g{grid-template-columns:1fr 1fr;gap:1.5rem}}
+    @media(max-width:480px){.ftr-g{grid-template-columns:1fr}}
+    .ftr-d{font-size:var(--sm);color:var(--tm);line-height:1.7;margin-top:.75rem;max-width:30ch}
+    .ftr-h{font-size:var(--xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--tf);margin-bottom:1rem;font-family:var(--fb)}
+    .ftr-ul{list-style:none;display:flex;flex-direction:column;gap:.625rem}
+    .ftr-ul a{font-size:var(--sm);color:var(--tm)}
+    .ftr-ul a:hover{color:var(--t)}
+    .ftr-b{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid var(--dv);font-size:var(--xs);color:var(--tf)}
+    /* PAGE HERO */
+    .ph{padding:clamp(3rem,7vw,6rem) clamp(1rem,4vw,3rem) clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--dv);position:relative;overflow:hidden}
+    .ph::after{content:'';position:absolute;top:-30%;right:-8%;width:45%;height:130%;background:radial-gradient(ellipse,rgba(59,111,255,.06) 0%,transparent 65%);pointer-events:none}
+    .ph-in{max-width:var(--cw);margin:0 auto;position:relative;z-index:1}
+    .back{display:inline-flex;align-items:center;gap:.4rem;font-size:var(--sm);color:var(--tm);margin-bottom:1.5rem}
+    .back:hover{color:var(--t)}
+    .ey{font-size:var(--xs);font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--p);margin-bottom:1rem;display:block;font-family:var(--fb)}
+    .ph-t{font-size:var(--3xl);color:var(--t);letter-spacing:-.025em;line-height:1.04;margin-bottom:1.25rem}
+    .ph-t em{color:var(--p);font-style:italic}
+    .ph-s{font-size:var(--lg);color:var(--tm);max-width:54ch;line-height:1.65;margin-bottom:1.5rem}
+    .ph-m{display:flex;flex-wrap:wrap;gap:.75rem}
+    .mbg{display:inline-flex;align-items:center;font-size:var(--xs);padding:.2rem .7rem;border-radius:var(--rf);border:1px solid var(--bd);color:var(--tm);background:var(--s);font-family:var(--fb)}
+    /* DISC */
+    .disc{background:color-mix(in srgb,var(--gd) 8%,var(--s));border:1px solid color-mix(in srgb,var(--gd) 28%,var(--bd));border-radius:var(--r4);padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;margin-bottom:2rem}
+    .disc svg{flex-shrink:0;color:var(--gd);width:15px;height:15px;margin-top:2px}
+    .disc p{font-size:var(--xs);color:var(--tm);line-height:1.65;max-width:none}
+    /* SECTIONS */
+    .sec{padding:clamp(3rem,7vw,6rem) clamp(1rem,4vw,3rem)}
+    .sec-s{background:var(--s);border-top:1px solid var(--dv)}
+    .cw{max-width:var(--cw);margin:0 auto}
+    .cd{max-width:var(--cd);margin:0 auto}
+    .cn{max-width:var(--cn);margin:0 auto}
+    .lbl{font-size:var(--xs);font-weight:500;text-transform:uppercase;letter-spacing:.12em;color:var(--p);margin-bottom:.75rem;display:block;font-family:var(--fb)}
+    .sttl{font-size:var(--2xl);color:var(--t);letter-spacing:-.022em;margin-bottom:1rem;line-height:1.08}
+    .sttl em{color:var(--p);font-style:italic}
+    .ssub{font-size:var(--base);color:var(--tm);max-width:58ch;line-height:1.72;margin-bottom:2rem}
+    /* CARDS */
+    .card{background:var(--s);border:1px solid var(--bd);border-radius:var(--r4);padding:1.5rem;transition:all var(--ease)}
+    .card:hover{box-shadow:var(--e2);border-color:color-mix(in srgb,var(--p) 35%,var(--bd));transform:translateY(-2px)}
+    /* TABLE */
+    .tbl{width:100%;border-collapse:collapse;font-size:var(--sm);border-radius:var(--r3);overflow:hidden;border:1px solid var(--bd)}
+    .tbl th{background:var(--so);text-align:left;font-size:var(--xs);text-transform:uppercase;letter-spacing:.08em;color:var(--tf);padding:.75rem 1rem;font-weight:500;border-bottom:1px solid var(--bd);font-family:var(--fb)}
+    .tbl td{padding:.75rem 1rem;color:var(--tm);border-bottom:1px solid var(--dv)}
+    .tbl tr:last-child td{border-bottom:none}
+    .tbl .t1{color:var(--t);font-weight:500}
+    .tbl tbody tr:hover td{background:var(--so)}
+    /* CALLOUT */
+    .cll{background:var(--phl);border:1px solid rgba(59,111,255,.2);border-radius:var(--r3);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .cll-w{background:color-mix(in srgb,var(--gd) 8%,transparent);border-color:color-mix(in srgb,var(--gd) 30%,transparent)}
+    .cll-t{font-size:var(--sm);font-weight:600;color:var(--p);margin-bottom:.4rem;font-family:var(--fb)}
+    .cll-w .cll-t{color:var(--gd)}
+    .cll p{font-size:var(--sm);color:var(--tm);max-width:none;line-height:1.65}
+    /* TAGS */
+    .tag{display:inline-flex;align-items:center;font-size:var(--xs);font-weight:500;padding:2px .6rem;border-radius:var(--rf);font-family:var(--fb)}
+    .t-b{background:var(--phl);color:var(--p)}
+    .t-i{background:rgba(212,168,67,.12);color:var(--gd)}
+    .t-a{background:rgba(62,207,142,.1);color:var(--ok)}
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+    .rv.in{opacity:1;transform:translateY(0)}
+
+  /* FILTER BAR */
+  .fbar{background:var(--s);border-bottom:1px solid var(--dv);padding:1rem clamp(1rem,4vw,3rem);position:sticky;top:3.75rem;z-index:100}
+  .fbar-in{max-width:var(--cw);margin:0 auto;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+  .f-pill{display:inline-flex;align-items:center;font-size:var(--xs);padding:.35rem .85rem;border-radius:var(--rf);border:1px solid var(--bd);color:var(--tm);background:var(--bg);cursor:pointer;font-family:var(--fb);transition:all var(--ease)}
+  .f-pill:hover{color:var(--t);border-color:var(--tm)}
+  .f-pill.on{background:var(--phl);border-color:rgba(59,111,255,.3);color:var(--p)}
+  .f-search{flex:1;min-width:160px;max-width:260px;position:relative}
+  .f-search input{width:100%;background:var(--so);border:1px solid var(--bd);border-radius:var(--r2);padding:.4rem .75rem .4rem 2rem;font-size:var(--sm);color:var(--t)}
+  .f-search input::placeholder{color:var(--tf)}
+  .f-search input:focus{outline:none;border-color:var(--p)}
+  .f-search svg{position:absolute;left:.55rem;top:50%;transform:translateY(-50%);color:var(--tf);pointer-events:none}
+  /* INTRO CARD */
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+  @media(max-width:700px){.intro-grid{grid-template-columns:1fr}}
+  /* ETF CARDS */
+  .etf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:1.25rem}
+  .etf-card{background:var(--s);border:1px solid var(--bd);border-radius:var(--r4);padding:1.5rem;transition:all var(--ease);display:flex;flex-direction:column;gap:.875rem}
+  .etf-card:hover{box-shadow:var(--e2);border-color:color-mix(in srgb,var(--p) 30%,var(--bd));transform:translateY(-2px)}
+  .etf-card.hidden{display:none}
+  .etf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
+  .etf-ticker{font-family:var(--fb);font-size:var(--xs);font-weight:700;letter-spacing:.08em;color:var(--p);background:var(--phl);padding:.2rem .55rem;border-radius:var(--r1)}
+  .etf-name{font-family:var(--fd);font-size:var(--lg);color:var(--t);line-height:1.2;max-width:none}
+  .etf-index{font-size:var(--xs);color:var(--tm);font-family:var(--fb)}
+  .etf-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem}
+  .etf-stat{background:var(--so);border-radius:var(--r2);padding:.6rem .75rem;text-align:center}
+  .etf-sv{font-family:var(--fd);font-size:var(--base);color:var(--t)}
+  .etf-sl{font-size:var(--xs);color:var(--tf);font-family:var(--fb)}
+  .etf-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .etf-desc{font-size:var(--sm);color:var(--tm);line-height:1.65;max-width:none}
+  .etf-pros{margin-top:.25rem}
+  .etf-pros li{font-size:var(--xs);color:var(--tm);list-style:none;padding:.15rem 0;display:flex;align-items:flex-start;gap:.4rem;max-width:none}
+  .etf-pros li::before{content:'✓';color:var(--ok);font-weight:700;flex-shrink:0}
+  .etf-score{display:flex;align-items:center;gap:.5rem;padding-top:.5rem;border-top:1px solid var(--dv)}
+  .score-bar{flex:1;height:4px;background:var(--dv);border-radius:var(--rf)}
+  .score-fill{height:100%;border-radius:var(--rf);background:linear-gradient(90deg,var(--p),var(--ok))}
+  .score-lbl{font-size:var(--xs);color:var(--tm);font-family:var(--fb);white-space:nowrap}
+  /* CONCEPTS */
+  .concept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:1rem}
+  .concept-card{background:var(--s);border:1px solid var(--bd);border-radius:var(--r3);padding:1.25rem}
+  .concept-icon{font-size:1.5rem;margin-bottom:.625rem}
+  .concept-t{font-family:var(--fd);font-size:var(--base);color:var(--t);margin-bottom:.4rem}
+  .concept-d{font-size:var(--xs);color:var(--tm);line-height:1.6;max-width:none}
+  /* CRITERIA TABLE */
+  .crit-tbl{margin:1.5rem 0}
+  /* COMPARISON MODAL - reusable */
+  .no-results{text-align:center;padding:3rem;color:var(--tm);font-size:var(--base);display:none}
+  .count-bar{font-size:var(--xs);color:var(--tf);font-family:var(--fb);margin-bottom:1.25rem}
+  .count-bar strong{color:var(--t)}
+</style>
+</head>
+<body data-page="etf">
+<a href="#main" class="skip">Aller au contenu</a>
+<header class="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="logo"><svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="var(--p)"/><path d="M6 20L11 10L16.5 17L20 12.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="12.5" r="2" fill="#fff"/></svg><span class="logo-t">FinCulture</span><span class="logo-d" aria-hidden="true"></span></a>
+    <nav class="nav-l"><a href="guide-investissement.html" data-p="guide">Guide</a><a href="comparateur_etf.html" data-p="etf"class=act>ETF</a><a href="calculateur_fire.html" data-p="fire">FIRE</a><a href="budget_tracker.html" data-p="budget">Budget</a><a href="guide_fiscalite.html" data-p="fisc">Fiscalité</a></nav>
+    <div class="nav-r">
+      <button class="i-btn" data-tt aria-label="Thème"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+      <a href="index.html" class="btn-p">← Accueil</a>
+      <button class="hmb" id="hmb" aria-label="Menu" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+<nav class="mnav" id="mnav">
+  <a href="index.html">← Accueil</a><a href="guide-investissement.html">Guide</a><a href="comparateur_etf.html">ETF</a><a href="calculateur_fire.html">FIRE</a><a href="budget_tracker.html">Budget</a><a href="guide_fiscalite.html">Fiscalité</a>
+  <hr>
+  <a href="index.html" class="btn-p" style="justify-content:center">Retour à l'accueil</a>
+</nav>
+
+<main id="main">
+  <div class="ph">
+    <div class="ph-in">
+      <a href="index.html" class="back rv"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Accueil</a>
+      <span class="ey rv">Comparateur ETF</span>
+      <h1 class="ph-t rv">Comprendre et choisir<br>ses premiers <em>ETF</em></h1>
+      <p class="ph-s rv">Une sélection pédagogique des ETF les plus utilisés par les investisseurs passifs. L'objectif : comprendre les critères essentiels, pas créer une liste exhaustive.</p>
+      <div class="ph-m rv">
+        <span class="mbg">📊 8 ETF expliqués</span>
+        <span class="mbg">🎓 Critères pédagogiques</span>
+        <span class="mbg">⚠️ Éducatif uniquement</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="fbar">
+    <div class="fbar-in">
+      <div class="f-search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="f-search" placeholder="Rechercher…" aria-label="Rechercher un ETF">
+      </div>
+      <button class="f-pill on" data-filter="all">Tous</button>
+      <button class="f-pill" data-filter="Débutant">Débutant</button>
+      <button class="f-pill" data-filter="Intermédiaire">Intermédiaire</button>
+      <button class="f-pill" data-filter="Avancé">Avancé</button>
+      <button class="f-pill" data-filter="Monde">🌍 Monde</button>
+      <button class="f-pill" data-filter="Europe">🇪🇺 Europe</button>
+      <button class="f-pill" data-filter="Obligations">📈 Obligations</button>
+    </div>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div style="padding:1.5rem clamp(1rem,4vw,3rem) 0;max-width:var(--cw);margin:0 auto">
+    <div class="disc rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <p><strong>Sélection éducative uniquement.</strong> Les ETF présentés ici sont choisis pour leur pertinence pédagogique, pas comme recommandations d'investissement. Les données (TER, encours) sont indicatives et peuvent évoluer. Consulte les DICI officiels et un conseiller agréé avant toute décision.</p></div>
+  </div>
+
+  <!-- ETF GRID -->
+  <section class="sec">
+    <div class="cw">
+      <span class="lbl rv">Sélection pédagogique</span>
+      <h2 class="sttl rv">Les ETF <em>essentiels</em> à connaître</h2>
+      <p class="ssub rv">8 fonds choisis pour leur popularité, leur pertinence éducative et leur diversification. Un point de départ pour comprendre, pas une liste définitive.</p>
+      <p class="count-bar rv"><strong id="count">8</strong> ETF affichés</p>
+      <div class="etf-grid" id="etf-grid">
+        <div class="etf-card rv" data-cat="Monde" data-niveau="Débutant" data-name="ishares core msci world iwda msci world">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">IWDA</span>
+      <h3 class="etf-name" style="margin-top:.4rem">iShares Core MSCI World</h3>
+      <p class="etf-index">MSCI World</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.20 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">80 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Physique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-b">Débutant</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Monde</span>
+  </div>
+  <p class="etf-desc">Le fonds indiciel mondial de référence. Il réplique l'indice MSCI World qui couvre 85 % de la capitalisation des marchés développés. Incontournable dans tout portefeuille passif.</p>
+  <ul class="etf-pros"><li>1 600+ entreprises dans 23 pays développés</li><li>Très faibles frais</li><li>Encours géant = très liquide</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:95%"></div></div>
+    <p class="score-lbl">95/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Monde" data-niveau="Débutant" data-name="hsbc msci world hmwo msci world">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">HMWO</span>
+      <h3 class="etf-name" style="margin-top:.4rem">HSBC MSCI World</h3>
+      <p class="etf-index">MSCI World</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.15 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">12 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Physique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-b">Débutant</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Monde</span>
+  </div>
+  <p class="etf-desc">Alternative moins connue à IWDA avec des frais encore inférieurs. Encours plus petit mais suffisant. Bonne option si tu cherches à minimiser les TER.</p>
+  <ul class="etf-pros"><li>TER parmi les plus bas du marché</li><li>Réplication physique complète</li><li>Éligible PEA via synthétique</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:88%"></div></div>
+    <p class="score-lbl">88/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Monde" data-niveau="Débutant" data-name="amundi msci world (pea) cw8 msci world">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">CW8</span>
+      <h3 class="etf-name" style="margin-top:.4rem">Amundi MSCI World (PEA)</h3>
+      <p class="etf-index">MSCI World</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.38 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">5 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Synthétique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-b">Débutant</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Monde</span>
+  </div>
+  <p class="etf-desc">L'ETF MSCI World éligible au PEA. La réplication synthétique permet l'éligibilité PEA malgré un indice mondial. Légèrement plus cher que ses pairs, mais l'avantage fiscal compense largement.</p>
+  <ul class="etf-pros"><li>Éligible PEA — avantage fiscal majeur</li><li>Un seul ETF pour tout le monde développé</li><li>Accessible dès 1 part (~€400)</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:82%"></div></div>
+    <p class="score-lbl">82/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Émergents" data-niveau="Intermédiaire" data-name="amundi msci emerging markets paeem msci emerging markets">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">PAEEM</span>
+      <h3 class="etf-name" style="margin-top:.4rem">Amundi MSCI Emerging Markets</h3>
+      <p class="etf-index">MSCI Emerging Markets</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.20 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">2 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Synthétique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-i">Intermédiaire</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Émergents</span>
+  </div>
+  <p class="etf-desc">Donne accès aux marchés émergents : Chine, Inde, Brésil, Taiwan… Ces marchés ont un potentiel de croissance plus élevé mais une volatilité supérieure. Convient en complément d'un ETF World.</p>
+  <ul class="etf-pros"><li>Exposition aux marchés émergents (Chine, Inde…)</li><li>Éligible PEA</li><li>Complément au MSCI World</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:75%"></div></div>
+    <p class="score-lbl">75/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Europe" data-niveau="Débutant" data-name="ishares core msci europe ese msci europe">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">ESE</span>
+      <h3 class="etf-name" style="margin-top:.4rem">iShares Core MSCI Europe</h3>
+      <p class="etf-index">MSCI Europe</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.12 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">7 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Physique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-b">Débutant</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Europe</span>
+  </div>
+  <p class="etf-desc">Pour ceux qui veulent surpondérer l'Europe dans leur portefeuille. Couvre environ 400 grandes et moyennes entreprises européennes. Réplication physique directe, très transparente.</p>
+  <ul class="etf-pros"><li>Exposition pure à l'Europe</li><li>Frais très faibles</li><li>Dividendes réinvestis (acc)</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:80%"></div></div>
+    <p class="score-lbl">80/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Tech US" data-niveau="Avancé" data-name="amundi nasdaq-100 panx nasdaq-100">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">PANX</span>
+      <h3 class="etf-name" style="margin-top:.4rem">Amundi Nasdaq-100</h3>
+      <p class="etf-index">Nasdaq-100</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.23 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">4 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Synthétique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-a">Avancé</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Tech US</span>
+  </div>
+  <p class="etf-desc">Pour s'exposer au Nasdaq-100 (Apple, Microsoft, Google, Amazon…) depuis un PEA. Concentration sectorielle tech élevée = volatilité supérieure. À utiliser en complément, pas en remplacement d'un World.</p>
+  <ul class="etf-pros"><li>Exposition aux 100 plus grandes tech US</li><li>Éligible PEA</li><li>Forte performance historique</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:70%"></div></div>
+    <p class="score-lbl">70/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Obligations" data-niveau="Intermédiaire" data-name="ishares core € govt bond iega bloomberg euro govt">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">IEGA</span>
+      <h3 class="etf-name" style="margin-top:.4rem">iShares Core € Govt Bond</h3>
+      <p class="etf-index">Bloomberg Euro Govt</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.09 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">9 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Physique</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-i">Intermédiaire</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Obligations</span>
+  </div>
+  <p class="etf-desc">Pour ajouter une poche obligataire au portefeuille. Les obligations d'État zone euro offrent de la stabilité. Convient en phase de consommation du capital ou pour profils prudents.</p>
+  <ul class="etf-pros"><li>Stabilisateur de portefeuille</li><li>Frais ultra-réduits</li><li>Décorrélation partielle avec actions</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:78%"></div></div>
+    <p class="score-lbl">78/100</p>
+  </div>
+</div>
+<div class="etf-card rv" data-cat="Or / Matières" data-niveau="Avancé" data-name="invesco physical gold sgld cours de l'or">
+  <div class="etf-head">
+    <div>
+      <span class="etf-ticker">SGLD</span>
+      <h3 class="etf-name" style="margin-top:.4rem">Invesco Physical Gold</h3>
+      <p class="etf-index">Cours de l'or</p>
+    </div>
+  </div>
+  <div class="etf-stats">
+    <div class="etf-stat"><p class="etf-sv">0.12 %</p><p class="etf-sl">TER /an</p></div>
+    <div class="etf-stat"><p class="etf-sv">14 Md€</p><p class="etf-sl">Encours</p></div>
+    <div class="etf-stat"><p class="etf-sv" style="font-size:var(--xs)">Physique (or)</p><p class="etf-sl">Réplication</p></div>
+  </div>
+  <div class="etf-tags">
+    <span class="tag t-a">Avancé</span>
+    <span class="tag" style="background:var(--so);color:var(--tm)">Or / Matières</span>
+  </div>
+  <p class="etf-desc">ETC (Exchange Traded Commodity) repliquant le cours spot de l'or. L'or sert de valeur refuge en période de crise. Non éligible PEA. Allocation max recommandée : 5-10 % d'un portefeuille.</p>
+  <ul class="etf-pros"><li>Or physique — valeur refuge</li><li>Décorrélé des actions</li><li>Faibles frais pour un ETC or</li></ul>
+  <div class="etf-score">
+    <p class="score-lbl">Score pédagogique</p>
+    <div class="score-bar"><div class="score-fill" style="width:65%"></div></div>
+    <p class="score-lbl">65/100</p>
+  </div>
+</div>
+      </div>
+      <div class="no-results" id="no-results">Aucun ETF ne correspond à ta recherche.</div>
+    </div>
+  </section>
+
+  <!-- COMPRENDRE LES CRITÈRES -->
+  <section class="sec sec-s" id="criteres">
+    <div class="cw">
+      <span class="lbl rv">Éducation</span>
+      <h2 class="sttl rv">Les <em>critères</em> importants pour choisir un ETF</h2>
+      <p class="ssub rv">Avant de choisir un ETF, il faut comprendre ces 5 indicateurs clés. Ils te permettent d'évaluer objectivement n'importe quel fonds indiciel.</p>
+
+      <div class="concept-grid rv">
+        <div class="concept-card">
+          <div class="concept-icon">💸</div>
+          <h3 class="concept-t">TER — Total Expense Ratio</h3>
+          <p class="concept-d">Les frais annuels prélevés automatiquement sur le fonds. Un TER de 0.20 % signifie que tu paies 2 € par an pour 1 000 € investis. Préfère toujours les ETF avec les TER les plus bas pour un même indice.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📏</div>
+          <h3 class="concept-t">Encours (AUM)</h3>
+          <p class="concept-d">La taille totale du fonds. Un encours élevé (> 500 M€) garantit une meilleure liquidité et réduit le risque de fermeture du fonds. Les ETF trop petits peuvent être liquidés par l'émetteur.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🔄</div>
+          <h3 class="concept-t">Réplication physique vs synthétique</h3>
+          <p class="concept-d">Physique : le fonds achète réellement les actions de l'indice. Synthétique : il utilise des contrats dérivés (swaps) pour répliquer la performance. La synthétique permet l'éligibilité PEA pour des ETF mondiaux.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🗓️</div>
+          <h3 class="concept-t">Capitalisant vs Distribuant</h3>
+          <p class="concept-d">"Acc" (Accumulating) : les dividendes sont automatiquement réinvestis dans le fonds. "Dist" (Distributing) : les dividendes sont versés en cash. En phase de capitalisation, préfère les ETF acc pour l'effet des intérêts composés.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">📊</div>
+          <h3 class="concept-t">Tracking Error</h3>
+          <p class="concept-d">L'écart entre la performance du fonds et celle de son indice de référence. Un bon ETF doit avoir une tracking error la plus faible possible. Elle est différente du TER et mesure l'efficacité de la réplication.</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-icon">🏛️</div>
+          <h3 class="concept-t">Éligibilité PEA</h3>
+          <p class="concept-d">Certains ETF mondiaux (réplication synthétique) peuvent être logés dans un PEA, offrant une fiscalité réduite après 5 ans (17.2 % vs 30 %). C'est un critère majeur pour un investisseur français.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT LIRE UN ETF -->
+  <section class="sec">
+    <div class="cd">
+      <span class="lbl rv">Guide de lecture</span>
+      <h2 class="sttl rv">Comment <em>lire une fiche ETF</em> ?</h2>
+      <p class="ssub rv">Les informations clés à consulter avant d'investir dans un ETF. Disponibles dans le DICI (Document d'Information Clé pour l'Investisseur) obligatoire.</p>
+
+      <div style="overflow-x:auto" class="rv">
+      <table class="tbl">
+        <thead><tr><th>Information</th><th>Où la trouver</th><th>Ce qu'elle signifie</th></tr></thead>
+        <tbody>
+          <tr><td class="t1">Indice de référence</td><td>Nom du fonds / DICI</td><td>Ce que le fonds cherche à répliquer</td></tr>
+          <tr><td class="t1">TER (frais courants)</td><td>DICI, fiche émetteur</td><td>Coût annuel automatiquement déduit</td></tr>
+          <tr><td class="t1">ISIN</td><td>Fiche produit</td><td>Identifiant unique international</td></tr>
+          <tr><td class="t1">Encours sous gestion</td><td>Fiche émetteur</td><td>Taille du fonds — liquidité</td></tr>
+          <tr><td class="t1">Méthode de réplication</td><td>DICI</td><td>Physique ou synthétique</td></tr>
+          <tr><td class="t1">Politique de dividendes</td><td>Nom (Acc/Dist) / DICI</td><td>Reinvestis ou versés ?</td></tr>
+          <tr><td class="t1">Devise de cotation</td><td>Place de cotation</td><td>EUR, USD — impact sur frais de change</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <div class="cll rv" style="margin-top:2rem">
+        <p class="cll-t">📋 Où trouver les DICI officiels ?</p>
+        <p>Chaque ETF doit légalement publier un DICI (Document d'Information Clé pour l'Investisseur). Tu peux les trouver sur le site de l'émetteur (iShares, Amundi, Invesco…) ou sur <a href="https://www.amf-france.org" target="_blank" rel="noopener noreferrer" style="color:var(--p)">amf-france.org</a>. Lis toujours le DICI avant d'investir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATÉGIE ETF -->
+  <section class="sec sec-s">
+    <div class="cd">
+      <span class="lbl rv">Approche pédagogique</span>
+      <h2 class="sttl rv">ETF : <em>quelle logique</em> de construction ?</h2>
+
+      <div class="rv">
+      <div class="cll">
+        <p class="cll-t">🌍 L'approche "World-first"</p>
+        <p>La stratégie la plus simple et la plus éprouvée : un ETF MSCI World comme socle (80-100 % du portefeuille actions), qui couvre automatiquement les États-Unis (~65 %), l'Europe (~15 %), le Japon (~7 %) et le reste du monde. Pas besoin de 10 ETF différents.</p>
+      </div>
+      <div class="cll" style="margin-top:1rem">
+        <p class="cll-t">📐 Ajouter des satellites</p>
+        <p>Si tu veux ajuster l'exposition, tu peux ajouter un ETF Émergents (10-20 % pour plus d'exposition Asie), un ETF Obligations (pour stabiliser), ou un ETF Small Caps. Mais chaque ajout augmente la complexité et les coûts de gestion.</p>
+      </div>
+      </div>
+
+      <p style="font-size:var(--sm);color:var(--tm);margin-top:1.5rem;line-height:1.75" class="rv">
+        Pour comprendre les enveloppes dans lesquelles loger ces ETF (PEA, assurance-vie, CTO), 
+        consulte le <a href="guide_fiscalite.html" style="color:var(--p);font-weight:500">guide de la fiscalité →</a> 
+        ou le <a href="guide-investissement.html#enveloppes" style="color:var(--p);font-weight:500">guide d'investissement complet →</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr"><div class="ftr-in">
+  <div class="ftr-g">
+    <div><a href="index.html" class="logo" style="margin-bottom:.75rem"><svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="var(--p)"/><path d="M6 20L11 10L16.5 17L20 12.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="12.5" r="2" fill="#fff"/></svg><span class="logo-t">FinCulture</span></a>
+    <p class="ftr-d">Plateforme d'éducation financière indépendante. Apprendre à investir, pas à spéculer.</p></div>
+    <div><p class="ftr-h">Outils</p><ul class="ftr-ul">
+      <li><a href="guide-investissement.html">Guide d'investissement</a></li>
+      <li><a href="comparateur_etf.html">Comparateur ETF</a></li>
+      <li><a href="calculateur_fire.html">Calculateur FIRE</a></li>
+      <li><a href="budget_tracker.html">Budget Tracker</a></li>
+      <li><a href="guide_fiscalite.html">Guide Fiscalité</a></li>
+    </ul></div>
+    <div><p class="ftr-h">Apprendre</p><ul class="ftr-ul">
+      <li><a href="guide-investissement.html#bases">Bases de l'investissement</a></li>
+      <li><a href="guide-investissement.html#enveloppes">Enveloppes fiscales</a></li>
+      <li><a href="guide-investissement.html#strategie">Stratégie long terme</a></li>
+    </ul></div>
+    <div><p class="ftr-h">Légal</p><ul class="ftr-ul">
+      <li><a href="index.html#disclaimer">Disclaimer</a></li>
+      <li><a href="index.html#ressources">Sources officielles</a></li>
+    </ul></div>
+  </div>
+  <div class="ftr-b"><p>© 2026 FinCulture — Éducatif uniquement, aucun conseil en investissement.</p><p>Fait avec soin 🇫🇷</p></div>
+</div></footer>
+<script>
+(function(){
+  var r=document.documentElement,d=r.getAttribute('data-theme')||'dark',t=document.querySelector('[data-tt]');
+  function set(v){r.setAttribute('data-theme',v);if(t)t.innerHTML=v==='dark'?'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';}
+  set(d);if(t)t.addEventListener('click',function(){d=d==='dark'?'light':'dark';set(d);});
+  var h=document.getElementById('hmb'),m=document.getElementById('mnav');
+  if(h)h.addEventListener('click',function(){var o=m.classList.toggle('open');h.setAttribute('aria-expanded',o);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in');},i*60);io.unobserve(e.target);}});},{threshold:.06});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  var pg=document.body.getAttribute('data-page');
+  if(pg){var lk=document.querySelector('.nav-l a[data-p="'+pg+'"]');if(lk)lk.classList.add('act');}
+})();
+</script><script>
+var cards=document.querySelectorAll('.etf-card');
+var pills=document.querySelectorAll('.f-pill');
+var search=document.getElementById('f-search');
+var noRes=document.getElementById('no-results');
+var countEl=document.getElementById('count');
+var activeFilter='all';
+
+function applyFilters(){
+  var q=search.value.toLowerCase().trim();
+  var visible=0;
+  cards.forEach(function(c){
+    var matchF=activeFilter==='all'||c.dataset.cat===activeFilter||c.dataset.niveau===activeFilter;
+    var matchQ=!q||c.dataset.name.includes(q);
+    if(matchF&&matchQ){c.classList.remove('hidden');visible++;}else{c.classList.add('hidden');}
+  });
+  countEl.textContent=visible;
+  noRes.style.display=visible===0?'block':'none';
+}
+
+pills.forEach(function(p){
+  p.addEventListener('click',function(){
+    pills.forEach(function(x){x.classList.remove('on');});
+    p.classList.add('on');
+    activeFilter=p.dataset.filter;
+    applyFilters();
+  });
+});
+search.addEventListener('input',applyFilters);
+</script>
+</body>
+</html>
