@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Politique de Confidentialité — FinCulture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo"><span class="logo-text">FinCulture</span><span class="logo-dot"></span></a>
+        <nav class="nav">
+          <ul class="nav-links">
+            <li><a href="/#outils" class="nav-link">Outils</a></li>
+            <li><a href="/#apprentissage" class="nav-link">Apprentissage</a></li>
+            <li><a href="/blog/" class="nav-link">Blog</a></li>
+          </ul>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path id="sun-icon" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" style="display: none;"/>
+              <path id="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </nav>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Ouvrir le menu">
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section style="padding: var(--space-16) var(--container-gap); border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <a href="/" style="display: inline-flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-8); color: var(--c-primary);">← Retour</a>
+        <h1 style="font-size: var(--type-h1);">Politique de Confidentialité</h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h2 style="color: var(--c-primary); margin-bottom: var(--space-4);">Données Collectées</h2>
+          <p style="color: var(--text-secondary);">FinCulture collecte UNIQUEMENT :</p>
+          <ul style="margin-top: var(--space-4); padding-left: var(--space-6);">
+            <li style="color: var(--text-secondary); margin-bottom: var(--space-2);">• Tes préférences de thème (light/dark) en localStorage</li>
+            <li style="color: var(--text-secondary); margin-bottom: var(--space-2);">• Tes saisies dans les outils (calculateur, budget) — jamais envoyées au serveur</li>
+            <li style="color: var(--text-secondary);">• Aucune donnée personnelle n'est collectée</li>
+          </ul>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h2 style="color: var(--c-primary); margin-bottom: var(--space-4);">Cookies & Tracking</h2>
+          <p style="color: var(--text-secondary);">Pas de cookies externes. Pas de trackers (Google Analytics, Facebook Pixel, etc.). Tes données en restent tiennent.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h2 style="color: var(--c-primary); margin-bottom: var(--space-4);">Tiers</h2>
+          <p style="color: var(--text-secondary);">Aucune donnée n'est partagée avec des tiers, vendeurs de données, ou annonceurs.</p>
+        </div>
+
+        <div class="card">
+          <h2 style="color: var(--c-primary); margin-bottom: var(--space-4);">Contact</h2>
+          <p style="color: var(--text-secondary);">Des questions sur ta confidentialité ? <a href="contact.html" style="color: var(--c-primary); text-decoration: none;">Contacte-nous →</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom" style="justify-content: center;">
+      <p>© 2026 FinCulture</p>
+    </div>
+  </footer>
+
+  <script>
+    const html = document.documentElement;
+    html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+</body>
+</html>

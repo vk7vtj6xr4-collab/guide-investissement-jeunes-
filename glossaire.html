@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glossaire FinCulture — Définitions simples de tous les termes financiers utilisés sur le site.">
+  <meta property="og:title" content="Glossaire — FinCulture">
+  <title>Glossaire — FinCulture</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+  <a href="#main" class="skip-to-content">Aller au contenu principal</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <span class="logo-text">FinCulture</span>
+          <span class="logo-dot"></span>
+        </a>
+        
+        <nav class="nav">
+          <ul class="nav-links">
+            <li><a href="/#outils" class="nav-link">Outils</a></li>
+            <li><a href="/#apprentissage" class="nav-link">Apprentissage</a></li>
+            <li><a href="/blog/" class="nav-link">Blog</a></li>
+          </ul>
+          
+          <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path id="sun-icon" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" style="display: none;"/>
+              <path id="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Ouvrir le menu">
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="/#outils">Outils</a>
+    <a href="/#apprentissage">Apprentissage</a>
+    <a href="/blog/">Blog</a>
+    <hr style="border: none; border-top: 1px solid var(--border); margin: var(--space-4) 0;">
+    <a href="/" class="btn btn-secondary" style="justify-content: center;">Retour à l'accueil</a>
+  </nav>
+
+  <main id="main">
+    <!-- Page Header -->
+    <section style="padding: var(--space-16) var(--container-gap); text-align: center; border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <a href="/" style="display: inline-flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-8); color: var(--c-primary); font-size: var(--type-sm); text-decoration: none;">← Retour à l'accueil</a>
+        <h1 style="font-size: var(--type-h1); margin-bottom: var(--space-6);">Glossaire</h1>
+        <p style="font-size: var(--type-base); color: var(--text-secondary); max-width: 70ch; margin: 0 auto;">
+          Tous les termes financiers expliqués simplement. Aucun jargon compliqué.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h3 style="margin-bottom: var(--space-4); color: var(--c-primary);">Action</h3>
+          <p style="color: var(--text-secondary);">Morceau d'une entreprise qu'on peut acheter. Si tu achètes une action Apple, tu possèdes une toute petite part d'Apple.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h3 style="margin-bottom: var(--space-4); color: var(--c-primary);">ETF</h3>
+          <p style="color: var(--text-secondary);">Un panier d'actions ou d'obligations. Plutôt que d'acheter 100 actions une par une, tu achètes 1 ETF qui les contient toutes.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h3 style="margin-bottom: var(--space-4); color: var(--c-primary);">FIRE</h3>
+          <p style="color: var(--text-secondary);">Financial Independence, Retire Early. Stratégie pour devenir riche assez tôt pour arrêter de travailler.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h3 style="margin-bottom: var(--space-4); color: var(--c-primary);">PEA</h3>
+          <p style="color: var(--text-secondary);">Plan d'Épargne en Actions. Un compte spécial où tu peux investir en actions/ETF sans payer d'impôts après 8 ans.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: var(--space-8);">
+          <h3 style="margin-bottom: var(--space-4); color: var(--c-primary);">Diversification</h3>
+          <p style="color: var(--text-secondary);">Ne pas mettre tous tes œufs dans le même panier. Investir dans plusieurs choses différentes pour limiter le risque.</p>
+        </div>
+
+        <div class="info-box" style="background: color-mix(in srgb, var(--c-primary) 8%, var(--surface)); border-left: 4px solid var(--c-primary); padding: var(--space-6); border-radius: var(--radius-md);">
+          <strong style="color: var(--c-primary);">💡 Besoin d'une définition ?</strong>
+          <p style="margin-top: var(--space-4); color: var(--text-secondary);">Contacte-nous via la page contact ou consulte le guide complet d'investissement.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <div class="footer-links">
+            <a href="guide-investissement.html">Guide d'investissement</a>
+            <a href="calculateur_fire.html">Calculateur FIRE</a>
+            <a href="budget_tracker.html">Budget Tracker</a>
+            <a href="blog/">Blog</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Ressources</h3>
+          <div class="footer-links">
+            <a href="glossaire.html">Glossaire</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Légal</h3>
+          <div class="footer-links">
+            <a href="disclaimer.html">Disclaimer complet</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Politique de confidentialité</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 FinCulture — Plateforme d'éducation financière indépendante</p>
+        <p style="color: var(--c-primary); font-weight: var(--type-weight-medium);">Éducatif uniquement • Pas de conseil personnalisé</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const html = document.documentElement;
+    
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    function updateThemeIcon(theme) {
+      if (theme === 'dark') {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      updateThemeIcon(currentTheme);
+    });
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      mobileMenuBtn.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
