@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Suis tes revenus et dépenses mois par mois. Calcule ton taux d'épargne, visualise tes dépenses par catégorie et applique la règle 50/30/20. Données stockées localement.">
+  <meta property="og:title" content="Budget Tracker — FinCulture">
+  <meta property="og:description" content="Gère ton budget mois par mois. Éducatif uniquement.">
+  <title>Budget Tracker — FinCulture</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="design-system.css">
+
+  <style>
+    /* BUDGET TRACKER STYLES */
+    .budget-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+    }
+
+    .month-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .month-nav button {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
+
+    .month-nav button:hover {
+      border-color: var(--c-primary);
+      color: var(--c-primary);
+    }
+
+    .month-lbl {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--font-serif);
+    }
+
+    .budget-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    @media(max-width: 900px) {
+      .budget-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .stat-card.income {
+      border-left: 3px solid #22c55e;
+    }
+
+    .stat-card.expense {
+      border-left: 3px solid #ef4444;
+    }
+
+    .stat-card.savings {
+      border-left: 3px solid var(--c-primary);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .form-section {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @media(max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+    }
+
+    .form-input {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 0.875rem;
+      font-size: 13px;
+      color: var(--text);
+      font-family: var(--font-body);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 2px rgba(59, 111, 255, 0.1);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-add {
+      background: var(--c-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .btn-add:hover {
+      background: #2b5cff;
+      transform: translateY(-1px);
+    }
+
+    .quick-btns {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .quick-btn:hover {
+      background: rgba(59, 111, 255, 0.1);
+      border-color: var(--c-primary);
+      color: var(--c-primary);
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active {
+      background: var(--c-primary);
+      border-color: var(--c-primary);
+      color: white;
+    }
+
+    .tx-list {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .tx-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .tx-item:last-child {
+      border-bottom: none;
+    }
+
+    .tx-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .tx-cat {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .tx-date {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tx-val {
+      font-weight: 600;
+      font-family: var(--font-body);
+    }
+
+    .tx-val.income {
+      color: #22c55e;
+    }
+
+    .tx-val.expense {
+      color: #ef4444;
+    }
+
+    .tx-btn-del {
+      background: rgba(239, 68, 68, 0.1);
+      border: none;
+      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      color: #ef4444;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+    }
+
+    .tx-btn-del:hover {
+      background: #ef4444;
+      color: white;
+    }
+
+    .empty-msg {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .chart-wrap {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-family: var(--font-body);
+    }
+
+    #budget-chart {
+      width: 100%;
+      max-height: 250px;
+    }
+
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    @media(max-width: 600px) {
+      .rules {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rule-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .rule-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-body);
+    }
+
+    .rule-pct {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .rule-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body data-page="budget">
+  <a href="#main" class="skip-to-content">Aller au contenu principal</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-text">FinCulture</span>
+          <span class="logo-dot"></span>
+        </a>
+        
+        <nav class="nav">
+          <ul class="nav-links">
+            <li><a href="index.html#outils" class="nav-link">Outils</a></li>
+            <li><a href="index.html#apprentissage" class="nav-link">Apprentissage</a></li>
+            <li><a href="blog/index.html" class="nav-link">Blog</a></li>
+          </ul>
+          
+          <button class="theme-toggle" id="theme-toggle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path id="sun-icon" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" style="display: none;"/>
+              <path id="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html#outils">Outils</a>
+    <a href="index.html#apprentissage">Apprentissage</a>
+    <a href="blog/index.html">Blog</a>
+    <hr style="border: none; border-top: 1px solid var(--border); margin: var(--space-4) 0;">
+    <a href="index.html" class="btn btn-secondary" style="justify-content: center;">Retour à l'accueil</a>
+  </nav>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="section" style="text-align: center; border-bottom: 1px solid var(--border);">
+      <div class="container">
+        <a href="/" style="display: inline-flex; align-items: center; gap: var(--space-2); color: var(--c-primary); font-size: 13px; margin-bottom: var(--space-8); margin-top: var(--space-8);">
+          ← Retour à l'accueil
+        </a>
+        <h1 style="margin-bottom: var(--space-2);">Budget Tracker</h1>
+        <p style="color: var(--text-secondary); max-width: 70ch; margin-left: auto; margin-right: auto; margin-bottom: var(--space-8);">
+          Suis tes revenus et dépenses mois par mois. Visualise tes dépenses par catégorie, calcule ton taux d'épargne et applique la règle 50/30/20.
+        </p>
+      </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <div class="disclaimer">
+          <strong>⚠ Contenu éducatif uniquement.</strong> Cet outil te permet de suivre tes finances. Il n'offre aucun conseil en investissement ou fiscalité. Tes données sont stockées localement dans ton navigateur.
+        </div>
+      </div>
+    </section>
+
+    <!-- BUDGET TRACKER -->
+    <section class="section">
+      <div class="budget-wrap">
+        <!-- MONTH NAV -->
+        <div class="month-nav">
+          <button id="prev-month">← Mois précédent</button>
+          <div class="month-lbl" id="month-lbl">Janvier 2026</div>
+          <button id="next-month">Mois suivant →</button>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="budget-grid" id="stats"></div>
+
+        <!-- RULE 50/30/20 -->
+        <div class="rules" id="rules"></div>
+
+        <!-- FORM -->
+        <div class="form-section">
+          <h3 style="margin: 0 0 1.5rem 0; font-size: 15px;">Ajouter une transaction</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Type</label>
+              <select id="f-type" class="form-input">
+                <option value="dep">Dépense</option>
+                <option value="rev">Revenu</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Catégorie</label>
+              <select id="f-cat" class="form-input">
+                <option>Alimentation</option>
+                <option>Transport</option>
+                <option>Loisirs</option>
+                <option>Santé</option>
+                <option>Vêtements</option>
+                <option>Abonnements</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Montant (€)</label>
+              <input type="number" id="f-amt" class="form-input" placeholder="0" min="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="date" id="f-date" class="form-input">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button id="btn-add" class="btn-add">Ajouter</button>
+            
+            <div>
+              <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom:0.3rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">Ajout rapide</label>
+              <div class="quick-btns">
+                <button class="quick-btn" data-quick="Alimentation|50">Courses -50€</button>
+                <button class="quick-btn" data-quick="Transport|30">Transport -30€</button>
+                <button class="quick-btn" data-quick="Loisirs|20">Loisirs -20€</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-wrap">
+          <div class="chart-title">Dépenses par catégorie</div>
+          <canvas id="budget-chart"></canvas>
+        </div>
+
+        <!-- FILTERS -->
+        <h3 style="margin: 0 0 1rem 0; font-size: 15px;">Transactions</h3>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="rev">Revenus</button>
+          <button class="filter-btn" data-filter="dep">Dépenses</button>
+        </div>
+
+        <!-- TRANSACTIONS LIST -->
+        <div class="tx-list" id="tx-list"></div>
+
+        <!-- CLEAR & EXPORT -->
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+          <button id="clear-month" style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 1.2rem; font-size: 13px; color: var(--text-secondary); cursor: pointer; font-family: var(--font-body);">Effacer ce mois</button>
+          <button id="export-csv" style="background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 1.2rem; font-size: 13px; color: var(--text-secondary); cursor: pointer; font-family: var(--font-body);">Exporter (CSV)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="text-align: center;">
+      <div class="container">
+        <h2 style="margin-bottom: var(--space-4);">Envie d'aller plus loin ?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-8);">Explore nos guides et outils pour maîtriser ton épargne et tes investissements.</p>
+        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+          <a href="calculateur_fire.html" class="btn btn-primary">Calculateur FIRE</a>
+          <a href="guide-investissement.html" class="btn btn-secondary">Guide d'investissement</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <div class="footer-links">
+            <a href="guide-investissement.html">Guide d'investissement</a>
+            <a href="comparateur_etf.html">Comparateur ETF</a>
+            <a href="calculateur_fire.html">Calculateur FIRE</a>
+            <a href="budget_tracker.html">Budget Tracker</a>
+            <a href="guide_fiscalite.html">Guide Fiscalité</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Ressources</h3>
+          <div class="footer-links">
+            <a href="glossaire.html">Glossaire</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Légal</h3>
+          <div class="footer-links">
+            <a href="disclaimer.html">Disclaimer complet</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Politique de confidentialité</a
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 FinCulture — Plateforme d'éducation financière indépendante</p>
+        <p style="color: var(--c-primary); font-weight: 500;">Éducatif uniquement • Pas de conseil personnalisé</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const html = document.documentElement;
+    
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    function updateThemeIcon(theme) {
+      if (theme === 'dark') {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      updateThemeIcon(currentTheme);
+    });
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      mobileMenuBtn.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <!-- CHART.JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- BUDGET TRACKER -->
+  <script>
+    const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    const now = new Date();
+    let curY = now.getFullYear();
+    let curM = now.getMonth();
+
+    function key() { return 'fc_budget_' + curY + '_' + curM; }
+    function getData() { try { return JSON.parse(localStorage.getItem(key())) || []; } catch(e) { return []; } }
+    function saveData(d) { try { localStorage.setItem(key(), JSON.stringify(d)); } catch(e) {} }
+    function fmt(n) { return Math.abs(n).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €'; }
+    function updateMonthLbl() { document.getElementById('month-lbl').textContent = months[curM] + ' ' + curY; }
+
+    function render() {
+      const data = getData();
+      renderStats(data);
+      renderChart(data);
+      renderTransactions(data);
+    }
+
+    function renderStats(data) {
+      const rev = data.filter(t => t.type === 'rev').reduce((a,t) => a+t.amt, 0);
+      const dep = data.filter(t => t.type === 'dep').reduce((a,t) => a+t.amt, 0);
+      const epargne = rev - dep;
+      const tauxEpargne = rev > 0 ? (epargne / rev * 100) : 0;
+
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card income">
+          <div class="stat-label">Revenus</div>
+          <div class="stat-val">${fmt(rev)}</div>
+          <div class="stat-desc">Total du mois</div>
+        </div>
+        <div class="stat-card expense">
+          <div class="stat-label">Dépenses</div>
+          <div class="stat-val">${fmt(dep)}</div>
+          <div class="stat-desc">${tauxEpargne.toFixed(1)}% des revenus</div>
+        </div>
+        <div class="stat-card savings">
+          <div class="stat-label">Épargne</div>
+          <div class="stat-val">${fmt(epargne)}</div>
+          <div class="stat-desc">Revenu - Dépenses</div>
+        </div>
+      `;
+
+      // Visualiser la règle 50/30/20
+      const needs = dep * 0.5;
+      const wants = dep * 0.3;
+      const savings_planned = dep * 0.2;
+      
+      document.getElementById('rules').innerHTML = `
+        <div class="rule-card">
+          <div class="rule-label">Besoins (Nécessaires)</div>
+          <div class="rule-pct">50%</div>
+          <div class="rule-desc">${fmt(needs)} actuellement</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-label">Envies (Loisirs)</div>
+          <div class="rule-pct">30%</div>
+          <div class="rule-desc">${fmt(wants)} actuellement</div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-label">Épargne (Futur)</div>
+          <div class="rule-pct">20%</div>
+          <div class="rule-desc">${fmt(savings_planned)} recommandé</div>
+        </div>
+      `;
+    }
+
+    function renderChart(data) {
+      const cats = {};
+      data.filter(t => t.type === 'dep').forEach(t => { cats[t.cat] = (cats[t.cat]||0) + t.amt; });
+      const labels = Object.keys(cats);
+      const values = Object.values(cats);
+      const colors = ['#3b6fff', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
+
+      const ctx = document.getElementById('budget-chart').getContext('2d');
+      if (window.chartInst) window.chartInst.destroy();
+      window.chartInst = new Chart(ctx, {
+        type: 'doughnut',
+        data: { labels, datasets: [{data: values, backgroundColor: colors.slice(0, labels.length)}] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { labels: { font: {size: 11}, color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary') } }
+          }
+        }
+      });
+    }
+
+    function renderTransactions(data) {
+      const filter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+      const filtered = filter === 'all' ? data : data.filter(t => t.type === filter);
+      
+      if (filtered.length === 0) {
+        document.getElementById('tx-list').innerHTML = '<div class="empty-msg">Pas de transactions ce mois-ci</div>';
+        return;
+      }
+
+      const sorted = filtered.sort((a,b) => new Date(b.date) - new Date(a.date));
+      document.getElementById('tx-list').innerHTML = sorted.map(t => {
+        const d = new Date(t.date).toLocaleDateString('fr-FR');
+        const sign = t.type === 'rev' ? '+' : '-';
+        return `
+          <div class="tx-item">
+            <div class="tx-info">
+              <div class="tx-cat">${t.cat}</div>
+              <div class="tx-date">${d}</div>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <div class="tx-val ${t.type === 'rev' ? 'income' : 'expense'}">${sign}${fmt(t.amt)}</div>
+              <button class="tx-btn-del" onclick="delTx('${t.id}')">Supprimer</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function delTx(id) { const d = getData(); const idx = d.findIndex(t => t.id === id); if (idx>=0) { d.splice(idx,1); saveData(d); render(); } }
+
+    document.getElementById('btn-add').addEventListener('click', () => {
+      const type = document.getElementById('f-type').value;
+      const cat = document.getElementById('f-cat').value;
+      const amt = parseFloat(document.getElementById('f-amt').value);
+      const date = document.getElementById('f-date').value;
+      if (!amt || !date) return;
+      const d = getData();
+      d.push({id: Date.now().toString(), type, cat, amt, date});
+      saveData(d);
+      document.getElementById('f-amt').value = '';
+      render();
+    });
+
+    document.querySelectorAll('[data-quick]').forEach(b => {
+      b.addEventListener('click', () => {
+        const [cat, amt] = b.getAttribute('data-quick').split('|');
+        document.getElementById('f-type').value = 'dep';
+        document.getElementById('f-cat').value = cat;
+        document.getElementById('f-amt').value = Math.abs(parseFloat(amt));
+        document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      });
+    });
+
+    document.getElementById('prev-month').addEventListener('click', () => { curM--; if (curM < 0) { curM = 11; curY--; } updateMonthLbl(); render(); });
+    document.getElementById('next-month').addEventListener('click', () => { curM++; if (curM > 11) { curM = 0; curY++; } updateMonthLbl(); render(); });
+
+    document.getElementById('clear-month').addEventListener('click', () => { if (confirm('Effacer toutes les transactions de ce mois ?')) { saveData([]); render(); } });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+      const d = getData();
+      const csv = 'Type,Catégorie,Montant,Date\n' + d.map(t => `${t.type},${t.cat},${t.amt},${t.date}`).join('\n');
+      const a = document.createElement('a');
+      a.href = 'data:text/csv,' + encodeURIComponent(csv);
+      a.download = 'budget_' + curY + '_' + (curM+1) + '.csv';
+      a.click();
+    });
+
+    document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+    updateMonthLbl();
+    render();
+  </script>
+</body>
+</html>
