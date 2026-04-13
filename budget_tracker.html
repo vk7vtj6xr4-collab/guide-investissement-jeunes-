@@ -370,9 +370,105 @@
       color: var(--text-secondary);
       margin-top: 0.5rem;
     }
+
+    .form-group--autre {
+      display: none;
+      grid-column: 1 / -1;
+    }
+
+    .form-group--autre.is-visible {
+      display: flex;
+    }
+
+    .subs-section {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .subs-section h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 15px;
+    }
+
+    .subs-intro {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .subs-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .subs-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .subs-total {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .subs-total span {
+      color: var(--c-primary);
+    }
+
+    .subs-list {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .subs-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      gap: 1rem;
+    }
+
+    .subs-item:last-child {
+      border-bottom: none;
+    }
+
+    .subs-item-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .subs-item-amt {
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .subs-chart-wrap {
+      margin-top: 1rem;
+    }
+
+    #subs-chart {
+      width: 100%;
+      max-height: 320px;
+    }
   </style>
 </head>
 <body data-page="budget">
+  <a href="#main" class="skip-to-content">Aller au contenu principal</a>
 
   <header class="header">
     <div class="container">
@@ -416,12 +512,12 @@
     <!-- HERO -->
     <section class="section" style="text-align: center; border-bottom: 1px solid var(--border);">
       <div class="container">
-        <a href="index.html" style="display: inline-flex; align-items: center; gap: var(--space-2); color: var(--c-primary); font-size: 13px; margin-bottom: var(--space-8); margin-top: var(--space-8);">
+        <a href="/" style="display: inline-flex; align-items: center; gap: var(--space-2); color: var(--c-primary); font-size: 13px; margin-bottom: var(--space-8); margin-top: var(--space-8);">
           ← Retour à l'accueil
         </a>
         <h1 style="margin-bottom: var(--space-2);">Budget Tracker</h1>
         <p style="color: var(--text-secondary); max-width: 70ch; margin-left: auto; margin-right: auto; margin-bottom: var(--space-8);">
-          Suis tes revenus et dépenses mois par mois. Visualise tes dépenses par catégorie, calcule ton taux d'épargne et applique la règle 50/30/20.
+          Suis tes revenus et dépenses mois par mois, tes versements épargne / investissement et tes abonnements. Visualise où part ton argent et ton poids d'abonnements.
         </p>
       </div>
     </section>
@@ -471,6 +567,8 @@
                 <option>Santé</option>
                 <option>Vêtements</option>
                 <option>Abonnements</option>
+                <option>Épargne</option>
+                <option>Investissement</option>
                 <option>Autre</option>
               </select>
             </div>
@@ -481,6 +579,10 @@
             <div class="form-group">
               <label class="form-label">Date</label>
               <input type="date" id="f-date" class="form-input">
+            </div>
+            <div class="form-group form-group--autre" id="f-autre-wrap">
+              <label class="form-label" for="f-autre-motif">Motif (précision)</label>
+              <input type="text" id="f-autre-motif" class="form-input" placeholder="Ex. Cadeau, frais, don…" maxlength="120" autocomplete="off">
             </div>
           </div>
 
@@ -502,6 +604,31 @@
         <div class="chart-wrap">
           <div class="chart-title">Dépenses par catégorie</div>
           <canvas id="budget-chart"></canvas>
+        </div>
+
+        <!-- ABONNEMENTS -->
+        <div class="subs-section">
+          <h3>Abonnements récurrents</h3>
+          <p class="subs-intro">
+            Liste tes abonnements (streaming, mobile, salle de sport, logiciels…) pour voir le total mensuel et la part de chaque poste. Les données sont enregistrées sur cet appareil, indépendamment du mois affiché pour les transactions.
+          </p>
+          <div class="subs-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="sub-name">Nom</label>
+              <input type="text" id="sub-name" class="form-input" placeholder="Ex. Netflix, Forfait mobile…" maxlength="80" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="sub-amt">Montant mensuel (€)</label>
+              <input type="number" id="sub-amt" class="form-input" placeholder="0" min="0" step="0.01">
+            </div>
+            <button type="button" id="sub-add" class="btn-add">Ajouter l’abonnement</button>
+          </div>
+          <div class="subs-total">Total mensuel estimé : <span id="sub-total">0,00 €</span></div>
+          <div class="subs-list" id="subs-list"></div>
+          <div class="chart-wrap subs-chart-wrap">
+            <div class="chart-title">Répartition des abonnements (mensuel)</div>
+            <canvas id="subs-chart"></canvas>
+          </div>
         </div>
 
         <!-- FILTERS -->
@@ -564,7 +691,7 @@
           <div class="footer-links">
             <a href="disclaimer.html">Disclaimer complet</a>
             <a href="conditions.html">Conditions d'utilisation</a>
-            <a href="confidentialite.html">Politique de confidentialité</a
+            <a href="confidentialite.html">Politique de confidentialité</a>
           </div>
         </div>
       </div>
@@ -634,7 +761,23 @@
     function getData() { try { return JSON.parse(localStorage.getItem(key())) || []; } catch(e) { return []; } }
     function saveData(d) { try { localStorage.setItem(key(), JSON.stringify(d)); } catch(e) {} }
     function fmt(n) { return Math.abs(n).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' €'; }
+    function esc(s) {
+      if (s == null || s === '') return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+    }
     function updateMonthLbl() { document.getElementById('month-lbl').textContent = months[curM] + ' ' + curY; }
+
+    const SUBS_KEY = 'fc_subscriptions';
+    function getSubs() { try { return JSON.parse(localStorage.getItem(SUBS_KEY)) || []; } catch (e) { return []; } }
+    function saveSubs(arr) { try { localStorage.setItem(SUBS_KEY, JSON.stringify(arr)); } catch (e) {} }
+
+    function syncAutreField() {
+      const wrap = document.getElementById('f-autre-wrap');
+      const cat = document.getElementById('f-cat').value;
+      const show = cat === 'Autre';
+      wrap.classList.toggle('is-visible', show);
+      if (!show) document.getElementById('f-autre-motif').value = '';
+    }
 
     function render() {
       const data = getData();
@@ -667,26 +810,29 @@
         </div>
       `;
 
-      // Visualiser la règle 50/30/20
+      // Visualiser la règle 50/30/20 (répartition indicative des dépenses totales)
       const needs = dep * 0.5;
       const wants = dep * 0.3;
-      const savings_planned = dep * 0.2;
-      
+      const epargneInvestCat = data
+        .filter(t => t.type === 'dep' && (t.cat === 'Épargne' || t.cat === 'Investissement'))
+        .reduce((a, t) => a + t.amt, 0);
+      const cible20Revenus = rev * 0.2;
+
       document.getElementById('rules').innerHTML = `
         <div class="rule-card">
           <div class="rule-label">Besoins (Nécessaires)</div>
           <div class="rule-pct">50%</div>
-          <div class="rule-desc">${fmt(needs)} actuellement</div>
+          <div class="rule-desc">~${fmt(needs)} si tes dépenses suivent cette répartition</div>
         </div>
         <div class="rule-card">
           <div class="rule-label">Envies (Loisirs)</div>
           <div class="rule-pct">30%</div>
-          <div class="rule-desc">${fmt(wants)} actuellement</div>
+          <div class="rule-desc">~${fmt(wants)} sur la même base</div>
         </div>
         <div class="rule-card">
-          <div class="rule-label">Épargne (Futur)</div>
+          <div class="rule-label">Épargne & investissement (~20%)</div>
           <div class="rule-pct">20%</div>
-          <div class="rule-desc">${fmt(savings_planned)} recommandé</div>
+          <div class="rule-desc">${fmt(epargneInvestCat)} en cat. Épargne / Investissement · Cible indicative ${fmt(cible20Revenus)} (20% des revenus)</div>
         </div>
       `;
     }
@@ -696,13 +842,19 @@
       data.filter(t => t.type === 'dep').forEach(t => { cats[t.cat] = (cats[t.cat]||0) + t.amt; });
       const labels = Object.keys(cats);
       const values = Object.values(cats);
-      const colors = ['#3b6fff', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
+      const colors = ['#3b6fff', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#14b8a6', '#f97316', '#a855f7'];
 
-      const ctx = document.getElementById('budget-chart').getContext('2d');
+      const canvas = document.getElementById('budget-chart');
+      const ctx = canvas.getContext('2d');
       if (window.chartInst) window.chartInst.destroy();
+      window.chartInst = null;
+      if (labels.length === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
       window.chartInst = new Chart(ctx, {
         type: 'doughnut',
-        data: { labels, datasets: [{data: values, backgroundColor: colors.slice(0, labels.length)}] },
+        data: { labels, datasets: [{ data: values, backgroundColor: labels.map((_, i) => colors[i % colors.length]) }] },
         options: {
           responsive: true,
           maintainAspectRatio: true,
@@ -726,10 +878,12 @@
       document.getElementById('tx-list').innerHTML = sorted.map(t => {
         const d = new Date(t.date).toLocaleDateString('fr-FR');
         const sign = t.type === 'rev' ? '+' : '-';
+        const motif = (t.motif && String(t.motif).trim()) ? String(t.motif).trim() : '';
+        const catLine = (t.cat === 'Autre' && motif) ? `${esc(t.cat)} — ${esc(motif)}` : esc(t.cat);
         return `
           <div class="tx-item">
             <div class="tx-info">
-              <div class="tx-cat">${t.cat}</div>
+              <div class="tx-cat">${catLine}</div>
               <div class="tx-date">${d}</div>
             </div>
             <div style="display: flex; gap: 1rem; align-items: center;">
@@ -743,17 +897,90 @@
 
     function delTx(id) { const d = getData(); const idx = d.findIndex(t => t.id === id); if (idx>=0) { d.splice(idx,1); saveData(d); render(); } }
 
+    function renderSubs() {
+      const subs = getSubs();
+      const total = subs.reduce((a, s) => a + (Number(s.amt) || 0), 0);
+      document.getElementById('sub-total').textContent = fmt(total);
+
+      const listEl = document.getElementById('subs-list');
+      if (subs.length === 0) {
+        listEl.innerHTML = '<div class="empty-msg" style="margin:0;border-radius:0;">Aucun abonnement enregistré</div>';
+      } else {
+        listEl.innerHTML = subs.map(s => `
+          <div class="subs-item">
+            <div class="subs-item-name">${esc(s.name)}</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;flex-shrink:0;">
+              <span class="subs-item-amt">${fmt(s.amt)}</span>
+              <button type="button" class="tx-btn-del" onclick="delSub('${s.id}')">Supprimer</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const canvas = document.getElementById('subs-chart');
+      const ctx = canvas.getContext('2d');
+      if (window.subsChartInst) window.subsChartInst.destroy();
+      window.subsChartInst = null;
+      if (subs.length === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
+      }
+      const labels = subs.map(s => s.name);
+      const values = subs.map(s => Number(s.amt) || 0);
+      const palette = ['#3b6fff', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#14b8a6', '#f97316', '#a855f7'];
+      const legendColor = (getComputedStyle(document.documentElement).getPropertyValue('--text-secondary') || '#9ca3af').trim();
+      window.subsChartInst = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{ data: values, backgroundColor: labels.map((_, i) => palette[i % palette.length]) }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { labels: { font: { size: 11 }, color: legendColor } }
+          }
+        }
+      });
+    }
+
+    function delSub(id) {
+      saveSubs(getSubs().filter(s => s.id !== id));
+      renderSubs();
+    }
+    window.delSub = delSub;
+
     document.getElementById('btn-add').addEventListener('click', () => {
       const type = document.getElementById('f-type').value;
       const cat = document.getElementById('f-cat').value;
       const amt = parseFloat(document.getElementById('f-amt').value);
       const date = document.getElementById('f-date').value;
       if (!amt || !date) return;
+      const motifRaw = cat === 'Autre' ? document.getElementById('f-autre-motif').value.trim() : '';
       const d = getData();
-      d.push({id: Date.now().toString(), type, cat, amt, date});
+      const row = { id: Date.now().toString(), type, cat, amt, date };
+      if (motifRaw) row.motif = motifRaw;
+      d.push(row);
       saveData(d);
       document.getElementById('f-amt').value = '';
+      document.getElementById('f-autre-motif').value = '';
+      syncAutreField();
       render();
+    });
+
+    document.getElementById('f-cat').addEventListener('change', syncAutreField);
+
+    document.getElementById('sub-add').addEventListener('click', () => {
+      const name = document.getElementById('sub-name').value.trim();
+      const amt = parseFloat(document.getElementById('sub-amt').value);
+      if (!name || !amt || amt <= 0) return;
+      const subs = getSubs();
+      subs.push({ id: Date.now().toString() + '_' + Math.random().toString(36).slice(2, 8), name, amt });
+      saveSubs(subs);
+      document.getElementById('sub-name').value = '';
+      document.getElementById('sub-amt').value = '';
+      renderSubs();
     });
 
     document.querySelectorAll('[data-quick]').forEach(b => {
@@ -763,6 +990,7 @@
         document.getElementById('f-cat').value = cat;
         document.getElementById('f-amt').value = Math.abs(parseFloat(amt));
         document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+        syncAutreField();
       });
     });
 
@@ -781,7 +1009,11 @@
 
     document.getElementById('export-csv').addEventListener('click', () => {
       const d = getData();
-      const csv = 'Type,Catégorie,Montant,Date\n' + d.map(t => `${t.type},${t.cat},${t.amt},${t.date}`).join('\n');
+      const csv = 'Type,Catégorie,Montant,Date,Motif\n' + d.map(t => {
+        const raw = (t.motif != null ? String(t.motif) : '').replace(/"/g, '""');
+        const mot = raw.includes(',') || raw.includes('"') || raw.includes('\n') ? `"${raw}"` : raw;
+        return `${t.type},${t.cat},${t.amt},${t.date},${mot}`;
+      }).join('\n');
       const a = document.createElement('a');
       a.href = 'data:text/csv,' + encodeURIComponent(csv);
       a.download = 'budget_' + curY + '_' + (curM+1) + '.csv';
@@ -789,8 +1021,10 @@
     });
 
     document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+    syncAutreField();
     updateMonthLbl();
     render();
+    renderSubs();
   </script>
 </body>
 </html>
