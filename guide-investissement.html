@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guide complet d'investissement — De A à Z : actions, ETF, obligations, PEA, assurance-vie, risque, diversification. Éducatif, simple, sans conseil.">
+  <meta property="og:title" content="Guide d'investissement — FinCulture">
+  <meta property="og:description" content="Comprendre l'investissement de A à Z : fondamentaux, instruments, fiscalité et stratégie.">
+  <title>Guide d'Investissement — FinCulture</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="design-system.css">
+  
+  <style>
+    .guide-hero {
+      padding: var(--space-16) var(--container-gap);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .guide-hero h1 {
+      margin-bottom: var(--space-6);
+    }
+
+    .guide-wrapper {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-12);
+      padding: var(--space-12) var(--container-gap);
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 960px) {
+      .guide-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .guide-toc {
+        display: none;
+      }
+    }
+
+    .guide-toc {
+      position: sticky;
+      top: var(--space-20);
+      height: fit-content;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .guide-toc h3 {
+      font-size: var(--type-sm);
+      font-weight: var(--type-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-4);
+    }
+
+    .guide-toc ul {
+      list-style: none;
+    }
+
+    .guide-toc ul ul {
+      margin-left: var(--space-4);
+      margin-top: var(--space-2);
+    }
+
+    .guide-toc a {
+      display: block;
+      padding: var(--space-2) 0;
+      font-size: var(--type-sm);
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .guide-toc a:hover,
+    .guide-toc a.active {
+      color: var(--c-primary);
+      font-weight: var(--type-weight-medium);
+    }
+
+    .guide-content {
+      max-width: 800px;
+    }
+
+    .guide-section {
+      margin-bottom: var(--space-16);
+      scroll-margin-top: var(--space-20);
+    }
+
+    .guide-section h2 {
+      font-size: var(--type-h2);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-4);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .guide-section h3 {
+      font-size: var(--type-h4);
+      margin: var(--space-8) 0 var(--space-4);
+    }
+
+    .guide-section p {
+      margin-bottom: var(--space-6);
+      color: var(--text-secondary);
+      line-height: 1.85;
+    }
+
+    .guide-section ul,
+    .guide-section ol {
+      margin: var(--space-6) 0 var(--space-6) var(--space-8);
+      list-style-position: outside;
+    }
+
+    .guide-section li {
+      margin-bottom: var(--space-3);
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .guide-highlight {
+      background: color-mix(in srgb, var(--c-primary) 8%, var(--surface));
+      border-left: 4px solid var(--c-primary);
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+      margin: var(--space-8) 0;
+    }
+
+    .guide-highlight strong {
+      color: var(--c-primary);
+    }
+
+    .guide-definition {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+      margin: var(--space-6) 0;
+    }
+
+    .guide-definition strong {
+      display: block;
+      color: var(--c-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin: var(--space-8) 0;
+    }
+
+    @media (max-width: 600px) {
+      .guide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guide-grid-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-8);
+      color: var(--c-primary);
+      font-size: var(--type-sm);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-to-content">Aller au contenu principal</a>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <span class="logo-text">FinCulture</span>
+          <span class="logo-dot"></span>
+        </a>
+        
+        <nav class="nav">
+          <ul class="nav-links">
+            <li><a href="index.html#outils" class="nav-link">Outils</a></li>
+            <li><a href="index.html#apprentissage" class="nav-link">Apprentissage</a></li>
+            <li><a href="blog/index.html" class="nav-link">Blog</a></li>
+          </ul>
+          
+          <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path id="sun-icon" d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" style="display: none;"/>
+              <path id="moon-icon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Ouvrir le menu">
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+          <span style="width: 18px; height: 2px; background: currentColor; border-radius: 1px;"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="index.html#outils">Outils</a>
+    <a href="index.html#apprentissage">Apprentissage</a>
+    <a href="blog/index.html">Blog</a>
+    <hr style="border: none; border-top: 1px solid var(--border); margin: var(--space-4) 0;">
+    <a href="index.html" class="btn btn-secondary" style="justify-content: center;">Retour à l'accueil</a>
+  </nav>
+
+  <main id="main">
+    <!-- Page Hero -->
+    <section class="guide-hero">
+      <div class="container">
+        <a href="index.html" class="back-link">← Retour à l'accueil</a>
+        <h1>Guide d'investissement complet</h1>
+        <p style="color: var(--text-secondary); margin-top: var(--space-4);">
+          De A à Z : comprendre les actions, les ETF, les obligations, la fiscalité et les stratégies. Un guide 100% pédagogique.
+        </p>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="section">
+      <div class="container" style="max-width: 800px;">
+        <div class="disclaimer" style="margin-bottom: var(--space-12);">
+          <strong>⚠ Contenu éducatif uniquement.</strong> Ce guide explique les mécanismes généraux de l'investissement à titre pédagogique. Il ne constitue pas un conseil financier personnalisé et ne prend pas en compte ta situation individuelle. Tout investissement comporte un risque de perte en capital.
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section">
+      <div class="guide-wrapper">
+        
+        <!-- Sidebar TOC -->
+        <aside class="guide-toc">
+          <h3>Sommaire</h3>
+          <ul>
+            <li><a href="#fondamentaux">Fondamentaux</a></li>
+            <li><a href="#pourquoi-investir">Pourquoi investir</a></li>
+            <li><a href="#les-instruments">Les instruments</a></li>
+            <ul>
+              <li><a href="#actions">Actions</a></li>
+              <li><a href="#etf">ETF</a></li>
+              <li><a href="#obligations">Obligations</a></li>
+            </ul>
+            <li><a href="#risque-diversification">Risque & Diversification</a></li>
+            <li><a href="#fiscalite">Fiscalité</a></li>
+            <li><a href="#strategie">Stratégie</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="guide-content">
+
+          <!-- Section: Fondamentaux -->
+          <section class="guide-section" id="fondamentaux">
+            <h2>Fondamentaux</h2>
+            
+            <p>
+              L'investissement, c'est mettre ton argent au travail pour qu'il se multiplie au fil du temps. C'est différent d'épargner (garder de l'argent de côté) ou de trader (acheter/vendre rapidement).
+            </p>
+
+            <h3>L'intérêt composé</h3>
+            <p>
+              C'est le concept clé. Quand tu investis 1 000€ et que tu gagnes 7% de rendement la première année, tu as 1 070€. L'année d'après, tu gagnes 7% sur 1 070€, pas sur 1 000€. C'est "gagner sur les gains" qui crée la richesse exponentielle.
+            </p>
+
+            <div class="guide-highlight">
+              <strong>Exemple concret :</strong> 1 000€ investis à 7% par an deviennent 1 967€ en 10 ans, 3 870€ en 20 ans, et 7 612€ en 30 ans. Plus tu attendes, plus c'est puissant.
+            </div>
+
+            <h3>Horizon de temps</h3>
+            <p>
+              L'investissement nécessite du temps. Minimum 5-10 ans. En-dessous, c'est trop risqué. Les meilleures performances se font sur 20-30 ans.
+            </p>
+          </section>
+
+          <!-- Section: Pourquoi investir -->
+          <section class="guide-section" id="pourquoi-investir">
+            <h2>Pourquoi investir ?</h2>
+            
+            <h3>1. Battre l'inflation</h3>
+            <p>
+              L'inflation diminue ton pouvoir d'achat chaque année (~2-3% par an). Garder ton argent à la banque, c'est perdre progressivement de la valeur. Investir, c'est au moins essayer de la préserver.
+            </p>
+
+            <h3>2. Créer de la richesse</h3>
+            <p>
+              C'est le chemin vers l'indépendance financière. Avec l'intérêt composé, même des petits montants réguliers créent une grande richesse sur 20-30 ans.
+            </p>
+
+            <h3>3. Préparer l'avenir</h3>
+            <p>
+              Retraite, achat immobilier, grands projets. L'investissement régulier est la façon la plus sûre de financer tes objectifs à long terme.
+            </p>
+          </section>
+
+          <!-- Section: Les instruments -->
+          <section class="guide-section" id="les-instruments">
+            <h2>Les instruments</h2>
+
+            <h3 id="actions">Actions (Stocks)</h3>
+            <p>
+              Quand tu achètes une action, tu achètes un petit morceau d'une entreprise. Si l'entreprise gagne de l'argent, l'action monte. Si elle struggle, bah elle descend.
+            </p>
+
+            <div class="guide-definition">
+              <strong>Action individuelle</strong>
+              Représente une part du capital d'une entreprise. Avantage : potentiel de croissance. Inconvénient : très volatil, nécessite de la recherche.
+            </div>
+
+            <p>
+              Pour un débutant : acheter des actions individuelles, c'est complexe et risqué. Les actions individuelles sont pour les gens qui y passent du temps.
+            </p>
+
+            <h3 id="etf">ETF (Exchange Traded Funds)</h3>
+            <p>
+              L'ETF est un fonds qui regroupe plein d'actions (ou d'obligations) dans un seul produit. Au lieu d'acheter 500 actions, tu en achètes une : l'ETF.
+            </p>
+
+            <div class="guide-definition">
+              <strong>ETF</strong>
+              Fonds qui regroupe des titres. Avantages : diversification automatique, frais très bas, facile à acheter. C'est L'INSTRUMENT IDÉAL pour débuter.
+            </div>
+
+            <p>
+              Les ETF sont comme les boîtes à outils de l'investisseur. Tu veux suivre toutes les actions mondiales ? Il y a un ETF pour ça. Tu veux une approche plus agressive sur les actions ? Il y a un ETF pour ça aussi.
+            </p>
+
+            <h3 id="obligations">Obligations (Bonds)</h3>
+            <p>
+              Une obligation, c'est quand tu prêtes de l'argent à une entreprise ou un gouvernement. En échange, ils te paient des intérêts réguliers.
+            </p>
+
+            <div class="guide-definition">
+              <strong>Obligation</strong>
+              Un titre de dette. Avantage : revenus réguliers, moins volatiles que les actions. Inconvénient : rendement plus faible (2-4%).
+            </div>
+
+            <p>
+              Les obligations sont plus sûres que les actions, mais aussi moins rémunératrices. Pour un jeune investisseur, les actions/ETF sont généralement plus appropriés.
+            </p>
+          </section>
+
+          <!-- Section: Risque et diversification -->
+          <section class="guide-section" id="risque-diversification">
+            <h2>Risque & Diversification</h2>
+
+            <h3>Comprendre le risque</h3>
+            <p>
+              Le risque est la volatilité — à quel point les prix montent et descendent. En bourse, les prix fluctuent. C'est normal. Le secret : tu dois être prêt à supporter les baisses court-terme pour les gains long-terme.
+            </p>
+
+            <div class="guide-highlight">
+              <strong>Règle d'or :</strong> Ne mets en bourse que l'argent dont tu n'auras pas besoin avant 5+ ans. Pour un objectif à court terme, reste en cash ou obligations.
+            </div>
+
+            <h3>Diversification</h3>
+            <p>
+              "Ne mets pas tous tes œufs dans le même panier." C'est la base de la réduction du risque. Au lieu d'acheter 5 actions d'une seule entreprise, tu achètes un ETF avec 500 entreprises.
+            </p>
+
+            <h3>Types de diversification</h3>
+            <ul>
+              <li><strong>Par secteur</strong> : Tech, santé, énergie, finance, etc. Un accident tech ne détruit pas ton portefeuille.</li>
+              <li><strong>Par géographie</strong> : USA, Europe, Asie. La diversification mondiale réduit le risque lié à une région.</li>
+              <li><strong>Par classe d'actifs</strong> : Actions + obligations. Quand les actions baissent, les obligations peuvent monter.</li>
+            </ul>
+
+            <p>
+              Un bon ETF fait déjà 80% du travail de diversification. Commence par UN ETF diversifié. Tu pourras ajouter d'autres instruments petit à petit.
+            </p>
+          </section>
+
+          <!-- Section: Fiscalité -->
+          <section class="guide-section" id="fiscalite">
+            <h2>Fiscalité</h2>
+
+            <p>
+              Les plus-values et dividendes sont imposés. Mais il y a des enveloppes fiscales qui te permettent d'optimiser les impôts.
+            </p>
+
+            <h3>Les enveloppes fiscales en France</h3>
+
+            <div class="guide-grid">
+              <div class="guide-grid-item">
+                <strong>PEA</strong>
+                <p style="font-size: var(--type-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Plan d'Épargne en Actions. 0% d'impôt sur les plus-values après 5 ans. Limite : 150k€.
+                </p>
+              </div>
+              <div class="guide-grid-item">
+                <strong>Assurance-vie</strong>
+                <p style="font-size: var(--type-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Flexible, pas de limite. Imposition progressive 8-45% selon durée. Avantage succession.
+                </p>
+              </div>
+              <div class="guide-grid-item">
+                <strong>PER</strong>
+                <p style="font-size: var(--type-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Plan d'Épargne Retraite. Déduction fiscale des versements. Déblocage à retraite.
+                </p>
+              </div>
+              <div class="guide-grid-item">
+                <strong>CTO</strong>
+                <p style="font-size: var(--type-sm); color: var(--text-secondary); margin-top: var(--space-2);">
+                  Compte-Titres Ordinaire. Pas de limite, mais imposé chaque année (flat tax 30%).
+                </p>
+              </div>
+            </div>
+
+            <p style="margin-top: var(--space-8);">
+              Pour un débutant avec peu d'argent : CTO ou Assurance-vie. Une fois que tu as accumulé, regarde le PEA.
+            </p>
+          </section>
+
+          <!-- Section: Stratégie -->
+          <section class="guide-section" id="strategie">
+            <h2>Stratégie pour débuter</h2>
+
+            <h3>1. Définir tes objectifs</h3>
+            <ul>
+              <li>Combien d'argent veux-tu accumuler ?</li>
+              <li>Dans combien de temps ?</li>
+              <li>Peux-tu laisser l'argent investi pendant tout ce temps ?</li>
+            </ul>
+
+            <h3>2. Choisir ta stratégie</h3>
+            <p>
+              <strong>ETF diversifié global (simple) :</strong> Achète UN ETF qui suit le monde entier (VWRL, EWLD, etc.). Oublie les détails. Investis régulièrement.
+            </p>
+
+            <p>
+              <strong>Allocation progressive (un peu plus complexe) :</strong> 70% actions / 30% obligations. Elle s'adaptera au fil du temps.
+            </p>
+
+            <p>
+              <strong>Dollar-cost averaging (anti-volatilité) :</strong> Au lieu d'investir 12 000€ d'un coup, investis 1 000€ chaque mois pendant un an. Ça lisse la volatilité.
+            </p>
+
+            <h3>3. Éviter les pièges courants</h3>
+            <ul>
+              <li>❌ Acheter parce qu'un copain a fait 50% de return (c'est du luck, pas de la stratégie)</li>
+              <li>❌ Changer de stratégie tous les 6 mois (sois patient, minimum 5 ans)</li>
+              <li>❌ Payer des frais de gestion élevés (cherche des frais &lt; 0.5%)</li>
+              <li>❌ Trader activement (tu vas juste payer des impôts et des frais)</li>
+            </ul>
+
+            <div class="guide-highlight">
+              <strong>Le secret :</strong> Simplicité + discipline. Choisis une approche simple, investis régulièrement, et oublie le bruit. C'est comme ça que 99% des gens riches se sont enrichis.
+            </div>
+          </section>
+
+          <!-- Bottom CTA -->
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-12); text-align: center; margin-top: var(--space-16);">
+            <h3 style="font-size: var(--type-h4); margin-bottom: var(--space-4);">Prêt à passer à l'action ?</h3>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-8);">Découvrez nos outils interactifs ou approfondissez avec le comparateur ETF.</p>
+            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+              <a href="calculateur_fire.html" class="btn btn-primary">Calculateur FIRE</a>
+              <a href="comparateur_etf.html" class="btn btn-secondary">Comparateur ETF</a>
+              <a href="budget_tracker.html" class="btn btn-ghost">Budget Tracker</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <div class="footer-links">
+            <a href="comparateur_etf.html">Comparateur ETF</a>
+            <a href="calculateur_fire.html">Calculateur FIRE</a>
+            <a href="budget_tracker.html">Budget Tracker</a>
+            <a href="guide_fiscalite.html">Guide Fiscalité</a>
+            <a href="blog/">Blog</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Ressources</h3>
+          <div class="footer-links">
+            <a href="glossaire.html">Glossaire</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Légal</h3>
+          <div class="footer-links">
+            <a href="disclaimer.html">Disclaimer complet</a>
+            <a href="conditions.html">Conditions d'utilisation</a>
+            <a href="confidentialite.html">Politique de confidentialité</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 FinCulture — Plateforme d'éducation financière indépendante</p>
+        <p style="color: var(--c-primary); font-weight: var(--type-weight-medium);">Éducatif uniquement • Pas de conseil personnalisé</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+    const html = document.documentElement;
+    
+    let currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+    
+    function updateThemeIcon(theme) {
+      if (theme === 'dark') {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', currentTheme);
+      localStorage.setItem('theme', currentTheme);
+      updateThemeIcon(currentTheme);
+    });
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      mobileMenuBtn.setAttribute('aria-expanded', mobileNav.classList.contains('open'));
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // TOC active link highlighting
+    const toc = document.querySelectorAll('.guide-toc a');
+    const sections = document.querySelectorAll('.guide-section');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      toc.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
